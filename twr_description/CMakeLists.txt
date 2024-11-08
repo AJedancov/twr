@@ -16,6 +16,7 @@ install(DIRECTORY
   rviz 
   urdf
   controllers
+  gz
   
   DESTINATION share/${PROJECT_NAME}/)
 

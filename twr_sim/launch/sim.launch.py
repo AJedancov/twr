@@ -15,31 +15,58 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
+    # === Package Directories ===
+    ros_gz_pkg_path = FindPackageShare('ros_gz_sim')
+    twr_control_pkg_path = FindPackageShare('twr_control')
+    twr_description_pkg_path = FindPackageShare('twr_description')
+
     # =============================
     # === Robot State Publisher ===
     # =============================
-    twr_control_pkg_path = FindPackageShare('twr_control')
-    rsp_ld_source = PythonLaunchDescriptionSource([
+    # TODO: add path to URDF and set as argument for rsp launch file
+    rsp_ld_src = PythonLaunchDescriptionSource([
         PathJoinSubstitution([twr_control_pkg_path, 'launch', 'rsp.launch.py'])
     ])
 
+    rsp_ld_args = {'use_sim_time': 'True'}.items()
+
     rsp_ld = IncludeLaunchDescription(
-        rsp_ld_source,
-        launch_arguments={'use_sim_time': 'True'}.items()
+        launch_description_source=rsp_ld_src,
+        launch_arguments=rsp_ld_args
     )
-    
+
     # ===================
     # === Gazebo Sim ====
     # ===================
-    ros_gz_pkg_path = FindPackageShare('ros_gz_sim')
-    ros_gz_ld_source = PythonLaunchDescriptionSource([
+    gz_sim_ld_src = PythonLaunchDescriptionSource([
         PathJoinSubstitution([ros_gz_pkg_path, 'launch', 'gz_sim.launch.py'])
     ])
 
-    ros_gz_ld = IncludeLaunchDescription(ros_gz_ld_source)
+    # TODO: add args for Gazebo Sim launch (gui config, empty.sdf world (with ground))
+    gz_sim_ld_args={'gz_args': '-r empty.sdf'}.items()
 
-    # === spawn_entity ===
-    # robot_description from robot_state_publisher node
+    gz_sim_ld = IncludeLaunchDescription(
+        launch_description_source=gz_sim_ld_src,
+        launch_arguments=gz_sim_ld_args
+    )
+
+    # =============
+    # === RViz2 ===
+    # =============
+    rviz2_node_args = PathJoinSubstitution([
+        twr_description_pkg_path, 
+        'rviz',
+        'config.rviz'
+    ])
+
+    rviz2_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        arguments=['-d', rviz2_node_args] # -d -> --display-config
+    )
+
+    # === Gazebo: spawn entity ===
+    # use /robot_description from robot_state_publisher node
     spawn_entity_node_param = {'name' : 'twr',
                                'topic': 'robot_description'}
 
@@ -47,11 +74,40 @@ def generate_launch_description():
         package='ros_gz_sim',
         executable='create',
         output='screen',
-        parameters=[spawn_entity_param]
+        parameters=[spawn_entity_node_param]
     )
 
+    # === Bridge === 
+    bridge_node = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        output='screen',
+        arguments=[
+            # Clock (GZ -> ROS2)
+            '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
+            # Joint states (GZ -> ROS2)
+            '/world/empty/model/twr/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
+            # TF (GZ -> ROS2)
+            # '/world/empty/dynamic_pose/info@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+            # '/world/empty/pose/info@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+            # Velocity and odometry (Gazebo -> ROS2)
+            # '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+            # '/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry',
+        ],
+        remappings=[
+            ('/world/empty/model/twr/joint_state', 'joint_states'),
+            # ('/world/empty/dynamic_pose/info', 'tf'),
+            # ('/world/empty/pose/info', 'tf_static')
+        ],
+        # parameters=[
+        #     {'config_file': PathJoinSubstitution([twr_description_pkg_path, 'gz', 'gz_bridge.yaml'])}
+        # ],
+    )
+
+    ld.add_action(gz_sim_ld)
     ld.add_action(rsp_ld)
-    ld.add_action(ros_gz_ld)
+    ld.add_action(rviz2_node)
     ld.add_action(spawn_entity_node)
+    ld.add_action(bridge_node)
     
     return ld

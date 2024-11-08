@@ -32,7 +32,7 @@ def generate_launch_description():
     rsp_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        parameters=[rsp_param]
+        parameters=[rsp_node_param]
     )
 
     ld.add_action(sim_time_launch_arg)

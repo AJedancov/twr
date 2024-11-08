@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <robot name="twr" xmlns:xacro="http://ros.org/wiki/xacro">
 
+    <!-- Include files -->
     <xacro:include filename="_inertia.macro.xacro"/>
     <xacro:include filename="_colors.xacro"/>
-    <xacro:include filename="ros2_control.xacro"/>
+    <!-- <xacro:include filename="ros2_control.xacro"/> -->
 
     <xacro:property name="mm2m" value="0.001"/>
 
@@ -51,15 +52,6 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:box_inertia>
     </link>
-
-    <!-- === CHASSIS === -->
-    <!-- <joint name="chassis_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="chassis_link" />
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint>
-
-    <link name="chassis_link"></link> -->
 
     <!-- ============== -->
     <!-- === WHEELS === -->
@@ -179,4 +171,8 @@
         </xacro:sphere_inertia>
     </link> 
 
+    <!-- Joint states plugin -->
+    <gazebo>
+        <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher"/>
+    </gazebo>
 </robot>
