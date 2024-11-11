@@ -50,6 +50,47 @@ def generate_launch_description():
         launch_arguments=gz_sim_ld_args
     )
 
+    # === Gazebo: spawn entity ===
+    # use /robot_description from robot_state_publisher node
+    spawn_entity_node_param = {'name' : 'twr',
+                               'topic': 'robot_description'}
+
+    spawn_entity_node = Node(
+        package='ros_gz_sim',
+        executable='create',
+        output='screen',
+        parameters=[spawn_entity_node_param]
+    )
+
+    # === Gazebo: bridge ===
+    bridge_node_param = {'config_file': PathJoinSubstitution([twr_description_pkg_path, 'gz', 'gz_bridge.yaml'])}
+
+    bridge_node = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        output='screen',
+        parameters=[bridge_node_param],
+
+        # === Instead of a YAML file, we can describe connections as arguments and remappings for them ====
+        # arguments=[
+        #     # Clock (GZ -> ROS2)
+        #     '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
+        #     # Joint states (GZ -> ROS2)
+        #     '/world/empty/model/twr/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
+        #     # TF (GZ -> ROS2)
+        #     '/world/empty/dynamic_pose/info@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+        #     '/world/empty/pose/info@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+        #     # Velocity and odometry (Gazebo -> ROS2)
+        #     '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+        #     '/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry',
+        # ],
+        # remappings=[
+        #     ('/world/empty/model/twr/joint_state', 'joint_states'),
+        #     ('/world/empty/dynamic_pose/info', 'tf'),
+        #     ('/world/empty/pose/info', 'tf_static')
+        # ],
+    )
+
     # =============
     # === RViz2 ===
     # =============
@@ -65,49 +106,10 @@ def generate_launch_description():
         arguments=['-d', rviz2_node_args] # -d -> --display-config
     )
 
-    # === Gazebo: spawn entity ===
-    # use /robot_description from robot_state_publisher node
-    spawn_entity_node_param = {'name' : 'twr',
-                               'topic': 'robot_description'}
-
-    spawn_entity_node = Node(
-        package='ros_gz_sim',
-        executable='create',
-        output='screen',
-        parameters=[spawn_entity_node_param]
-    )
-
-    # === Bridge === 
-    bridge_node = Node(
-        package='ros_gz_bridge',
-        executable='parameter_bridge',
-        output='screen',
-        arguments=[
-            # Clock (GZ -> ROS2)
-            '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
-            # Joint states (GZ -> ROS2)
-            '/world/empty/model/twr/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
-            # TF (GZ -> ROS2)
-            # '/world/empty/dynamic_pose/info@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-            # '/world/empty/pose/info@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-            # Velocity and odometry (Gazebo -> ROS2)
-            # '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
-            # '/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry',
-        ],
-        remappings=[
-            ('/world/empty/model/twr/joint_state', 'joint_states'),
-            # ('/world/empty/dynamic_pose/info', 'tf'),
-            # ('/world/empty/pose/info', 'tf_static')
-        ],
-        # parameters=[
-        #     {'config_file': PathJoinSubstitution([twr_description_pkg_path, 'gz', 'gz_bridge.yaml'])}
-        # ],
-    )
-
     ld.add_action(gz_sim_ld)
     ld.add_action(rsp_ld)
-    ld.add_action(rviz2_node)
     ld.add_action(spawn_entity_node)
     ld.add_action(bridge_node)
+    ld.add_action(rviz2_node)
     
     return ld
