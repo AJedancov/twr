@@ -4,7 +4,8 @@
     <!-- Include files -->
     <xacro:include filename="_inertia.macro.xacro"/>
     <xacro:include filename="_colors.xacro"/>
-    <!-- <xacro:include filename="ros2_control.xacro"/> -->
+    <xacro:include filename="ros2_control.xacro"/>
+    <xacro:include filename="gz.xacro"/>
 
     <xacro:property name="mm2m" value="0.001"/>
 
@@ -171,8 +172,4 @@
         </xacro:sphere_inertia>
     </link> 
 
-    <!-- Joint states plugin -->
-    <gazebo>
-        <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher"/>
-    </gazebo>
 </robot>

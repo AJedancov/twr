@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <ros2_control name="twr diff" type="system"> 
+    <ros2_control name="GazeboSimSystem" type="system"> 
         <hardware>
             <!-- name of hardware interface -->
-            <!-- it will talk to Gazebo just like a normal hardware interface -->
-            <plugin> gz_ros2_control/GazeboSystem </plugin>
+            <!-- it will use Gazebo just like a normal hardware interface -->
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
         </hardware>
 
         <joint name="left_wheel_joint">
@@ -28,11 +28,5 @@
             <state_interface name="position" />
         </joint>
     </ros2_control>
-
-    <gazebo>
-        <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-            <parameters> $(find twr_description)/controllers/twr_diff_drive.yaml </parameters>
-        </plugin>
-    </gazebo>
 
 </robot>
