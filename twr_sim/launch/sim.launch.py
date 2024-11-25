@@ -50,28 +50,17 @@ def generate_launch_description():
         launch_arguments=gz_sim_ld_args
     )
 
-    # === Gazebo: spawn entity ===
-    # use /robot_description from robot_state_publisher node
-    spawn_entity_node_param = {'name' : 'twr',
-                               'topic': 'robot_description'}
-
-    spawn_entity_node = Node(
-        package='ros_gz_sim',
-        executable='create',
-        output='screen',
-        parameters=[spawn_entity_node_param]
-    )
-
     # === Gazebo: bridge ===
-    bridge_node_param = {'config_file': PathJoinSubstitution([twr_description_pkg_path, 'gz', 'gz_bridge.yaml'])}
+    gz_bridge_node_param = {'config_file': PathJoinSubstitution([twr_description_pkg_path, 'gz', 'gz_bridge.yaml'])}
 
-    bridge_node = Node(
+    gz_bridge_node = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
         output='screen',
-        parameters=[bridge_node_param],
+        parameters=[gz_bridge_node_param],
 
-        # === Instead of a YAML file, we can describe connections as arguments and remappings for them ====
+        #  Instead of a YAML file, we can describe connections as arguments and remappings for them 
+        # 
         # arguments=[
         #     # Clock (GZ -> ROS2)
         #     '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
@@ -91,6 +80,49 @@ def generate_launch_description():
         # ],
     )
 
+    # === Gazebo: spawn entity ===
+    # use /robot_description from robot_state_publisher node
+    gz_spawn_entity_node_param = {'name' : 'twr',
+                                  'topic': 'robot_description'}
+
+    gz_spawn_entity_node = Node(
+        package='ros_gz_sim',
+        executable='create',
+        output='screen',
+        parameters=[gz_spawn_entity_node_param]
+    )
+
+    # === ROS2 Controllers ===
+    twr_controllers = PathJoinSubstitution([twr_description_pkg_path, 'controllers', 'twr_diff_drive.yaml'])
+
+    # gz_ros2_control runs the controller_manager, no need for ros2_control_node
+
+    # control_node = Node(
+    #     package="controller_manager",
+    #     executable="ros2_control_node",
+    #     parameters=[twr_controllers],
+    #     output="both",
+    #     # remappings=[
+    #     #     ('/diff_drive_controller/cmd_vel', '/cmd_vel'),
+    #     # ],
+    # )
+
+    joint_state_broadcaster_spawner_node = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['joint_state_broadcaster'],
+    )
+
+    diff_drive_base_controller_spawner_node = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=[
+            'diff_drive_controller',
+            '--param-file',
+            twr_controllers,
+            ],
+    )
+
     # =============
     # === RViz2 ===
     # =============
@@ -108,8 +140,11 @@ def generate_launch_description():
 
     ld.add_action(gz_sim_ld)
     ld.add_action(rsp_ld)
-    ld.add_action(spawn_entity_node)
-    ld.add_action(bridge_node)
+    ld.add_action(gz_spawn_entity_node)
+    ld.add_action(gz_bridge_node)
+    # ld.add_action(control_node)
+    ld.add_action(joint_state_broadcaster_spawner_node)
+    ld.add_action(diff_drive_base_controller_spawner_node)
     ld.add_action(rviz2_node)
     
     return ld

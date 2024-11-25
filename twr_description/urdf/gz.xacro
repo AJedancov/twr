@@ -7,6 +7,8 @@
     </gazebo>
 
     <!-- Ros2 control plugin -->
+    <!-- In addition to the ros2_control tags, a Gazebo plugin needs to be added to your URDF 
+    that actually parses the ros2_control tags and loads the appropriate hardware interfaces and controller manager -->
     <gazebo>
         <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
             <parameters> $(find twr_description)/controllers/twr_diff_drive.yaml </parameters>
