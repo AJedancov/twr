@@ -42,7 +42,7 @@ def generate_launch_description():
         PathJoinSubstitution([ros_gz_pkg_path, 'launch', 'gz_sim.launch.py'])
     ])
 
-    # TODO: add args for Gazebo Sim launch (gui config, empty.sdf world (with ground))
+    # TODO: add args for Gazebo Sim launch (gui config)
     gz_sim_ld_args={'gz_args': '-r empty.sdf'}.items()
 
     gz_sim_ld = IncludeLaunchDescription(
@@ -141,7 +141,7 @@ def generate_launch_description():
     ld.add_action(gz_sim_ld)
     ld.add_action(rsp_ld)
     ld.add_action(gz_spawn_entity_node)
-    ld.add_action(gz_bridge_node)
+    # ld.add_action(gz_bridge_node)
     # ld.add_action(control_node)
     ld.add_action(joint_state_broadcaster_spawner_node)
     ld.add_action(diff_drive_base_controller_spawner_node)

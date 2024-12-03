@@ -2,15 +2,15 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <!-- Joint states plugin -->
-    <gazebo>
+    <!-- <gazebo>
         <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher"/>
-    </gazebo>
+    </gazebo> -->
 
     <!-- Ros2 control plugin -->
     <!-- In addition to the ros2_control tags, a Gazebo plugin needs to be added to your URDF 
     that actually parses the ros2_control tags and loads the appropriate hardware interfaces and controller manager -->
     <gazebo>
-        <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+        <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
             <parameters> $(find twr_description)/controllers/twr_diff_drive.yaml </parameters>
         </plugin>
     </gazebo>
