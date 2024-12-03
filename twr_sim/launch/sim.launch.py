@@ -8,8 +8,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
-from ament_index_python.packages import get_package_share_directory
-
 
 def generate_launch_description():
 
@@ -19,6 +17,7 @@ def generate_launch_description():
     ros_gz_pkg_path = FindPackageShare('ros_gz_sim')
     twr_control_pkg_path = FindPackageShare('twr_control')
     twr_description_pkg_path = FindPackageShare('twr_description')
+    twr_sim_pkg_path = FindPackageShare('twr_sim')
 
     # =============================
     # === Robot State Publisher ===
@@ -126,16 +125,16 @@ def generate_launch_description():
     # =============
     # === RViz2 ===
     # =============
-    rviz2_node_args = PathJoinSubstitution([
-        twr_description_pkg_path, 
-        'rviz',
-        'config.rviz'
+
+    rviz2_ld_src = PythonLaunchDescriptionSource([
+        PathJoinSubstitution([twr_sim_pkg_path, 'launch', 'rviz2.launch.py'])
     ])
 
-    rviz2_node = Node(
-        package='rviz2',
-        executable='rviz2',
-        arguments=['-d', rviz2_node_args] # -d -> --display-config
+    rviz2_ld_args = {'without_gz': 'False'}.items()
+
+    rviz2_ld = IncludeLaunchDescription(
+        launch_description_source=rviz2_ld_src,
+        launch_arguments=rviz2_ld_args
     )
 
     ld.add_action(gz_sim_ld)
@@ -145,6 +144,6 @@ def generate_launch_description():
     # ld.add_action(control_node)
     ld.add_action(joint_state_broadcaster_spawner_node)
     ld.add_action(diff_drive_base_controller_spawner_node)
-    ld.add_action(rviz2_node)
+    ld.add_action(rviz2_ld)
     
     return ld
