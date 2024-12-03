@@ -1,9 +1,10 @@
 import os
 
 from launch import LaunchDescription
-from launch.substitutions import Command, PathJoinSubstitution
-from launch.actions import IncludeLaunchDescription
+from launch.substitutions import Command, PathJoinSubstitution, LaunchConfiguration
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.conditions import IfCondition
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -18,6 +19,13 @@ def generate_launch_description():
     twr_control_pkg_path = FindPackageShare('twr_control')
     twr_description_pkg_path = FindPackageShare('twr_description')
     twr_sim_pkg_path = FindPackageShare('twr_sim')
+
+    # === Launch arguments ===
+    use_rviz2_launch_arg = DeclareLaunchArgument(
+        name='use_rviz2',
+        default_value='True',
+        description='Launch RViz',
+    )
 
     # =============================
     # === Robot State Publisher ===
@@ -134,9 +142,11 @@ def generate_launch_description():
 
     rviz2_ld = IncludeLaunchDescription(
         launch_description_source=rviz2_ld_src,
-        launch_arguments=rviz2_ld_args
+        launch_arguments=rviz2_ld_args,
+        condition=IfCondition(LaunchConfiguration('use_rviz2'))
     )
 
+    ld.add_action(use_rviz2_launch_arg)
     ld.add_action(gz_sim_ld)
     ld.add_action(rsp_ld)
     ld.add_action(gz_spawn_entity_node)
