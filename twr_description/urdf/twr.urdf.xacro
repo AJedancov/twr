@@ -4,7 +4,8 @@
     <!-- Include files -->
     <xacro:include filename="_inertia.macro.xacro"/>
     <xacro:include filename="_colors.xacro"/>
-    <!-- <xacro:include filename="ros2_control.xacro"/> -->
+    <xacro:include filename="ros2_control.xacro"/>
+    <xacro:include filename="gz.xacro"/>
 
     <xacro:property name="mm2m" value="0.001"/>
 
@@ -20,16 +21,16 @@
     <!-- ============= -->
     <!-- === WORLD === -->
     <!-- ============= -->
-    <link name="world_link"/>
+    <link name="odom"/>
 
 
     <!-- ============ -->
     <!-- === BASE === -->
     <!-- ============ -->
     <joint name="base_joint" type="fixed">
-        <parent link="world_link"/>
+        <parent link="odom"/>
         <child link="base_link" />
-        <origin xyz="0 0 ${wheel_radius+0.01}" rpy="0 0 0"/>
+        <origin xyz="0 0 ${wheel_radius+0.001}" rpy="0 0 0"/>
     </joint>
 
     <link name="base_link">
@@ -68,7 +69,7 @@
             <geometry>
                 <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
             </geometry>
-            <material name="white"/>
+            <material name="orange"/>
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </visual>
 
@@ -79,7 +80,7 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </collision>
 
-        <xacro:cylinder_inertia m="1" r="${wheel_radius}" l="${wheel_width}">
+        <xacro:cylinder_inertia m="0.2" r="${wheel_radius}" l="${wheel_width}">
             <origin xyz="0 0 0" rpy="-${pi/2} 0 0"/>
         </xacro:cylinder_inertia>
     </link>
@@ -87,7 +88,7 @@
     <joint name="right_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="right_wheel_link" />
-        <origin xyz="0 -${base_width/2 + wheel_width/2 + 0.01} 0" rpy="${pi/2} 0 0"/>
+        <origin xyz="0 -${base_width/2 + wheel_width/2 + 0.01} 0" rpy="-${pi/2} 0 0"/>
         <axis xyz="0 0 1"/>
     </joint>
 
@@ -96,7 +97,7 @@
             <geometry>
                 <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
             </geometry>
-            <material name="white"/>
+            <material name="orange"/>
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </visual>
 
@@ -107,7 +108,7 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </collision>
 
-        <xacro:cylinder_inertia m="1" r="${wheel_radius}" l="${wheel_width}">
+        <xacro:cylinder_inertia m="0.2" r="${wheel_radius}" l="${wheel_width}">
             <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
         </xacro:cylinder_inertia>
     </link>
@@ -115,7 +116,7 @@
     <!-- ===================== -->
     <!-- === CASTER WHEELS === -->
     <!-- ===================== -->
-    <joint name="caster_front_wheel_joint" type="continuous">
+    <joint name="caster_front_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="caster_front_wheel_link"/>
         <origin xyz="${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" rpy="0 0 0"/>
@@ -143,7 +144,7 @@
         </xacro:sphere_inertia>
     </link>
 
-    <joint name="caster_back_wheel_joint" type="continuous">
+    <joint name="caster_back_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="caster_back_wheel_link"/>
         <origin xyz="-${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" rpy="0 0 0"/>
@@ -171,8 +172,4 @@
         </xacro:sphere_inertia>
     </link> 
 
-    <!-- Joint states plugin -->
-    <gazebo>
-        <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher"/>
-    </gazebo>
 </robot>

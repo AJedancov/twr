@@ -13,10 +13,10 @@ find_package(ament_cmake REQUIRED)
 
 
 install(DIRECTORY
-  rviz 
-  urdf
   controllers
   gz
+  rviz 
+  urdf
   
   DESTINATION share/${PROJECT_NAME}/)
 
