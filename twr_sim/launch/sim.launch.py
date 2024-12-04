@@ -30,7 +30,6 @@ def generate_launch_description():
     # =============================
     # === Robot State Publisher ===
     # =============================
-    # TODO: add path to URDF and set as argument for rsp launch file
     rsp_ld_src = PythonLaunchDescriptionSource([
         PathJoinSubstitution([twr_control_pkg_path, 'launch', 'rsp.launch.py'])
     ])
@@ -49,8 +48,10 @@ def generate_launch_description():
         PathJoinSubstitution([ros_gz_pkg_path, 'launch', 'gz_sim.launch.py'])
     ])
 
-    # TODO: add args for Gazebo Sim launch (gui config)
-    gz_sim_ld_args={'gz_args': '-r empty.sdf'}.items()
+    gz_sim_world = 'empty.sdf'
+    gz_sim_gui_config = PathJoinSubstitution([twr_description_pkg_path, 'gz', 'gz_gui.config'])
+    
+    gz_sim_ld_args={'gz_args': ['-r ', gz_sim_world, ' --gui-config ', gz_sim_gui_config]}.items()
 
     gz_sim_ld = IncludeLaunchDescription(
         launch_description_source=gz_sim_ld_src,
