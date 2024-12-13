@@ -60,6 +60,7 @@
     <!-- ============== -->
     <xacro:wheel 
         name="left_wheel" 
+        type="standart"
         parent="base_link" 
         xyz="0 ${base_width/2 + wheel_width/2 + 0.01} 0" 
         rpy="-${pi/2} 0 0" 
@@ -71,7 +72,8 @@
     />
     
     <xacro:wheel 
-        name="right_wheel" 
+        name="right_wheel"
+        type="standart"
         parent="base_link" 
         xyz="0 -${base_width/2 + wheel_width/2 + 0.01} 0" 
         rpy="-${pi/2} 0 0" 
@@ -82,64 +84,30 @@
         material_name="orange" 
     />
 
+    <xacro:wheel 
+        name="caster_front_wheel" 
+        type="caster"
+        parent="base_link" 
+        xyz="${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" 
+        rpy="0 0 0" 
+        radius="${caster_wheel_radius}" 
+        width="${caster_wheel_radius}" 
+        m="0.01" 
+        xyz_axis="0 0 0" 
+        material_name="white" 
+    />
 
-    <!-- ===================== -->
-    <!-- === CASTER WHEELS === -->
-    <!-- ===================== -->
-    <joint name="caster_front_wheel_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="caster_front_wheel_link"/>
-        <origin xyz="${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" rpy="0 0 0"/>
-        <axis xyz="1 1 1"/>
-    </joint>
-
-    <link name="caster_front_wheel_link">
-        <visual>
-            <geometry>
-                <sphere radius="${caster_wheel_radius}"/>
-            </geometry>
-            <material name="white"/>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </visual>
-
-        <collision>
-            <geometry>
-                <sphere radius="${caster_wheel_radius}"/>
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </collision>
-
-        <xacro:sphere_inertia m="0.01" r="${caster_wheel_radius}">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </xacro:sphere_inertia>
-    </link>
-
-    <joint name="caster_back_wheel_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="caster_back_wheel_link"/>
-        <origin xyz="-${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" rpy="0 0 0"/>
-        <axis xyz="1 1 1"/>
-    </joint>
-
-    <link name="caster_back_wheel_link">
-        <visual>
-            <geometry>
-                <sphere radius="${caster_wheel_radius}"/>
-            </geometry>
-            <material name="white"/>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </visual>
-
-        <collision>
-            <geometry>
-                <sphere radius="${caster_wheel_radius}"/>
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </collision>
-
-        <xacro:sphere_inertia m="0.01" r="${caster_wheel_radius}">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </xacro:sphere_inertia>
-    </link> 
+    <xacro:wheel 
+        name="caster_back_wheel" 
+        type="caster"
+        parent="base_link" 
+        xyz="-${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" 
+        rpy="0 0 0" 
+        radius="${caster_wheel_radius}" 
+        width="${caster_wheel_radius}" 
+        m="0.01" 
+        xyz_axis="0 0 0" 
+        material_name="white" 
+    />
 
 </robot>
