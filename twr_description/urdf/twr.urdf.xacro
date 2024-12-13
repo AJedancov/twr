@@ -6,7 +6,7 @@
     <xacro:include filename="_colors.xacro"/>
     <xacro:include filename="ros2_control.xacro"/>
     <xacro:include filename="gz.xacro"/>
-    <xacro:include filename="wheel.xacro"/>
+    <xacro:include filename="wheel.macro.xacro"/>
 
     <xacro:property name="mm2m" value="0.001"/>
 
@@ -50,9 +50,8 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </collision>
 
-        <xacro:box_inertia m="1" l="${base_length}" w="${base_width}"  h="${base_height}">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </xacro:box_inertia>
+        <xacro:inertia shape="box" xyz="0 0 0" rpy="0 0 0" l="${base_length}" w="${base_width}" h="${base_height}" m="1"/>
+
     </link>
 
     <!-- ============== -->

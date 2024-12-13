@@ -29,9 +29,8 @@
                     <origin xyz="0 0 0" rpy="0 0 0"/>
                 </collision>
 
-                <xacro:cylinder_inertia m="${m}" r="${radius}" l="${width}">
-                    <origin xyz="0 0 0" rpy="0 0 0"/>
-                </xacro:cylinder_inertia>
+                <xacro:inertia shape="cylinder" xyz="0 0 0" rpy="0 0 0" r="${radius}" w="${width}" m="${m}"/>
+
             </link>
         </xacro:if>
         
@@ -61,9 +60,8 @@
                     <origin xyz="0 0 0" rpy="0 0 0"/>
                 </collision>
 
-                <xacro:sphere_inertia m="${m}" r="${radius}">
-                    <origin xyz="0 0 0" rpy="0 0 0"/>
-                </xacro:sphere_inertia>
+                <xacro:inertia shape="sphere" xyz="0 0 0" rpy="0 0 0" r="${radius}" m="${m}"/>
+
             </link>
         </xacro:if>
     </xacro:macro> 
