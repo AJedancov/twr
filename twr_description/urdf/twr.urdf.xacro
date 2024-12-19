@@ -20,9 +20,9 @@
 
     <xacro:property name="caster_wheel_radius" value="${10*mm2m}"/>
 
-    <xacro:property name="lidar_radius" value="${50*mm2m}"/>
+    <xacro:property name="lidar_radius" value="${10*mm2m}"/>
     <xacro:property name="lidar_width" value="${20*mm2m}"/>
-    <xacro:property name="lidar_base" value="${30*mm2m}"/>
+    <xacro:property name="lidar_base" value="${60*mm2m}"/>
 
     <!-- ============= -->
     <!-- === WORLD === -->
