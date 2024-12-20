@@ -6,6 +6,9 @@ This model can serve as a basis for testing control and localization algorithms.
 **ROS2 Distro**: Jazzy  
 **Gazebo**: Harmonic
 
+The model includes sensors:
+- [LIDAR](#lidar)
+
 
 ## Installation
 ### Install dependencies
@@ -21,7 +24,8 @@ Install [ros2_control](https://github.com/ros-controls/ros2_control) packages:
                   ros-${ROS_DISTRO}-ros2-controllers \             
 ```
 
-Install [Gazebo](https://github.com/gazebosim) for a specific ROS2 version. More details from the [source](https://gazebosim.org/docs/latest/ros_installation/):
+Install [Gazebo](https://github.com/gazebosim) for a specific ROS2 version. More details from the [source](https://gazebosim.org/docs/latest/ros_installation/)
+In addition, we will need the ros2_control plugin for Gazebo:
 ```bash
  sudo apt install ros-${ROS_DISTRO}-ros-gz \
                   ros-${ROS_DISTRO}-gz-ros2-control
@@ -78,3 +82,12 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/di
 ```
 
 [More information](https://github.com/ros-teleop/teleop_twist_keyboard) about this package.
+
+
+## Available sensors
+### LIDAR
+**Topic name:** `/scan`  
+**Number of samples:** 360  
+**Range (m):** 0.05 - 5  
+
+To visualize LIDAR data in Gazebo, you need to activate the plugin `Visualize Lidar` and refresh list of topics.
