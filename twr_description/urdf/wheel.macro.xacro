@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <xacro:macro name="wheel" params="name type parent xyz rpy radius width m xyz_axis material_name">
+        <!-- ====================== -->
+        <!-- === Stanrart wheel === -->
+        <!-- ====================== -->
+        <xacro:if value="${type == 'standart'}">
+            <joint name="${name}_joint" type="continuous">
+                <parent link="${parent}"/>
+                <child link="${name}_link"/>
+                <origin xyz="${xyz}" rpy="${rpy}"/>
+                <axis xyz="${xyz_axis}"/>
+            </joint>
+
+            <link name="${name}_link">
+                <visual>
+                    <geometry>
+                        <cylinder radius="${radius}" length="${width}"/>
+                    </geometry>
+                    <material name="${material_name}"/>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                </visual>
+
+                <collision>
+                    <geometry>
+                        <cylinder radius="${radius}" length="${width}"/>
+                    </geometry>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                </collision>
+
+                <xacro:inertia shape="cylinder" xyz="0 0 0" rpy="0 0 0" r="${radius}" w="${width}" m="${m}"/>
+
+            </link>
+        </xacro:if>
+        
+        <!-- ==================== -->
+        <!-- === Caster wheel === -->
+        <!-- ==================== -->
+        <xacro:if value="${type == 'caster'}">
+            <joint name="${name}_joint" type="fixed">
+                <parent link="${parent}"/>
+                <child link="${name}_link"/>
+                <origin xyz="${xyz}" rpy="${rpy}"/>
+            </joint>
+
+            <link name="${name}_link">
+                <visual>
+                    <geometry>
+                        <sphere radius="${radius}"/>
+                    </geometry>
+                    <material name="${material_name}"/>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                </visual>
+
+                <collision>
+                    <geometry>
+                        <sphere radius="${radius}"/>
+                    </geometry>
+                    <origin xyz="0 0 0" rpy="0 0 0"/>
+                </collision>
+
+                <xacro:inertia shape="sphere" xyz="0 0 0" rpy="0 0 0" r="${radius}" m="${m}"/>
+
+            </link>
+        </xacro:if>
+    </xacro:macro> 
+
+
+</robot>
+
+
+
+

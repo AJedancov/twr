@@ -151,7 +151,7 @@ def generate_launch_description():
     ld.add_action(gz_sim_ld)
     ld.add_action(rsp_ld)
     ld.add_action(gz_spawn_entity_node)
-    # ld.add_action(gz_bridge_node)
+    ld.add_action(gz_bridge_node)
     # ld.add_action(control_node)
     ld.add_action(joint_state_broadcaster_spawner_node)
     ld.add_action(diff_drive_base_controller_spawner_node)
