@@ -147,6 +147,19 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('use_rviz2'))
     )
 
+
+    # ============
+    # === SLAM ===
+    # ============
+    slam_ld_src = PythonLaunchDescriptionSource([
+        PathJoinSubstitution([twr_sim_pkg_path, 'launch', 'slam.launch.py'])
+    ])
+
+    slam_ld = IncludeLaunchDescription(
+        launch_description_source=slam_ld_src,
+    )
+
+
     ld.add_action(use_rviz2_launch_arg)
     ld.add_action(gz_sim_ld)
     ld.add_action(rsp_ld)
@@ -156,5 +169,6 @@ def generate_launch_description():
     ld.add_action(joint_state_broadcaster_spawner_node)
     ld.add_action(diff_drive_base_controller_spawner_node)
     ld.add_action(rviz2_ld)
+    ld.add_action(slam_ld)
     
     return ld
