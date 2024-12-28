@@ -24,17 +24,35 @@
     <xacro:property name="lidar_width" value="${20*mm2m}"/>
     <xacro:property name="lidar_base" value="${60*mm2m}"/>
 
-    <!-- ============= -->
-    <!-- === WORLD === -->
-    <!-- ============= -->
-    <link name="odom"/>
+    <!-- ============ -->
+    <!-- === MAP === -->
+    <!-- ============ -->
+    <link name="map"/>
 
+    <!-- ============ -->
+    <!-- === ODOM === -->
+    <!-- ============ -->
+    <joint name="odom_joint" type="fixed">
+        <parent link="map"/>
+        <child link="odom" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+    
+    <link name="odom"/>
 
     <!-- ============ -->
     <!-- === BASE === -->
     <!-- ============ -->
-    <joint name="base_joint" type="fixed">
+    <joint name="base_footprint_joint" type="fixed">
         <parent link="odom"/>
+        <child link="base_footprint" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="base_footprint"/>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
         <child link="base_link" />
         <origin xyz="0 0 ${wheel_radius+0.001}" rpy="0 0 0"/>
     </joint>
