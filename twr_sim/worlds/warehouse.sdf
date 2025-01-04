@@ -1,0 +1,434 @@
+<sdf version='1.10'>
+  <world name='warehouse'>
+    <physics name='default_physics' default='false' type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>100</real_time_update_rate>
+    </physics>
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
+            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+            <specular>0.800000012 0.800000012 0.800000012 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    
+    <model name='whall_front'>
+      <static>true</static>
+      <link name='whall_front_link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>2 14 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>2 14 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
+            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+            <specular>0.800000012 0.800000012 0.800000012 1</specular>
+          </material>
+          <transparency>0.5</transparency>
+        </visual>
+        <pose>6 0 1 0 1.5707963267948966 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 -4.4408920985006262e-16 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='whall_back'>
+      <static>true</static>
+      <link name='whall_back_link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>2 14 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>2 14 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+          <transparency>0.5</transparency>
+        </visual>
+        <pose>-6 0 1 0 1.5707963267948966 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='whall_left'>
+      <static>true</static>
+      <link name='whall_left_link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>2 12 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>2 12 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+          <transparency>0.5</transparency>
+        </visual>
+        <pose>0 7 1 0 1.5707963267948966 1.5707963267948966</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='whall_right'>
+      <static>true</static>
+      <link name='whall_right_link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>2 12 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>2 12 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+          <transparency>0.5</transparency>
+        </visual>
+        <pose>0 -7 1 0 1.5707963267948966 1.5707963267948966</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='aws_robomaker_warehouse_ShelfE_01_001'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ShelfE_01</uri>
+      </include>
+      <pose>5.4435491561889648 -2.7080090045928955 0 0 0 -1.5707600969989992</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ShelfD_01_001'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ShelfD_01</uri>
+      </include>
+      <pose>3.9394600391387939 -6.4014344215393066 0 0 0 0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ShelfD_01_002'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ShelfD_01</uri>
+      </include>
+      <pose>-3.9054899215698242 6.4700908660888672 0 0 0 0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='aws_robomaker_warehouse_Bucket_01_021'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_Bucket_01</uri>
+      </include>
+      <pose>-0.33102396130561829 -2.5052766799926758 0 0 0 -1.5631600645387924</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_Bucket_01_022'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_Bucket_01</uri>
+      </include>
+      <pose>2.860313892364502 6.4909491539001456 0 0 0 -1.5631600645387924</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringA_01_016'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringA_01</uri>
+      </include>
+      <pose>2.9516899585723877 -3.2356750965118408 -0.017477000132203102 0 0 0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringA_01_017'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringA_01</uri>
+      </include>
+      <pose>4.7760143280029297 3.1254699230194092 -0.017477000132203102 0 0 0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringA_01_018'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringA_01</uri>
+      </include>
+      <pose>-3.8099532127380371 3.2351441383361816 -0.017477000132203102 0 0 -1.5831900502372414</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringC_01_027'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringC_01</uri>
+      </include>
+      <pose>-4.9132065773010254 -6.0789923667907724 -0.012063999660313129 0 0 1.5638700472001696</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringC_01_028'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringC_01</uri>
+      </include>
+      <pose>4.8005480766296387 0.7052451372146602 -0.015662999823689461 0 0 -1.5831900502372414</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringC_01_029'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringC_01</uri>
+      </include>
+      <pose>5.0371475219726554 5.8677682876586914 0 0 0 -3.133190000080512</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringC_01_030'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringC_01</uri>
+      </include>
+      <pose>-5.057685375213623 -0.55497777462005604 0 0 0 -3.133190000080512</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringC_01_031'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringC_01</uri>
+      </include>
+      <pose>-0.14650700986385334 2.7585587501525874 -0.015662999823689461 0 0 -3.133190000080512</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringC_01_032'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringC_01</uri>
+      </include>
+      <pose>0.069877520203590393 5.9940886497497567 -0.015662999823689461 0 0 1.5638700472001696</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringD_01_005'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringD_01</uri>
+      </include>
+      <pose>-1.397024393081665 -6.163489818572998 -0.3195590078830719 0 0 0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_ClutteringC_01_030_1'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringC_01</uri>
+      </include>
+      <pose>-5.1185503005981445 -3.5862770080566406 0 0 0 -3.133190000080512</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_Bucket_01_021_1'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_Bucket_01</uri>
+      </include>
+      <pose>-2.8214015960693364 -6.4469342231750488 0 0 0 -1.5631600645387931</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aws_robomaker_warehouse_Bucket_01_021_2'>
+      <include>
+        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_Bucket_01</uri>
+      </include>
+      <pose>0.46769300103187561 -6.4392409324645996 0 0 0 -1.5631600645387924</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>1 1 1 1</specular>
+      <attenuation>
+        <range>10</range>
+        <linear>1</linear>
+        <constant>1</constant>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>

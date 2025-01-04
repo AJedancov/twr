@@ -19,8 +19,14 @@ def generate_launch_description():
     twr_sim_pkg_path = FindPackageShare('twr_sim')
 
     # === Launch arguments ===
+    gz_sim_world_arg = DeclareLaunchArgument(
+        name='gz_sim_world_path',
+        default_value=PathJoinSubstitution([twr_sim_pkg_path, 'worlds', 'warehouse.sdf']),
+        description='Gazebo Sim world',
+    )
 
     # === Launch configuration ===
+    gz_sim_world = LaunchConfiguration('gz_sim_world_path')
 
     # ===================
     # === Gazebo Sim ====
@@ -29,7 +35,6 @@ def generate_launch_description():
         PathJoinSubstitution([ros_gz_pkg_path, 'launch', 'gz_sim.launch.py'])
     ])
 
-    gz_sim_world = 'empty.sdf'
     gz_sim_gui_config = PathJoinSubstitution([twr_sim_pkg_path, 'config', 'gz_gui.config'])
     
     gz_sim_ld_args={'gz_args': ['-r ', gz_sim_world, ' --gui-config ', gz_sim_gui_config]}.items()
@@ -80,6 +85,8 @@ def generate_launch_description():
         output='screen',
         parameters=[gz_spawn_entity_node_param]
     )
+
+    ld.add_action(gz_sim_world_arg)
 
     ld.add_action(gz_sim_ld)
     ld.add_action(gz_spawn_entity_node)
