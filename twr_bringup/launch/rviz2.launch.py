@@ -16,7 +16,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # === Package Directories ===
-    rsp_pkg_path = FindPackageShare('twr_control')
+    rsp_pkg_path = FindPackageShare('twr_bringup')
     twr_description_pkg_path = FindPackageShare('twr_description')
 
     # === Launch arguments ===
