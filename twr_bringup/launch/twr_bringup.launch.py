@@ -17,6 +17,7 @@ def generate_launch_description():
     twr_bringup_pkg_path = FindPackageShare('twr_bringup')
     twr_description_pkg_path = FindPackageShare('twr_description')
     twr_control_pkg_path = FindPackageShare('twr_control')
+    twr_navigation_pkg_path = FindPackageShare('twr_navigation')
     twr_sim_pkg_path = FindPackageShare('twr_sim')
 
     # === Launch arguments ===
@@ -64,6 +65,17 @@ def generate_launch_description():
         launch_description_source=slam_ld_src,
     )
 
+    # ==================
+    # === Navigation ===
+    # ==================
+    navigation_ld_src = PythonLaunchDescriptionSource([
+        PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'navigation.launch.py'])
+    ])
+
+    navigation_ld = IncludeLaunchDescription(
+        launch_description_source=navigation_ld_src,
+    )
+
     # =============
     # === RViz2 ===
     # =============
@@ -96,7 +108,8 @@ def generate_launch_description():
     ld.add_action(rsp_ld)
     ld.add_action(sim_ld)
     ld.add_action(control_ld)
+    ld.add_action(navigation_ld)
     ld.add_action(rviz2_ld)
-    ld.add_action(slam_ld)
+    # ld.add_action(slam_ld)
     
     return ld
