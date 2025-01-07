@@ -58,7 +58,7 @@ def generate_launch_description():
     # === SLAM ===
     # ============
     slam_ld_src = PythonLaunchDescriptionSource([
-        PathJoinSubstitution([twr_bringup_pkg_path, 'launch', 'slam.launch.py'])
+        PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'slam.launch.py'])
     ])
 
     slam_ld = IncludeLaunchDescription(
