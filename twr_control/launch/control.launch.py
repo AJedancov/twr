@@ -15,7 +15,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # === Package Directories ===
-    twr_description_pkg_path = FindPackageShare('twr_description')
+    twr_control_pkg_path = FindPackageShare('twr_control')
 
     # === Launch arguments ===
 
@@ -24,7 +24,7 @@ def generate_launch_description():
     # ====================
     # === ros2_control ===
     # ====================
-    twr_controllers = PathJoinSubstitution([twr_description_pkg_path, 'controllers', 'twr_diff_drive.yaml'])
+    twr_controllers = PathJoinSubstitution([twr_control_pkg_path, 'config', 'twr_diff_drive_controller.yaml'])
 
     # controller_manager commented -> gz_ros2_control runs the controller_manager, no need for ros2_control_node
 
