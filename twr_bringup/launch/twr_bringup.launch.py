@@ -110,6 +110,6 @@ def generate_launch_description():
     ld.add_action(control_ld)
     ld.add_action(navigation_ld)
     ld.add_action(rviz2_ld)
-    # ld.add_action(slam_ld)
+    ld.add_action(slam_ld)
     
     return ld
