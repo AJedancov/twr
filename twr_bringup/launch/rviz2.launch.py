@@ -35,7 +35,7 @@ def generate_launch_description():
     rviz2_node_args = PathJoinSubstitution([
         twr_description_pkg_path, 
         'rviz',
-        'config.rviz'
+        'nav2_config.rviz'
     ])
 
     rviz2_node = Node(
