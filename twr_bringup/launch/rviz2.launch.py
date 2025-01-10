@@ -16,7 +16,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # === Package Directories ===
-    rsp_pkg_path = FindPackageShare('twr_control')
+    rsp_pkg_path = FindPackageShare('twr_bringup')
     twr_description_pkg_path = FindPackageShare('twr_description')
 
     # === Launch arguments ===
@@ -35,7 +35,7 @@ def generate_launch_description():
     rviz2_node_args = PathJoinSubstitution([
         twr_description_pkg_path, 
         'rviz',
-        'config.rviz'
+        'nav2_config.rviz'
     ])
 
     rviz2_node = Node(

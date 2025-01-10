@@ -13,7 +13,7 @@ def generate_launch_description():
 
     # === Package Directories ===
     slam_toolbox_pkg_path = FindPackageShare('slam_toolbox')
-    twr_description_pkg_path = FindPackageShare('twr_description')
+    twr_navigation_pkg_path = FindPackageShare('twr_navigation')
 
     # === Launch arguments ===
 
@@ -26,7 +26,7 @@ def generate_launch_description():
         PathJoinSubstitution([slam_toolbox_pkg_path, 'launch', 'online_async_launch.py'])
     ])
     
-    slam_toolbox_ld_args={'slam_params_file': PathJoinSubstitution([twr_description_pkg_path, 'mapper_params_online_async.yaml']),
+    slam_toolbox_ld_args={'slam_params_file': PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'mapper_params_online_async.yaml']),
                           'use_sim_time': 'True'}.items()
 
     slam_toolbox_ld = IncludeLaunchDescription(

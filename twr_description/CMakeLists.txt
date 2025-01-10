@@ -12,12 +12,7 @@ find_package(ament_cmake REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 
-install(DIRECTORY
-  controllers
-  gz
-  rviz 
-  urdf
-  
+install(DIRECTORY rviz urdf
   DESTINATION share/${PROJECT_NAME}/)
 
 ament_package()
