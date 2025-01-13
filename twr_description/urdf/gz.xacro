@@ -7,7 +7,7 @@
         <!-- In addition to the ros2_control tags, a Gazebo plugin needs to be added to your URDF 
         that actually parses the ros2_control tags and loads the appropriate hardware interfaces and controller manager -->
         <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-            <parameters> $(find twr_description)/controllers/twr_diff_drive.yaml </parameters>
+            <parameters> $(find twr_control)/config/twr_diff_drive_controller.yaml </parameters>
         </plugin>
 
         <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
