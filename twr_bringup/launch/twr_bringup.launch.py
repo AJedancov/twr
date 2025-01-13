@@ -27,7 +27,14 @@ def generate_launch_description():
         description='Launch RViz2',
     )
 
+    use_sim_time_launch_arg = DeclareLaunchArgument(
+        name='use_sim_time',
+        default_value='True',
+        description='Use simulation time',
+    )
+
     # === Launch configuration ===
+    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
 
     # =============================
     # === Robot State Publisher ===
@@ -36,11 +43,11 @@ def generate_launch_description():
         PathJoinSubstitution([twr_bringup_pkg_path, 'launch', 'rsp.launch.py'])
     ])
 
-    rsp_ld_args = {'use_sim_time': 'True'}.items()
+    rsp_ld_args = {'use_sim_time': use_sim_time_launch_conf}.items()
 
     rsp_ld = IncludeLaunchDescription(
         launch_description_source=rsp_ld_src,
-        launch_arguments=rsp_ld_args
+        launch_arguments=rsp_ld_args,
     )
 
     # ===============
@@ -61,8 +68,11 @@ def generate_launch_description():
         PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'slam.launch.py'])
     ])
 
+    slam_ld_args = {'use_sim_time': use_sim_time_launch_conf}.items()
+
     slam_ld = IncludeLaunchDescription(
         launch_description_source=slam_ld_src,
+        launch_arguments=slam_ld_args,
     )
 
     # ==================
@@ -72,8 +82,11 @@ def generate_launch_description():
         PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'navigation.launch.py'])
     ])
 
+    navigation_ld_args = {'use_sim_time': use_sim_time_launch_conf}.items()
+
     navigation_ld = IncludeLaunchDescription(
         launch_description_source=navigation_ld_src,
+        launch_arguments=navigation_ld_args,
     )
 
     # =============
@@ -83,7 +96,9 @@ def generate_launch_description():
         PathJoinSubstitution([twr_bringup_pkg_path, 'launch', 'rviz2.launch.py'])
     ])
 
-    rviz2_ld_args = {'without_gz': 'False'}.items()
+    rviz2_ld_args = {
+        'without_gz': 'False',
+        'use_sim_time': use_sim_time_launch_conf}.items()
 
     rviz2_ld = IncludeLaunchDescription(
         launch_description_source=rviz2_ld_src,
@@ -104,6 +119,7 @@ def generate_launch_description():
 
 
     ld.add_action(use_rviz2_launch_arg)
+    ld.add_action(use_sim_time_launch_arg)
     
     ld.add_action(rsp_ld)
     ld.add_action(sim_ld)

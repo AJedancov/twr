@@ -26,7 +26,14 @@ def generate_launch_description():
         description='Gazebo is not using',
     )
 
+    use_sim_time_launch_arg = DeclareLaunchArgument(
+        name='use_sim_time',
+        default_value='True',
+        description='Use simulation time',
+    )
+
     # === Launch configuration === 
+    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
 
     # =============
     # === RViz2 ===
@@ -45,6 +52,7 @@ def generate_launch_description():
     )
     
     ld.add_action(without_gz_launch_arg)
+    ld.add_action(use_sim_time_launch_arg)
     ld.add_action(rviz2_node)
 
 
@@ -56,7 +64,7 @@ def generate_launch_description():
         PathJoinSubstitution([rsp_pkg_path, 'launch', 'rsp.launch.py'])
     ])
 
-    rsp_ld_args = {'use_sim_time': 'True'}.items()
+    rsp_ld_args = {'use_sim_time': use_sim_time_launch_conf}.items()
 
     rsp_ld = IncludeLaunchDescription(
         launch_description_source=rsp_ld_source,

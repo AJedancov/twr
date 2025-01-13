@@ -1,8 +1,8 @@
 import os
 
 from launch import LaunchDescription
-from launch.substitutions import PathJoinSubstitution
-from launch.actions import IncludeLaunchDescription
+from launch.substitutions import PathJoinSubstitution, PathJoinSubstitution, LaunchConfiguration
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 from launch_ros.substitutions import FindPackageShare
@@ -16,8 +16,14 @@ def generate_launch_description():
     twr_navigation_pkg_path = FindPackageShare('twr_navigation')
 
     # === Launch arguments ===
+    use_sim_time_launch_arg = DeclareLaunchArgument(
+        name='use_sim_time',
+        default_value='True',
+        description='Use simulation time',
+    )
 
     # === Launch configuration === 
+    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
 
     # ====================
     # === slam_toolbox ===
@@ -27,7 +33,7 @@ def generate_launch_description():
     ])
     
     slam_toolbox_ld_args={'slam_params_file': PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'mapper_params_online_async.yaml']),
-                          'use_sim_time': 'True'}.items()
+                          'use_sim_time': use_sim_time_launch_conf}.items()
 
     slam_toolbox_ld = IncludeLaunchDescription(
         launch_description_source=slam_toolbox_ld_src,
@@ -35,5 +41,6 @@ def generate_launch_description():
     )
 
     ld.add_action(slam_toolbox_ld)
+    ld.add_action(use_sim_time_launch_arg)
 
     return ld

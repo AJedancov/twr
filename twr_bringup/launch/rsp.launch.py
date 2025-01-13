@@ -17,14 +17,14 @@ def generate_launch_description():
     twr_description_pkg_path = FindPackageShare('twr_description')
 
     # === Launch arguments ===
-    sim_time_launch_arg = DeclareLaunchArgument(
+    use_sim_time_launch_arg = DeclareLaunchArgument(
         name='use_sim_time',
         default_value='True',
-        description='Launch RViz',
+        description='Use simulation time',
     )
 
-    # === Launch configuration ===
-    sim_time_launch_cfg = LaunchConfiguration('use_sim_time')
+    # === Launch configuration === 
+    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
 
     # =============================
     # === Robot State Publisher ===
@@ -32,18 +32,18 @@ def generate_launch_description():
     twr_xacro_config_file = PathJoinSubstitution([twr_description_pkg_path, 'urdf', 'twr.urdf.xacro'])
 
     twr_urdf_config_file = Command(['xacro ', twr_xacro_config_file])
-    rsp_node_param = {
+    rsp_node_params = {
         'robot_description': twr_urdf_config_file,
-        'use_sim_time': sim_time_launch_cfg
+        'use_sim_time': use_sim_time_launch_conf
     }
     
     rsp_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        parameters=[rsp_node_param]
+        parameters=[rsp_node_params]
     )
 
-    ld.add_action(sim_time_launch_arg)
+    ld.add_action(use_sim_time_launch_arg)
     ld.add_action(rsp_node)
 
     return ld
