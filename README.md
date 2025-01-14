@@ -62,8 +62,9 @@ Use this launch file to see model preview in RViz2:
  ros2 launch twr_bringup rviz2.launch.py
 ```  
 
-![](images/twr_rviz2.png)
-
+<div align="center">
+  <img src="images/twr_rviz2.png" width="450"/>  
+</div>
 
 ## Start simulation in Gazebo Sim
 
@@ -73,8 +74,11 @@ Use this launch file to see model preview in RViz2:
 Set the `use_sim_time` parameter to use Gazebo time (by default `True`).  
 Set the `use_rviz2` to use RViz2 during simulation time (by default `True`).
 
-![](images/twr_rviz2_nav.png)
-![](images/twr_gazebo_warehouse.png)
+<div align="center">
+  <img src="images/twr_rviz2_nav.png" width="400"/>  
+
+  <img src="images/twr_gazebo_warehouse.png" width="400"/>
+</div>
 
 
 ## Control
@@ -91,7 +95,10 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/di
 The robot is capable of moving to a given point in space.
 The [Nav2](https://github.com/ros-navigation/navigation2) framework is used to implement the navigation task.  
 Use the "2D Goal Pose" function in RViz2 to set the desired position.  
-![](images/twr_rviz2_set_goal.png)
+
+<div align="center">
+  <img src="images/twr_rviz2_set_goal.png" width="400"/>  
+</div>
 
 
 ## Available sensors
