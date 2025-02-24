@@ -314,14 +314,6 @@
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
-    <model name='aws_robomaker_warehouse_ClutteringA_01_017'>
-      <include>
-        <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringA_01</uri>
-      </include>
-      <pose>4.7760143280029297 3.1254699230194092 -0.017477000132203102 0 0 0</pose>
-      <static>false</static>
-      <self_collide>false</self_collide>
-    </model>
     <model name='aws_robomaker_warehouse_ClutteringA_01_018'>
       <include>
         <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/aws_robomaker_warehouse_ClutteringA_01</uri>
