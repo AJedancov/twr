@@ -14,6 +14,11 @@
             <render_engine>ogre2</render_engine>
         </plugin>
 
+        <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+            <odom_frame>map</odom_frame>
+            <robot_base_frame>base_link</robot_base_frame>
+        </plugin>
+        
     </gazebo>
 
 
