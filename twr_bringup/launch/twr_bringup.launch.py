@@ -75,6 +75,20 @@ def generate_launch_description():
         launch_arguments=slam_ld_args,
     )
 
+    # ==============
+    # === Fusion ===
+    # ==============
+    fusion_ld_src = PythonLaunchDescriptionSource([
+        PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'fusion.launch.py'])
+    ])
+
+    fusion_ld_args = {'use_sim_time': use_sim_time_launch_conf}.items()
+
+    fusion_ld = IncludeLaunchDescription(
+        launch_description_source=fusion_ld_src,
+        launch_arguments=fusion_ld_args,
+    )
+
     # ==================
     # === Navigation ===
     # ==================
@@ -127,5 +141,6 @@ def generate_launch_description():
     ld.add_action(navigation_ld)
     ld.add_action(rviz2_ld)
     ld.add_action(slam_ld)
+    ld.add_action(fusion_ld)
     
     return ld

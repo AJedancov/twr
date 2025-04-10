@@ -1,0 +1,22 @@
+ekf_filter_node:
+  ros__parameters:
+
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_link
+
+    two_d_mode: true
+
+    odom0: /diff_drive_controller/odom  # Type: nav_msgs/msg/Odometry
+    odom0_config: [true,  true,  false, #  x,      y,    z, 
+                   false, false, true, # roll, pitch,  yaw, 
+                   false, false, false, #  vx,    vy,    vz, 
+                   false, false, false,  # vroll, vpitch, vyaw, 
+                   false, false, false] #  ax,    ay,    az
+    
+    pose0: /pose  # Type: geometry_msgs/msg/PoseWithCovarianceStamped
+    pose0_config: [true,  true,  false,
+                   false, false, true,
+                   false, false, false,
+                   false, false, false,
+                   false, false, false]
