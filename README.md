@@ -20,8 +20,8 @@ Install [ros2_control](https://github.com/ros-controls/ros2_control) packages:
                   ros-${ROS_DISTRO}-ros2-controllers \             
 ```
 
-Install [Gazebo](https://github.com/gazebosim) for a specific ROS2 version. More details from the [source](https://gazebosim.org/docs/latest/ros_installation/).  
-In addition, we will need the ros2_control plugin for Gazebo:
+Install [Gazebo](https://github.com/gazebosim) for a specific ROS2 version. More detailed information can be found [here](https://gazebosim.org/docs/latest/ros_installation/).  
+In addition, install the ros2_control plugin for Gazebo:
 ```bash
  sudo apt install ros-${ROS_DISTRO}-ros-gz \
                   ros-${ROS_DISTRO}-gz-ros2-control
@@ -33,8 +33,12 @@ sudo apt install ros-${ROS_DISTRO}-navigation2 \
                  ros-${ROS_DISTRO}-nav2-bringup
 ```
 
+Install [robot_localization](https://github.com/cra-ros-pkg/robot_localization) package for nonlinear state estimation:
+```bash
+sudo apt install ros-${ROS_DISTRO}-robot-localization
+```
 
-### Build project
+### Clone and build project
 
 Open the directory where the ros2 workspace will be stored.
 Clone repository and build project:
@@ -74,11 +78,10 @@ Use this launch file to see model preview in RViz2:
 Set the `use_sim_time` parameter to use Gazebo time (by default `True`).  
 Set the `use_rviz2` to use RViz2 during simulation time (by default `True`).
 
-<div align="center">
+<p align="center">
   <img src="images/twr_rviz2_nav.png" width="400"/>  
-
-  <img src="images/twr_gazebo_warehouse.png" width="400"/>
-</div>
+  <img src="images/twr_gazebo_warehouse.png" width="450"/>
+</p>
 
 
 ## Control
