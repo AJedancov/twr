@@ -45,10 +45,15 @@ def generate_launch_description():
         'nav2_config.rviz'
     ])
 
+    rviz2_node_params = {
+        'use_sim_time': use_sim_time_launch_conf
+    }
+
     rviz2_node = Node(
         package='rviz2',
         executable='rviz2',
-        arguments=['-d', rviz2_node_args] # -d -> --display-config
+        arguments=['-d', rviz2_node_args], # -d -> --display-config
+        parameters=[rviz2_node_params]
     )
     
     ld.add_action(without_gz_launch_arg)
