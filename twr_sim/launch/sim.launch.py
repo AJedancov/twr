@@ -77,7 +77,8 @@ def generate_launch_description():
     # === Gazebo: spawn entity ===
     # use /robot_description from robot_state_publisher node
     gz_spawn_entity_node_param = {'name' : 'twr',
-                                  'topic': 'robot_description'}
+                                  'topic': 'robot_description',
+                                  'z': 0.051}
 
     gz_spawn_entity_node = Node(
         package='ros_gz_sim',
