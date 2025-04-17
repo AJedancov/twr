@@ -73,7 +73,7 @@ def generate_launch_description():
 
     # === Controller Server ===
     nav2_controller_server_params = [
-        PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'nav2_controller.yaml']),
+        PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'nav2_controller_mppi.yaml']),
         {'use_sim_time': use_sim_time_launch_conf,}
     ]
     
