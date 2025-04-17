@@ -78,7 +78,7 @@ def generate_launch_description():
     # use /robot_description from robot_state_publisher node
     gz_spawn_entity_node_param = {'name' : 'twr',
                                   'topic': 'robot_description',
-                                  'z': 0.051}
+                                  'z': 0.1}
 
     gz_spawn_entity_node = Node(
         package='ros_gz_sim',

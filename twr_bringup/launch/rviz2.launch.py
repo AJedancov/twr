@@ -2,7 +2,7 @@ import os
 
 from launch import LaunchDescription
 from launch.substitutions import Command, PathJoinSubstitution, LaunchConfiguration
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
 from launch.conditions import IfCondition
 
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -55,10 +55,34 @@ def generate_launch_description():
         arguments=['-d', rviz2_node_args], # -d -> --display-config
         parameters=[rviz2_node_params]
     )
-    
+
+
+    # ==============================
+    #  === TF Static Publisher ===
+    # ==============================
+
+    tf_sb_odom_node_args=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'odom', 'base_link']
+
+    tf_sb_odom_node = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=tf_sb_odom_node_args,
+    )
+
+    tf_sb_map_node_args=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'map', 'odom']
+
+    tf_sb_map_node = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=tf_sb_map_node_args,
+    )
+
+
     ld.add_action(without_gz_launch_arg)
     ld.add_action(use_sim_time_launch_arg)
     ld.add_action(rviz2_node)
+    ld.add_action(tf_sb_odom_node)
+    ld.add_action(tf_sb_map_node)
 
 
     # =============================
@@ -74,7 +98,6 @@ def generate_launch_description():
     rsp_ld = IncludeLaunchDescription(
         launch_description_source=rsp_ld_source,
         launch_arguments=rsp_ld_args,
-        condition=IfCondition(LaunchConfiguration('without_gz'))
     )
 
     # ==============================
@@ -86,12 +109,13 @@ def generate_launch_description():
     jsp_node = Node(
         package='joint_state_publisher',
         executable='joint_state_publisher',
-        condition=IfCondition(LaunchConfiguration('without_gz'))
     )
 
+    without_sim_group = GroupAction(
+            actions=[rsp_ld, jsp_node],
+            condition=IfCondition(LaunchConfiguration('without_gz')),
+    )
 
-    ld.add_action(rsp_ld)
-    ld.add_action(jsp_node)
-
+    ld.add_action(without_sim_group)
     
     return ld
