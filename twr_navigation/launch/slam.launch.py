@@ -22,8 +22,15 @@ def generate_launch_description():
         description='Use simulation time',
     )
 
+    slam_toolbox_params_path_launch_arg = DeclareLaunchArgument(
+        name='slam_toolbox_params_path',
+        default_value=PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'slam_toolbox','online_async_localization_params.yaml']),
+        description='Path to slam_toolbox parameters file',
+    )
+
     # === Launch configuration === 
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
+    slam_toolbox_params_path_launch_conf = LaunchConfiguration('slam_toolbox_params_path')
 
     # ====================
     # === slam_toolbox ===
@@ -32,15 +39,17 @@ def generate_launch_description():
         PathJoinSubstitution([slam_toolbox_pkg_path, 'launch', 'online_async_launch.py'])
     ])
     
-    slam_toolbox_ld_args={'slam_params_file': PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'mapper_params_online_async.yaml']),
-                          'use_sim_time': use_sim_time_launch_conf}.items()
+    slam_toolbox_ld_args={'use_sim_time': use_sim_time_launch_conf,
+                          'slam_params_file': slam_toolbox_params_path_launch_conf}.items()
 
     slam_toolbox_ld = IncludeLaunchDescription(
         launch_description_source=slam_toolbox_ld_src,
         launch_arguments=slam_toolbox_ld_args
     )
 
-    ld.add_action(slam_toolbox_ld)
     ld.add_action(use_sim_time_launch_arg)
+    ld.add_action(slam_toolbox_params_path_launch_arg)
+    
+    ld.add_action(slam_toolbox_ld)
 
     return ld
