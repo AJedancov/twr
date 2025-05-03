@@ -24,19 +24,19 @@ def generate_launch_description():
 
     nav2_bt_params_path_launch_arg = DeclareLaunchArgument(
         name='nav2_bt_params_path',
-        default_value=PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'nav2', 'bt', 'nav2_bt_params.yaml']),
+        default_value=PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'nav2_bt', 'nav2_bt_params.yaml']),
         description='Path to Nav2 behavior tree parameters',
     )
 
     nav2_planner_params_path_launch_arg = DeclareLaunchArgument(
         name='nav2_planner_params_path',
-        default_value=PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'nav2', 'planner', 'nav2_planner_navfn_params.yaml']),
+        default_value=PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'nav2_planner', 'nav2_planner_navfn_params.yaml']),
         description='Path to Nav2 planner parameters',
     )
 
     nav2_controller_params_path_launch_arg = DeclareLaunchArgument(
         name='nav2_controller_params_path',
-        default_value=PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'nav2', 'controller', 'nav2_controller_mppi_params.yaml']),
+        default_value=PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'nav2_controller', 'nav2_controller_mppi_params.yaml']),
         description='Path to Nav2 controller parameters',
     )
 

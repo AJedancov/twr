@@ -1,0 +1,9 @@
+<class_libraries>
+    <library path="twr_g2g_controller">
+        <class type="twr_g2g_controller::G2GController" base_class_type="nav2_core::Controller">
+            <description>
+                Go-to-Goal (g2g) controller based on nav2 framework
+            </description>
+        </class>
+    </library>
+</class_libraries>
