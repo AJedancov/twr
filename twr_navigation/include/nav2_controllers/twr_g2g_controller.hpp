@@ -2,12 +2,22 @@
 #include "nav2_core/controller.hpp"
 #include "pluginlib/class_loader.hpp"
 #include "pluginlib/class_list_macros.hpp"
+#include "rcl_interfaces/msg/set_parameters_result.hpp"
 
 #ifndef TWR_CONTROLLER_HPP_
 #define TWR_CONTROLLER_HPP_
 
 namespace twr_g2g_controller
 {
+
+struct Parameters{
+  double max_lin_vel;
+  double max_ang_vel;
+  double Kp_ang_vel; // Proportional gain
+  bool debug_info;
+  std::string local_frame;
+};
+
 class G2GController: public nav2_core::Controller
 {
 public:
@@ -44,12 +54,32 @@ protected:
   nav_msgs::msg::Path global_plan_;
 
   // Node parameters
-  double desired_linear_vel_;
-  double max_lin_vel;
-  double max_ang_vel;
+  Parameters params_;
 
-  double Kp_ang_vel; // Proportional gain
-  bool debug_info;
+private:
+
+  rclcpp::node_interfaces::OnSetParametersCallbackHandle::SharedPtr params_callback_handle_;
+  rcl_interfaces::msg::SetParametersResult paramsCallback(const std::vector<rclcpp::Parameter> &params){
+  
+    rcl_interfaces::msg::SetParametersResult result;
+
+    for(auto &param : params){
+      if (param.get_name() == plugin_name_ + ".max_lin_vel"){
+        params_.max_lin_vel = param.as_double();
+      }else if (param.get_name() == plugin_name_ + ".max_ang_vel"){
+        params_.max_ang_vel = param.as_double();
+      }else if (param.get_name() == plugin_name_ + ".Kp_ang_vel"){
+        params_.Kp_ang_vel = param.as_double();
+      }else if (param.get_name() == plugin_name_ + ".debug_info"){
+        params_.debug_info = param.as_bool();
+      }else if (param.get_name() == plugin_name_ + ".local_frame"){
+        params_.local_frame = param.as_string();
+      }
+    }
+
+    result.successful = true;
+    return result;
+  }
 };
 
 } // namespace twr_controller

@@ -12,13 +12,13 @@ controller_server:
     
     FollowPath:
       plugin: "twr_g2g_controller::G2GController"
-      desired_linear_vel: 0.5
       max_lin_vel: 0.2
       max_ang_vel: 1.5
 
       Kp_ang_vel: 2.0
 
       debug_info: true
+      local_frame: "odom"
 
 
 local_costmap:
