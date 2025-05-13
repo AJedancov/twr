@@ -113,6 +113,7 @@ def generate_launch_description():
         'controller_server',
         'behavior_server',
         'bt_navigator',
+        'slam_toolbox'
     ]
 
     nav2_lifecycle_manager_params = [

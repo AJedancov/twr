@@ -20,8 +20,11 @@ slam_toolbox:
     # if you'd like to immediately start continuing a map at a given pose
     # or at the dock, but they are mutually exclusive, if pose is given
     # will use pose
-    map_file_name: /home/ij/d/00_PROJECTS/ROS2_PG/twr/twr_navigation/map/warehouse/warehouse_serial_map
-    # map_start_pose: [0.0, 0.0, 0.0]
+
+    # The Node parameter 'map_file_name' specified as launch parameter slam.launch.py
+    # By default: twr_navigation/map/warehouse/warehouse_serial_map
+    # map_file_name: /path/to/map
+    map_start_pose: [0.0, 0.0, 0.0]
     map_start_at_dock: true
 
     debug_logging: false

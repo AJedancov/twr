@@ -5,6 +5,7 @@ from launch.substitutions import PathJoinSubstitution, PathJoinSubstitution, Lau
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
+from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
@@ -12,7 +13,6 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # === Package Directories ===
-    slam_toolbox_pkg_path = FindPackageShare('slam_toolbox')
     twr_navigation_pkg_path = FindPackageShare('twr_navigation')
 
     # === Launch arguments ===
@@ -28,28 +28,43 @@ def generate_launch_description():
         description='Path to slam_toolbox parameters file',
     )
 
+    slam_toolbox_path_to_map_launch_arg = DeclareLaunchArgument(
+        name='slam_toolbox_path_to_map',
+        default_value=PathJoinSubstitution([twr_navigation_pkg_path, 'map', 'warehouse','warehouse_serial_map']),
+        description='Path to map for slam_toolbox. Specify without file extension, only file name',
+    )
+
     # === Launch configuration === 
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
     slam_toolbox_params_path_launch_conf = LaunchConfiguration('slam_toolbox_params_path')
+    slam_toolbox_path_to_map_launch_conf = LaunchConfiguration('slam_toolbox_path_to_map')
+
 
     # ====================
     # === slam_toolbox ===
     # ====================
-    slam_toolbox_ld_src = PythonLaunchDescriptionSource([
-        PathJoinSubstitution([slam_toolbox_pkg_path, 'launch', 'online_async_launch.py'])
-    ])
-    
-    slam_toolbox_ld_args={'use_sim_time': use_sim_time_launch_conf,
-                          'slam_params_file': slam_toolbox_params_path_launch_conf}.items()
+    slam_toolbox_async_params = [
+        slam_toolbox_params_path_launch_conf,
+        {
+            'use_sim_time': use_sim_time_launch_conf,
+            'map_file_name': slam_toolbox_path_to_map_launch_conf
+        }
+    ]
 
-    slam_toolbox_ld = IncludeLaunchDescription(
-        launch_description_source=slam_toolbox_ld_src,
-        launch_arguments=slam_toolbox_ld_args
+    # This node is a managed node. 
+    # Its configuration is performed via nav2_lifecycle_manager
+    slam_toolbox_async_node = Node(
+        package='slam_toolbox',
+        executable='async_slam_toolbox_node',
+        name='slam_toolbox',
+        output='screen',
+        parameters=slam_toolbox_async_params,
     )
 
     ld.add_action(use_sim_time_launch_arg)
     ld.add_action(slam_toolbox_params_path_launch_arg)
+    ld.add_action(slam_toolbox_path_to_map_launch_arg)
     
-    ld.add_action(slam_toolbox_ld)
+    ld.add_action(slam_toolbox_async_node)
 
     return ld
