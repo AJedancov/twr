@@ -47,7 +47,6 @@ The project is based on a model of a robot with a differential drive and is buil
   - [xacro](https://github.com/ros/xacro)
   - [joint_state_publisher](https://github.com/ros/joint_state_publisher)
 
-  #### Install
   Install all required dependencies:
   ```shell
   sudo apt-get update && apt-get install -y \
@@ -63,8 +62,6 @@ The project is based on a model of a robot with a differential drive and is buil
   ```
 
   Install Gazebo for a specific ROS2 version. More detailed information can be found [here](https://gazebosim.org/docs/latest/ros_installation/).  
-
-  #### Build
 
   Build the project: 
   ```shell
@@ -91,7 +88,7 @@ The project is based on a model of a robot with a differential drive and is buil
   ```shell
   docker build -t twr:jazzy .
   ```
-  To visualize GUI from Docker container we need add local user (docker) to host's X Server:
+  To visualize GUI from Docker container, you need add a local user (docker) to the host X Server:
   ```shell
   sudo xhost +local:docker
   ```
@@ -149,7 +146,7 @@ The project is based on a model of a robot with a differential drive and is buil
 
   <p align="center">
     <img src="images/twr_rviz2_nav.png" width="300"/>  
-    <img src="images/twr_gazebo_warehouse.png" width="350"/>
+    <img src="images/twr_gazebo_warehouse.png" width="340"/>
   </p>
 
 
@@ -166,7 +163,9 @@ The project is based on a model of a robot with a differential drive and is buil
   #### Set goal point
   This function is implemented based on the [Nav2](https://github.com/ros-navigation/navigation2) framework.  
   Use the "2D Goal Pose" function in RViz2 to set the desired position.  
-  Configuration files are provided [here](./twr_navigation/config/).
+
   <div align="center">
     <img src="images/twr_rviz2_set_goal.png" width="300"/>  
   </div>
+  
+  Configuration files are provided [here](./twr_navigation/config/).
