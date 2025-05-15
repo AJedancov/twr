@@ -4,12 +4,14 @@
   <name>twr_control</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="andrei.jedancov@gmail.com">rti</maintainer>
+  <maintainer email="todo@todo.com">ij</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   
   <exec_depend>ros2launch</exec_depend>
+  <depend>ros2_control</depend>
+  <depend>ros2_controllers</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

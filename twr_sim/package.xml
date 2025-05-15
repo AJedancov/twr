@@ -4,12 +4,15 @@
   <name>twr_sim</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="andrei.jedancov@gmail.com">rti</maintainer>
+  <maintainer email="todo@todo.com">rti</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <exec_depend>ros2launch</exec_depend>
+  <exec_depend>gz_ros2_control</exec_depend>
+  <depend>ros_gz_sim</depend>
+  <depend>ros_gz_bridge</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
