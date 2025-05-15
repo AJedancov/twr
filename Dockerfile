@@ -1,40 +1,46 @@
+
+ARG ROSDISTRO=jazzy
+
 # Base image
-FROM ros:jazzy
+FROM ros:$ROSDISTRO
 
-# Install all dependencies
-RUN apt-get update && apt-get install -y \
-    ros-${ROS_DISTRO}-xacro \
-    ros-${ROS_DISTRO}-joint-state-publisher \
-    ros-${ROS_DISTRO}-ros2-control \
-    ros-${ROS_DISTRO}-ros2-controllers \
-    ros-${ROS_DISTRO}-ros-gz \
-    ros-${ROS_DISTRO}-gz-ros2-control \
-    ros-${ROS_DISTRO}-navigation2 \
-    ros-${ROS_DISTRO}-robot-localization \
-    ros-${ROS_DISTRO}-slam-toolbox \
-    && rm -rf /var/lib/apt/lists/* 
-
-# Create a non-root user
-ARG USERNAME=dev-user
-ARG GROUPNAME=dev-group
-ARG UID=1001
-ARG GID=$UID
-
-RUN groupadd --gid $GID $GROUPNAME \
-    && useradd -s /bin/bash -g $GID -u $UID $USERNAME
-
+# ARG USERNAME=dev-user
+# ARG GROUPNAME=dev-group
+# ARG UID=1001
+# ARG GID=$UID
 ARG WORKDIR=/twr
 
-# All subsequent commands will be in $WORKDIR as $USERNAME
+# Create a non-root user
+# RUN groupadd \
+#     --gid $GID $GROUPNAME \
+#     && useradd \ 
+#     --shell /bin/bash \
+#     --gid $GID \
+#     --uid $UID $USERNAME
+
+# All subsequent commands will be executed in $WORKDIR
 WORKDIR $WORKDIR 
 
 # Copy entire workspace (twr) to WORKDIR
 # Except for the files specified in .dockerignore
-COPY . .
+# COPY --chown=$USERNAME:$GROUPNAME . $WORKDIR
+COPY . $WORKDIR
 
-# Provide entrypoint for Docker container
-RUN chmod +x scripts/docker/twr_entrypoint.bash
-ENTRYPOINT [ "/bin/bash", "scripts/docker/twr_entrypoint.bash" ]
-CMD ["bash"]
+# Install all dependencies
+ARG ROSDISTRO
+RUN apt-get update \
+    && apt-get install -y \
+    && rosdep update \
+    --rosdistro $ROSDISTRO \ 
+    && rosdep install -y \
+    --from-paths $WORKDIR \
+    --rosdistro $ROSDISTRO \
+    --ignore-src \
+    && rm -rf /var/lib/apt/lists/*
 
 # USER $USERNAME
+
+# Provide entrypoint for Docker container
+RUN chmod +x $WORKDIR/scripts/docker/twr_entrypoint.bash
+ENTRYPOINT [ "/bin/bash", "scripts/docker/twr_entrypoint.bash" ]
+CMD ["bash"]
