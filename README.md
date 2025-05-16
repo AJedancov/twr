@@ -1,15 +1,19 @@
 # TWR Project
 The objective of this project is to design and implement a modular and flexible platform for testing, validating, and benchmarking a wide range of control and navigation algorithms in a simulated environment.  
-The project is based on a model of a robot with a differential drive and is built on the ROS2 framework.
+The project is based on a model of a robot with a differential drive and is built on the ROS 2 framework.
 
 ## Available sensors
   ### LIDAR
-  **Topic name:** `/scan`  
-  **Number of samples:** 360  
-  **Range [m]:** 0.05 - 5  
-  **Config:** [gz.xacro](./twr_description/urdf/gz.xacro)
 
-  > **Tip**  
+  | **Parameter**         | **Value**                                   |
+  |-----------------------|---------------------------------------------|
+  | **Number of samples** | 360                                         |
+  | **Range [m]**         | 0.05 - 5                                    |
+  | **Topic name**        | `/scan`                                     |
+  | **Config location**   | [gz.xacro](./twr_description/urdf/gz.xacro) |
+
+
+  > `Tip`  
   > To visualize LIDAR data in Gazebo, you need to activate the plugin `Visualize Lidar` and refresh list of topics.
 
   <!-- ### Camera -->
@@ -33,35 +37,48 @@ The project is based on a model of a robot with a differential drive and is buil
   ### Local machine
   #### Prerequisites
 
-  **Ubuntu**: 24.04  
-  **ROS2 Distro**: Jazzy  
-  **Gazebo**: Harmonic
+  | **Software**     | **Version**  |
+  |------------------|--------------|
+  | **Linux Distro** | Ubuntu 24.04 |
+  | **ROS 2 Distro** | Jazzy        |
+  | **Gazebo**       | Harmonic     |
 
   The project uses following packages:  
-  - [Nav2](https://github.com/ros-navigation/navigation2)
+  - [navigation2](https://github.com/ros-navigation/navigation2)
   - [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox)
   - [ros2_control](https://github.com/ros-controls/ros2_control)
   - [ros2_controllers](https://github.com/ros-controls/ros2_controllers)
   - [robot_localization](https://github.com/cra-ros-pkg/robot_localization)
-  - [Gazebo](https://github.com/gazebosim)
+  - [gz-sim](https://github.com/gazebosim/gz-sim)
+  - [gz_ros2_control](https://github.com/ros-controls/gz_ros2_control)
   - [xacro](https://github.com/ros/xacro)
   - [joint_state_publisher](https://github.com/ros/joint_state_publisher)
 
   Install all required dependencies:
   ```shell
   sudo apt-get update && apt-get install -y \
-    ros-${ROS_DISTRO}-xacro \
-    ros-${ROS_DISTRO}-joint-state-publisher \
+    ros-${ROS_DISTRO}-navigation2 \
+    ros-${ROS_DISTRO}-slam-toolbox \
     ros-${ROS_DISTRO}-ros2-control \
     ros-${ROS_DISTRO}-ros2-controllers \
+    ros-${ROS_DISTRO}-robot-localization \
     ros-${ROS_DISTRO}-ros-gz \
     ros-${ROS_DISTRO}-gz-ros2-control \
-    ros-${ROS_DISTRO}-navigation2 \
-    ros-${ROS_DISTRO}-robot-localization \
-    ros-${ROS_DISTRO}-slam-toolbox \  
+    ros-${ROS_DISTRO}-xacro \
+    ros-${ROS_DISTRO}-joint-state-publisher
   ```
 
-  Install Gazebo for a specific ROS2 version. More detailed information can be found [here](https://gazebosim.org/docs/latest/ros_installation/).  
+  OR install them via `rosdep`:
+  ```shell
+  sudo apt-get update \
+    && rosdep update \
+    --rosdistro ${ROS_DISTRO} \
+    && rosdep install -y \
+    --from-paths . \
+    --rosdistro ${ROS_DISTRO} \
+    --ignore-src
+  ```
+  <!-- Install Gazebo for a specific ROS2 version. More detailed information can be found [here](https://gazebosim.org/docs/latest/ros_installation/).   -->
 
   Build the project: 
   ```shell
@@ -81,7 +98,7 @@ The project is based on a model of a robot with a differential drive and is buil
   If it is necessary to launch a project in a container, a prepared [Dockerfile](./Dockerfile) can be used.  
   Follow the [instructions](https://docs.docker.com/engine/install/) to install Docker from the official website.
 
-  > **Note**  
+  > `Note`  
   > Currently, the GUI is only displayed when using the X Window System. 
 
   Build Docker image:
@@ -162,7 +179,7 @@ The project is based on a model of a robot with a differential drive and is buil
 
   #### Set goal point
   This function is implemented based on the [Nav2](https://github.com/ros-navigation/navigation2) framework.  
-  Use the "2D Goal Pose" function in RViz2 to set the desired position.  
+  Use the `2D Goal Pose` function in RViz2 to set the desired position.  
 
   <div align="center">
     <img src="images/twr_rviz2_set_goal.png" width="300"/>  
