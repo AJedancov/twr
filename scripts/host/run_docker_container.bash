@@ -4,7 +4,7 @@
 docker build -t twr:jazzy .
 
 # Add local user (in this case `docker`) to access the host's X server
-sudo xhost +local:docker
+# sudo xhost +local:docker
 
 # Create Docker container from twr:jazzy image 
 docker run \
