@@ -7,11 +7,13 @@ docker build -t twr:jazzy .
 sudo xhost +local:docker
 
 # Create Docker container from twr:jazzy image 
-docker run -it \
+docker run \
+  --interactive \
+  --tty \
   --rm \
-  --net=host \
+  --net host \
   --volume /tmp/.X11-unix:/tmp/.X11-unix:rw \
-  --env=DISPLAY \
+  --env DISPLAY \
   --name twr_jazzy_container \
   twr:jazzy
 
