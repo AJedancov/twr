@@ -44,7 +44,7 @@ def generate_launch_description():
     # ====================
     # === ros2_control ===
     # ====================
-    twr_controllers = PathJoinSubstitution([
+    twr_diff_drive_controller_params = PathJoinSubstitution([
         twr_control_pkg_path,
         'ros2_controllers',
         'diff_drive_controller',
@@ -52,35 +52,30 @@ def generate_launch_description():
         'twr_diff_drive_controller.yaml'
     ])
 
-    # controller_manager commented -> gz_ros2_control runs the controller_manager, no need for ros2_control_node
+    # === commented === 
+    # gz_ros2_control runs the controller_manager, no need for ros2_control_node
 
     # control_node = Node(
     #     package="controller_manager",
     #     executable="ros2_control_node",
-    #     parameters=[twr_controllers],
-    #     output="both",
-    #     # remappings=[
-    #     #     ('/diff_drive_controller/cmd_vel', '/cmd_vel'),
-    #     # ],
+    #     parameters=[twr_diff_drive_controller_params],
+    #     output="both"
     # )
     # ld.add_action(control_node)
+    # =================
 
-    joint_state_broadcaster_spawner_node = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['joint_state_broadcaster'],
-    )
-
-    diff_drive_base_controller_spawner_node = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=[
-            'diff_drive_controller',
+    spawner_node_args = [
+        'joint_state_broadcaster',
+        'diff_drive_controller',
             '--param-file',
-            twr_controllers,
-        ],
-    )
+            twr_diff_drive_controller_params,
+    ]
 
+    spawner_node = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=spawner_node_args,
+    )
 
     # ====================
     # === Nav2 Control ===
@@ -106,8 +101,7 @@ def generate_launch_description():
     ld.add_action(use_sim_time_launch_arg)
     ld.add_action(nav2_controllers_params_path_launch_arg)
 
-    ld.add_action(joint_state_broadcaster_spawner_node)
-    ld.add_action(diff_drive_base_controller_spawner_node)
+    ld.add_action(spawner_node)
     ld.add_action(nav2_controller_server_node)
     
     return ld
