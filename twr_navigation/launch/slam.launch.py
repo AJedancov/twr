@@ -2,8 +2,7 @@ import os
 
 from launch import LaunchDescription
 from launch.substitutions import PathJoinSubstitution, PathJoinSubstitution, LaunchConfiguration
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.actions import DeclareLaunchArgument
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -24,13 +23,23 @@ def generate_launch_description():
 
     slam_toolbox_params_path_launch_arg = DeclareLaunchArgument(
         name='slam_toolbox_params_path',
-        default_value=PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'slam_toolbox','online_async_localization_params.yaml']),
-        description='Path to slam_toolbox parameters file',
+        default_value=PathJoinSubstitution([
+            twr_navigation_pkg_path, 
+            'slam_toolbox',
+            'config',
+            'online_async_localization_params.yaml'
+        ]),
+        description='Path to slam_toolbox parameters',
     )
 
     slam_toolbox_path_to_map_launch_arg = DeclareLaunchArgument(
         name='slam_toolbox_path_to_map',
-        default_value=PathJoinSubstitution([twr_navigation_pkg_path, 'map', 'warehouse','warehouse_serial_map']),
+        default_value=PathJoinSubstitution([
+            twr_navigation_pkg_path, 
+            'map',
+            'warehouse',
+            'warehouse_serial_map'
+        ]),
         description='Path to map for slam_toolbox. Specify without file extension, only file name',
     )
 

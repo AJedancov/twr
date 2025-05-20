@@ -1,7 +1,6 @@
 from launch import LaunchDescription
 from launch.substitutions import PathJoinSubstitution, PathJoinSubstitution, LaunchConfiguration
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.actions import DeclareLaunchArgument
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -26,19 +25,27 @@ def generate_launch_description():
     # ===========
     # === EKF ===
     # ===========
-    ekf_params = [
-        PathJoinSubstitution([twr_navigation_pkg_path, 'config', 'ekf.yaml']),
+
+    ekf_node_congig_path = PathJoinSubstitution([
+        twr_navigation_pkg_path,
+        'robot_localization',
+        'config', 
+        'ekf.yaml'
+    ])
+
+    ekf_node_params = [
+        ekf_node_congig_path,
         {'use_sim_time': use_sim_time_launch_conf,}
     ]
     
     ekf_node = Node(
         package='robot_localization',
         executable='ekf_node',
-        parameters=ekf_params,
+        parameters=ekf_node_params,
     )
 
+    ld.add_action(use_sim_time_launch_arg)
 
     ld.add_action(ekf_node)
-    ld.add_action(use_sim_time_launch_arg)
 
     return ld

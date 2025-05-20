@@ -1,33 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <!-- === Plugins === -->
-    <gazebo>
-        <!-- Ros2 control plugin -->
-        <!-- In addition to the ros2_control tags, a Gazebo plugin needs to be added to your URDF 
-        that actually parses the ros2_control tags and loads the appropriate hardware interfaces and controller manager -->
-        <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-            <parameters> $(find twr_control)/config/twr_diff_drive_controller.yaml </parameters>
-        </plugin>
-
-        <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
-        </plugin>
-
-        <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
-            <render_engine>ogre2</render_engine>
-        </plugin>
-
-        <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
-            <odom_frame>map</odom_frame>
-            <robot_base_frame>base_link</robot_base_frame>
-            <dimensions>3</dimensions>
-        </plugin>
-        
-    </gazebo>
-
-
     <!-- =============== -->
-    <!-- === SENSORS === -->
+    <!-- === Sensors === -->
     <!-- =============== -->
 
     <!-- === LIDAR === -->
@@ -52,6 +27,33 @@
             <topic>scan</topic>
             <gz_frame_id>lidar_link</gz_frame_id>
         </sensor>
+    </gazebo>
+
+
+    <!-- =============== -->
+    <!-- === Plugins === -->
+    <!-- =============== -->
+    <gazebo>
+        <!-- Ros2 control plugin -->
+        <!-- In addition to the ros2_control tags, a Gazebo plugin needs to be added to your URDF 
+        that actually parses the ros2_control tags and loads the appropriate hardware interfaces and controller manager -->
+        <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters> $(find twr_control)/ros2_controllers/diff_drive_controller/config/twr_diff_drive_controller.yaml </parameters>
+        </plugin>
+
+        <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+        </plugin>
+
+        <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+            <render_engine>ogre2</render_engine>
+        </plugin>
+
+        <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+            <odom_frame>map</odom_frame>
+            <robot_base_frame>base_link</robot_base_frame>
+            <dimensions>3</dimensions>
+        </plugin>
+        
     </gazebo>
 
 </robot>

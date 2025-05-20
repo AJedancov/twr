@@ -6,6 +6,7 @@ from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.conditions import IfCondition
 
+from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
@@ -15,7 +16,6 @@ def generate_launch_description():
 
     # === Package Directories ===
     twr_bringup_pkg_path = FindPackageShare('twr_bringup')
-    twr_description_pkg_path = FindPackageShare('twr_description')
     twr_control_pkg_path = FindPackageShare('twr_control')
     twr_navigation_pkg_path = FindPackageShare('twr_navigation')
     twr_sim_pkg_path = FindPackageShare('twr_sim')
@@ -75,9 +75,9 @@ def generate_launch_description():
         launch_arguments=slam_ld_args,
     )
 
-    # ==============
-    # === Fusion ===
-    # ==============
+    # =====================
+    # === Sensor Fusion ===
+    # =====================
     fusion_ld_src = PythonLaunchDescriptionSource([
         PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'fusion.launch.py'])
     ])
@@ -132,6 +132,31 @@ def generate_launch_description():
     )
 
 
+    # ==============================
+    # === Nav2 Lifecycle Manager ===
+    # ==============================
+    nav2_lifecycle_nodes = [
+        'planner_server',
+        'controller_server',
+        'behavior_server',
+        'bt_navigator',
+        'slam_toolbox'
+    ]
+
+    nav2_lifecycle_manager_params = [{
+        'autostart': True,
+        'node_names': nav2_lifecycle_nodes,
+    }]
+
+    nav2_lifecycle_manager_node = Node(
+        package='nav2_lifecycle_manager',
+        executable='lifecycle_manager',
+        name='lifecycle_manager_navigation',
+        output='screen',
+        parameters=nav2_lifecycle_manager_params,
+    )
+
+
     ld.add_action(use_rviz2_launch_arg)
     ld.add_action(use_sim_time_launch_arg)
     
@@ -142,5 +167,6 @@ def generate_launch_description():
     ld.add_action(rviz2_ld)
     ld.add_action(slam_ld)
     ld.add_action(fusion_ld)
+    ld.add_action(nav2_lifecycle_manager_node)
     
     return ld
