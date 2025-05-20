@@ -32,8 +32,8 @@ def generate_launch_description():
         description='Path to Nav2 behavior tree parameters',
     )
 
-    nav2_planner_params_path_launch_arg = DeclareLaunchArgument(
-        name='nav2_planner_params_path',
+    nav2_planner_server_params_path_launch_arg = DeclareLaunchArgument(
+        name='nav2_planner_server_params_path',
         default_value=PathJoinSubstitution([
             twr_navigation_pkg_path, 
             'nav2_planners',
@@ -41,13 +41,25 @@ def generate_launch_description():
             'config',
             'nav2_navfn_planner_params.yaml'
         ]),
-        description='Path to Nav2 planner parameters',
+        description='Path to Nav2 planner server parameters',
+    )
+
+    nav2_global_costmap_params_path_launch_arg = DeclareLaunchArgument(
+        name='nav2_global_costmap_params_path',
+        default_value=PathJoinSubstitution([
+            twr_navigation_pkg_path,
+            'nav2_planners',
+            'nav2_global_costmap',
+            'nav2_global_costmap.yaml'
+        ]),
+        description='Path to Nav2 global costmap parameters',
     )
 
     # === Launch configuration === 
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
     nav2_bt_params_path_launch_conf = LaunchConfiguration('nav2_bt_params_path')
-    nav2_planner_params_path_launch_conf = LaunchConfiguration('nav2_planner_params_path')
+    nav2_planner_server_params_path_launch_conf = LaunchConfiguration('nav2_planner_server_params_path')
+    nav2_global_costmap_params_path_launch_conf = LaunchConfiguration('nav2_global_costmap_params_path')
 
 
     # ============
@@ -83,7 +95,8 @@ def generate_launch_description():
     
     # === Planner Server ===
     nav2_planner_server_params = [
-        nav2_planner_params_path_launch_conf,
+        nav2_planner_server_params_path_launch_conf,
+        nav2_global_costmap_params_path_launch_conf,
         {'use_sim_time': use_sim_time_launch_conf,}
     ]
 
@@ -99,7 +112,8 @@ def generate_launch_description():
 
     ld.add_action(use_sim_time_launch_arg)
     ld.add_action(nav2_bt_params_path_launch_arg)
-    ld.add_action(nav2_planner_params_path_launch_arg)
+    ld.add_action(nav2_planner_server_params_path_launch_arg)
+    ld.add_action(nav2_global_costmap_params_path_launch_arg)
 
     ld.add_action(nav2_behavior_server_node)
     ld.add_action(nav2_bt_navigator_node)
