@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot name="twr" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:lidar 
+    name="lidar" 
+    parent="base_link"
+    xyz="0 0 ${base_height/2+lidar_width/2+lidar_base}" 
+    rpy="0 0 0"
+    radius="${lidar_radius}" 
+    width="${lidar_width}" 
+    m="0.1" 
+    material_name="orange" 
+  />
+  
+</robot>

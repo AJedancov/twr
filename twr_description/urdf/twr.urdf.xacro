@@ -1,138 +1,24 @@
 <?xml version="1.0"?>
 <robot name="twr" xmlns:xacro="http://ros.org/wiki/xacro">
 
-    <!-- Include files -->
-    <xacro:include filename="_inertia.macro.xacro"/>
-    <xacro:include filename="_colors.xacro"/>
-    <xacro:include filename="ros2_control.xacro"/>
-    <xacro:include filename="gz.xacro"/>
-    <xacro:include filename="wheel.macro.xacro"/>
-    <xacro:include filename="twr_lidar.xacro"/>
+  <xacro:include filename="$(find twr_description)/urdf/macros/inertia.macro.xacro"/>
+  <xacro:include filename="$(find twr_description)/urdf/macros/wheel.macro.xacro"/>
+  <xacro:include filename="$(find twr_description)/urdf/macros/lidar.macro.xacro"/>
 
-    <xacro:property name="mm2m" value="0.001"/>
+  <xacro:include filename="$(find twr_description)/urdf/packages/gz.xacro"/>
+  <xacro:include filename="$(find twr_description)/urdf/packages/ros2_control.xacro"/>
 
-    <xacro:property name="base_length" value="${200*mm2m}"/>
-    <xacro:property name="base_width" value="${200*mm2m}"/>
-    <xacro:property name="base_height" value="${40*mm2m}"/>
+  <xacro:include filename="$(find twr_description)/urdf/properties/colors.xacro"/>
+  <xacro:include filename="$(find twr_description)/urdf/properties/geometry.xacro"/>
 
-    <xacro:property name="wheel_radius" value="${50*mm2m}"/>
-    <xacro:property name="wheel_width" value="${20*mm2m}"/>
+  <!-- === BASE === -->
+  <xacro:include filename="$(find twr_description)/urdf/parts/twr_base.xacro"/>
 
-    <xacro:property name="caster_wheel_radius" value="${10*mm2m}"/>
+  <!-- === WHEELS === -->
+  <xacro:include filename="$(find twr_description)/urdf/parts/twr_drive_wheels.xacro"/>
+  <xacro:include filename="$(find twr_description)/urdf/parts/twr_caster_wheels.xacro"/>
 
-    <xacro:property name="lidar_radius" value="${10*mm2m}"/>
-    <xacro:property name="lidar_width" value="${20*mm2m}"/>
-    <xacro:property name="lidar_base" value="${60*mm2m}"/>
-
-
-    <!-- ============ -->
-    <!-- === BASE === -->
-    <!-- ============ -->
-    <link name="base_link"/>
-
-    <!-- Base Frame -->
-    <joint name="base_frame_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="base_frame_link" />
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint>
-
-    <link name="base_frame_link">
-        <visual>
-            <geometry>
-                <box size="${base_length} ${base_width} ${base_height}"/>
-            </geometry>
-            <material name="white"/>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </visual>
-
-        <collision>
-            <geometry>
-                <box size="${base_length} ${base_width} ${base_height}"/>
-            </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </collision>
-
-        <xacro:inertia shape="box" xyz="0 0 0" rpy="0 0 0" l="${base_length}" w="${base_width}" h="${base_height}" m="1"/>
-
-    </link>
-
-    <!-- Base Footprint -->
-    <joint name="base_footprint_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="base_footprint" />
-        <origin xyz="0 0 -${wheel_radius+0.001}" rpy="0 0 0"/>
-    </joint>
-
-    <link name="base_footprint"/>
-
-    <!-- ============== -->
-    <!-- === WHEELS === -->
-    <!-- ============== -->
-    <xacro:wheel 
-        name="left_wheel" 
-        type="standart"
-        parent="base_link" 
-        xyz="0 ${base_width/2 + wheel_width/2 + 0.01} 0" 
-        rpy="-${pi/2} 0 0" 
-        radius="${wheel_radius}" 
-        width="${wheel_width}" 
-        m="0.2" 
-        xyz_axis="0 0 1" 
-        material_name="orange" 
-    />
-    
-    <xacro:wheel 
-        name="right_wheel"
-        type="standart"
-        parent="base_link" 
-        xyz="0 -${base_width/2 + wheel_width/2 + 0.01} 0" 
-        rpy="-${pi/2} 0 0" 
-        radius="${wheel_radius}" 
-        width="${wheel_width}" 
-        m="0.2" 
-        xyz_axis="0 0 1" 
-        material_name="orange" 
-    />
-
-    <xacro:wheel 
-        name="caster_front_wheel" 
-        type="caster"
-        parent="base_link" 
-        xyz="${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" 
-        rpy="0 0 0" 
-        radius="${caster_wheel_radius}" 
-        width="${caster_wheel_radius}" 
-        m="0.01" 
-        xyz_axis="0 0 0" 
-        material_name="white" 
-    />
-
-    <xacro:wheel 
-        name="caster_back_wheel" 
-        type="caster"
-        parent="base_link" 
-        xyz="-${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" 
-        rpy="0 0 0" 
-        radius="${caster_wheel_radius}" 
-        width="${caster_wheel_radius}" 
-        m="0.01" 
-        xyz_axis="0 0 0" 
-        material_name="white" 
-    />
-
-    <!-- ============= -->
-    <!-- === LIDAR === -->
-    <!-- ============= --> 
-    <xacro:lidar 
-        name="lidar" 
-        parent="base_link"
-        xyz="0 0 ${base_height/2+lidar_width/2+lidar_base}" 
-        rpy="0 0 0"
-        radius="${lidar_radius}" 
-        width="${lidar_width}" 
-        m="0.1" 
-        material_name="orange" 
-    />
+  <!-- === SENSORS === -->
+  <xacro:include filename="$(find twr_description)/urdf/parts/sensors/twr_lidar.xacro"/>
 
 </robot>

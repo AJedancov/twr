@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+  <xacro:wheel 
+    name="caster_front_wheel" 
+    type="caster"
+    parent="base_link" 
+    xyz="${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" 
+    rpy="0 0 0" 
+    radius="${caster_wheel_radius}" 
+    width="${caster_wheel_radius}" 
+    m="0.01" 
+    xyz_axis="0 0 0" 
+    material_name="white" 
+  />
+
+  <xacro:wheel 
+    name="caster_back_wheel" 
+    type="caster"
+    parent="base_link" 
+    xyz="-${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" 
+    rpy="0 0 0" 
+    radius="${caster_wheel_radius}" 
+    width="${caster_wheel_radius}" 
+    m="0.01" 
+    xyz_axis="0 0 0" 
+    material_name="white" 
+  />
+
+</robot>

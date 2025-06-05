@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">  
+
+  <link name="base_link"/>
+
+  <!-- Base Frame -->
+  <joint name="base_frame_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_frame_link" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_frame_link">
+    <visual>
+      <geometry>
+        <box size="${base_length} ${base_width} ${base_height}"/>
+      </geometry>
+      <material name="white"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="${base_length} ${base_width} ${base_height}"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+
+    <xacro:inertia shape="box" xyz="0 0 0" rpy="0 0 0" l="${base_length}" w="${base_width}" h="${base_height}" m="1"/>
+
+  </link>
+
+  <!-- Base Footprint -->
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_footprint" />
+    <origin xyz="0 0 -${wheel_radius+0.001}" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_footprint"/>
+
+</robot>
