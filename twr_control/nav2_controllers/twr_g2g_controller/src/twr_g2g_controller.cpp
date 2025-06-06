@@ -1,4 +1,4 @@
-#include "nav2_controllers/twr_g2g_controller.hpp"
+#include "twr_g2g_controller/twr_g2g_controller.hpp"
 
 namespace twr_g2g_controller
 {
@@ -81,11 +81,8 @@ geometry_msgs::msg::TwistStamped G2GController::computeVelocityCommands(
   // double distance_to_goal = std::hypot(dx, dy);
   double angle_to_goal = std::atan2(dy, dx);
 
-  // Transform Quaternion into RPY
-  tf2::Quaternion q;
-  tf2::fromMsg(robot_pose.pose.orientation, q);
-  double roll, pitch, yaw;
-  tf2::Matrix3x3(q).getRPY(roll, pitch, yaw);
+  // Get Yaw from Quaternion 
+  double yaw = tf2::getYaw(robot_pose.pose.orientation);
 
   double angle_error = angle_to_goal - yaw;
   // Angle normalization
