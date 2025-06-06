@@ -25,7 +25,14 @@
         <origin xyz="0 0 0" rpy="0 0 0"/>
       </collision>
 
-      <xacro:inertia shape="cylinder" xyz="0 0 0" rpy="0 0 0" r="${radius}" w="${width}" m="${m}"/>
+      <xacro:inertia 
+        shape="cylinder" 
+        xyz="0 0 0" 
+        rpy="0 0 0" 
+        r="${radius}" 
+        w="${width}" 
+        m="${m}"
+      />
     
     </link>
   </xacro:macro> 

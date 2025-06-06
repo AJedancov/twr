@@ -4,12 +4,12 @@
   <xacro:lidar 
     name="lidar" 
     parent="base_link"
-    xyz="0 0 ${base_height/2+lidar_width/2+lidar_base}" 
+    xyz="0 0 ${chassis_height + lidar_width/2 + 5*mm2m}" 
     rpy="0 0 0"
     radius="${lidar_radius}" 
     width="${lidar_width}" 
     m="0.1" 
-    material_name="orange" 
+    material_name="black" 
   />
   
 </robot>

@@ -15,7 +15,7 @@ diff_drive_controller:
 
     left_wheel_names: ["left_wheel_joint"]
     right_wheel_names: ["right_wheel_joint"]
-    wheel_separation: 0.222
-    wheel_radius: 0.05
+    wheel_separation: 0.51
+    wheel_radius: 0.08
 
     enable_odom_tf: false

@@ -29,7 +29,14 @@
           <origin xyz="0 0 0" rpy="0 0 0"/>
         </collision>
 
-        <xacro:inertia shape="cylinder" xyz="0 0 0" rpy="0 0 0" r="${radius}" w="${width}" m="${m}"/>
+        <xacro:inertia 
+          shape="cylinder" 
+          xyz="0 0 0" 
+          rpy="0 0 0" 
+          r="${radius}" 
+          w="${width}" 
+          m="${m}"
+        />
 
       </link>
     </xacro:if>
@@ -47,7 +54,7 @@
       <link name="${name}_link">
         <visual>
           <geometry>
-            <sphere radius="${radius}"/>
+            <cylinder radius="${radius}" length="${width}"/>
           </geometry>
           <material name="${material_name}"/>
           <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -55,13 +62,25 @@
 
         <collision>
           <geometry>
-            <sphere radius="${radius}"/>
+            <cylinder radius="${radius}" length="${width}"/>
           </geometry>
           <origin xyz="0 0 0" rpy="0 0 0"/>
         </collision>
 
-        <xacro:inertia shape="sphere" xyz="0 0 0" rpy="0 0 0" r="${radius}" m="${m}"/>
+        <xacro:inertia 
+          shape="cylinder" 
+          xyz="0 0 0" 
+          rpy="0 0 0" 
+          r="${radius}" 
+          w="${width}" 
+          m="${m}"
+        />
 
+        <gazebo reference="${name}_link">
+          <mu1>0</mu1>
+          <mu2>0</mu2>
+        </gazebo>
+        
       </link>
     </xacro:if>
   </xacro:macro> 

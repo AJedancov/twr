@@ -1,30 +1,56 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-  <xacro:wheel 
-    name="caster_front_wheel" 
+  <xacro:wheel
+    name="caster_front_left_wheel" 
     type="caster"
     parent="base_link" 
-    xyz="${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" 
-    rpy="0 0 0" 
+    xyz="${chassis_length/3} ${chassis_width/3} ${-drive_wheel_radius + drive_wheel_axis_offset + caster_wheel_radius + 1*mm2m}" 
+    rpy="${pi/2} 0 0" 
     radius="${caster_wheel_radius}" 
-    width="${caster_wheel_radius}" 
+    width="${caster_wheel_width}" 
     m="0.01" 
     xyz_axis="0 0 0" 
-    material_name="white" 
+    material_name="orange" 
+  />
+
+  <xacro:wheel
+    name="caster_front_right_wheel" 
+    type="caster"
+    parent="base_link" 
+    xyz="${chassis_length/3} ${-chassis_width/3} ${-drive_wheel_radius + drive_wheel_axis_offset + caster_wheel_radius + 1*mm2m}" 
+    rpy="${pi/2} 0 0" 
+    radius="${caster_wheel_radius}" 
+    width="${caster_wheel_width}" 
+    m="0.01" 
+    xyz_axis="0 0 0" 
+    material_name="orange" 
   />
 
   <xacro:wheel 
-    name="caster_back_wheel" 
+    name="caster_back_left_wheel" 
     type="caster"
     parent="base_link" 
-    xyz="-${base_length/2-caster_wheel_radius} 0 -${wheel_radius-caster_wheel_radius-1*mm2m}" 
-    rpy="0 0 0" 
+    xyz="${-chassis_length/3} ${chassis_width/3} ${-drive_wheel_radius + drive_wheel_axis_offset + caster_wheel_radius + 1*mm2m}" 
+    rpy="${pi/2} 0 0" 
     radius="${caster_wheel_radius}" 
-    width="${caster_wheel_radius}" 
+    width="${caster_wheel_width}" 
     m="0.01" 
     xyz_axis="0 0 0" 
-    material_name="white" 
+    material_name="orange" 
+  />
+
+  <xacro:wheel 
+    name="caster_back_right_wheel" 
+    type="caster"
+    parent="base_link" 
+    xyz="${-chassis_length/3} ${-chassis_width/3} ${-drive_wheel_radius + drive_wheel_axis_offset + caster_wheel_radius + 1*mm2m}" 
+    rpy="${pi/2} 0 0" 
+    radius="${caster_wheel_radius}" 
+    width="${caster_wheel_width}" 
+    m="0.01" 
+    xyz_axis="0 0 0" 
+    material_name="orange" 
   />
 
 </robot>
