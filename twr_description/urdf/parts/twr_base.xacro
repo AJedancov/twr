@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">  
 
+  <!-- Base Frame -->
   <link name="base_link"/>
 
-  <!-- Base Frame -->
+  <!-- Chassis Frame -->
   <joint name="chassis_joint" type="fixed">
     <parent link="base_link"/>
     <child link="chassis_link" />
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0 ${drive_wheel_radius - drive_wheel_axis_offset}" rpy="0 0 0"/>
   </joint>
 
   <link name="chassis_link">
@@ -41,7 +42,7 @@
   <joint name="base_footprint_joint" type="fixed">
     <parent link="base_link"/>
     <child link="base_footprint" />
-    <origin xyz="0 0 ${-drive_wheel_radius + drive_wheel_axis_offset}" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 
   <link name="base_footprint"/>

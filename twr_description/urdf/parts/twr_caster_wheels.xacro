@@ -4,7 +4,7 @@
   <xacro:wheel
     name="caster_front_left_wheel" 
     type="caster"
-    parent="base_link" 
+    parent="chassis_link" 
     xyz="${chassis_length/3} ${chassis_width/3} ${-drive_wheel_radius + drive_wheel_axis_offset + caster_wheel_radius + 1*mm2m}" 
     rpy="${pi/2} 0 0" 
     radius="${caster_wheel_radius}" 
@@ -17,7 +17,7 @@
   <xacro:wheel
     name="caster_front_right_wheel" 
     type="caster"
-    parent="base_link" 
+    parent="chassis_link" 
     xyz="${chassis_length/3} ${-chassis_width/3} ${-drive_wheel_radius + drive_wheel_axis_offset + caster_wheel_radius + 1*mm2m}" 
     rpy="${pi/2} 0 0" 
     radius="${caster_wheel_radius}" 
@@ -30,7 +30,7 @@
   <xacro:wheel 
     name="caster_back_left_wheel" 
     type="caster"
-    parent="base_link" 
+    parent="chassis_link" 
     xyz="${-chassis_length/3} ${chassis_width/3} ${-drive_wheel_radius + drive_wheel_axis_offset + caster_wheel_radius + 1*mm2m}" 
     rpy="${pi/2} 0 0" 
     radius="${caster_wheel_radius}" 
@@ -43,7 +43,7 @@
   <xacro:wheel 
     name="caster_back_right_wheel" 
     type="caster"
-    parent="base_link" 
+    parent="chassis_link" 
     xyz="${-chassis_length/3} ${-chassis_width/3} ${-drive_wheel_radius + drive_wheel_axis_offset + caster_wheel_radius + 1*mm2m}" 
     rpy="${pi/2} 0 0" 
     radius="${caster_wheel_radius}" 
