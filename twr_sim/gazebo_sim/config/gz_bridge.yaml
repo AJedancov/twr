@@ -13,6 +13,13 @@
   gz_type_name: "gz.msgs.LaserScan"
   direction: GZ_TO_ROS
 
+# IMU Data (GZ -> ROS2)
+- ros_topic_name: "/imu"
+  gz_topic_name: "/imu"
+  ros_type_name: "sensor_msgs/msg/Imu"
+  gz_type_name: "gz.msgs.IMU"
+  direction: GZ_TO_ROS
+
 # Model Data (GZ -> ROS2)
 - ros_topic_name: "/gz/pose_array"
   gz_topic_name: "/model/twr/pose"

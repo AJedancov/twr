@@ -20,5 +20,6 @@
 
   <!-- === SENSORS === -->
   <xacro:include filename="$(find twr_description)/urdf/parts/sensors/twr_lidar.xacro"/>
+  <xacro:include filename="$(find twr_description)/urdf/parts/sensors/twr_imu.xacro"/>
 
 </robot>

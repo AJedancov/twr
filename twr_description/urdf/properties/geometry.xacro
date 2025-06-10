@@ -20,4 +20,8 @@
   <xacro:property name="lidar_radius" value="${30*mm2m}"/>
   <xacro:property name="lidar_width" value="${20*mm2m}"/>
 
+  <xacro:property name="imu_length" value="${10*mm2m}"/>
+  <xacro:property name="imu_width" value="${10*mm2m}"/>
+  <xacro:property name="imu_height" value="${10*mm2m}"/>
+
 </robot>
