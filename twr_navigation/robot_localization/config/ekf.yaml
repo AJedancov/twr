@@ -10,7 +10,7 @@ ekf_filter_node:
     odom0: /diff_drive_controller/odom  # Type: nav_msgs/msg/Odometry
     odom0_config: [true,  true,  false, #  x,      y,    z, 
                    false, false, true, # roll, pitch,  yaw, 
-                   false, false, false, #  vx,    vy,    vz, 
+                   true,  false, false, #  vx,    vy,    vz, 
                    false, false, false,  # vroll, vpitch, vyaw, 
                    false, false, false] #  ax,    ay,    az
     
@@ -20,6 +20,13 @@ ekf_filter_node:
                    false, false, false,
                    false, false, false,
                    false, false, false]
+    
+    imu0: /imu  # Type: sensor_msgs/msg/Imu
+    imu0_config: [ false, false, false,
+                   false, false, true,
+                   true, false, false,
+                   false, false, true,
+                   false,  false, false]
 
     use_control: true
     # Order is      [vx,   vy,    vz,    vroll, vpitch, vyaw]
