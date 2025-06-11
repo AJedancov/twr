@@ -3,18 +3,29 @@ The objective of this project is to design and implement a modular and flexible 
 The project is based on a model of a robot with a differential drive and is built on the ROS 2 framework.
 
 ## Available sensors
+
+  The configuration file is located [here](./twr_description/urdf/packages/gz.xacro).
+  
   ### LIDAR
 
-  | **Parameter**         | **Value**                                   |
-  |-----------------------|---------------------------------------------|
-  | **Number of samples** | 360                                         |
-  | **Range [m]**         | 0.05 - 5                                    |
-  | **Topic name**        | `/scan`                                     |
-  | **Config location**   | [gz.xacro](./twr_description/urdf/gz.xacro) |
+  | **Parameter**         | **Value**                                            |
+  |-----------------------|---------------------------------------------         |
+  | **Number of samples** | 360                                                  |
+  | **Range [m]**         | 0.05 - 5                                             |
+  | **Update rate**       | 10                                                   |
+  | **Topic name**        | `/scan`                                              |
 
 
   > `Tip`  
   > To visualize LIDAR data in Gazebo, you need to activate the plugin `Visualize Lidar` and refresh list of topics.
+
+  ### IMU
+
+  | **Parameter**         | **Value**                                            |
+  |-----------------------|---------------------------------------------         |
+  | **Update rate**       | 10                                                   |
+  | **Topic name**        | `/imu`                                               |
+
 
   <!-- ### Camera -->
  
@@ -163,7 +174,7 @@ The project is based on a model of a robot with a differential drive and is buil
 
   <p align="center">
     <img src="images/twr_rviz2_nav.png" width="300"/>  
-    <img src="images/twr_gazebo_warehouse.png" width="340"/>
+    <img src="images/twr_gazebo_warehouse.png" width="300"/>
   </p>
 
 
@@ -184,5 +195,3 @@ The project is based on a model of a robot with a differential drive and is buil
   <div align="center">
     <img src="images/twr_rviz2_set_goal.png" width="300"/>  
   </div>
-  
-  Configuration files are provided [here](./twr_navigation/config/).
