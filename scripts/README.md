@@ -5,25 +5,25 @@
   Provides the ability to rebuild the project and launch [twr_bringup](../twr_bringup/launch/twr_bringup.launch.py) for the project with one command.
   
   ```shell
-  ./scripts/host/run_docker_container.bash
+  ./scripts/host/rebuild_and_launch.bash
   ```
 
 - [run_docker_container.bash](./host/run_docker_container.bash)
 
-  Provides automatic image creation, xhost configuration and launch container with all necessary parameters for the GUI.
-  
+  Provides automatic image creation and launch container with all necessary parameters for the GUI.
   ```shell
   ./scripts/host/run_docker_container.bash
   ```
-  > **Note 1**  
-  > To add a local user (docker) to the X Server, you must provide the sudo password.
 
-
-  > **Note 2**  
-  > After each Docker image is created, a **dangling image** will be created.
-   
+  To visualize GUI from Docker container, you need add a local user (docker) to the host X Server:  
+  ```shell
+  sudo xhost +local:docker
+  ``` 
   
-  They can be removed using the command
+  > **Note**  
+  > After each Docker image is created, a **dangling image** will be created.
+  
+  They can be removed using the command:
   ```shell
   docker image prune
   ```
@@ -36,4 +36,5 @@
 
 - [twr_entrypoint.bash](./docker/twr_entrypoint.bash)
 
-  Entry point script for Docker container. Specified in [Dockerfile](../Dockerfile). Required for automatic configuration of ROS2 packages and should not be executed manually.
+  Entry point script for Docker container. Specified in [Dockerfile](../Dockerfile).   
+  Required for automatic configuration of ROS2 packages and should not be executed manually.
