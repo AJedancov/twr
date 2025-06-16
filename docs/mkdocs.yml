@@ -1,0 +1,71 @@
+site_name: | 
+repo_url: https://github.com/AJedancov/twr
+
+
+theme:
+  name: material
+  font:
+    text: Inter
+    code: Inter Mono
+
+  features:
+  - navigation.path
+  - navigation.tabs
+  - navigation.indexes
+  - navigation.top
+
+  - content.code.copy
+  - content.code.annotate
+
+  - toc
+  - toc.follow
+
+  palette:
+    primary: white
+
+  favicon: assets/twr_logo.png
+  logo: assets/twr_logo.png
+  
+  icon:
+    repo: fontawesome/brands/github
+
+
+markdown_extensions:
+  - admonition
+  - tables
+
+  - attr_list
+  - md_in_html
+
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.blocks.caption
+  - pymdownx.tabbed:
+      alternate_style: true
+
+
+nav:
+  - Home:
+    - index.md
+  - Getting started:
+    - Installation:
+      - getting_started/installation/index.md
+      - Locally: getting_started/installation/locally.md
+      - Docker: getting_started/installation/docker.md
+    - Usage: getting_started/usage.md
+  - Documentation:
+    - Project structure:
+      - Scripts: documentation/project_structure/scripts.md
+      # - twr_bringup: documentation/project_structure/twr_bringup.md
+      # - twr_control: documentation/project_structure/twr_control.md
+      # - twr_description: documentation/project_structure/twr_description.md
+      # - twr_navigation: documentation/project_structure/twr_navigation.md
+      # - twr_sim: documentation/project_structure/twr_sim.md
+    - Sensors:
+      - documentation/sensors/index.md
+      - LiDAR: documentation/sensors/lidar.md 
+      - IMU: documentation/sensors/imu.md
+
+
+extra_css:
+  - stylesheets/extra.css
