@@ -20,30 +20,35 @@ def generate_launch_description():
     twr_description_pkg_path = FindPackageShare('twr_description')
 
     # === Launch arguments ===
-    without_gz_launch_arg = DeclareLaunchArgument(
-        name='without_gz',
-        default_value='True',
-        description='Gazebo is not using',
-    )
-
     use_sim_time_launch_arg = DeclareLaunchArgument(
         name='use_sim_time',
         default_value='True',
         description='Use simulation time',
     )
 
+    without_gz_launch_arg = DeclareLaunchArgument(
+        name='without_gz',
+        default_value='True',
+        description='Gazebo is not using',
+    )
+
+    rviz2_config_launch_arg = DeclareLaunchArgument(
+        name='rviz2_config_path',
+        default_value=PathJoinSubstitution([
+            twr_description_pkg_path,
+            'rviz',
+            'nav2_config.rviz'
+        ]),
+        description='Path to RViz2 configuration file',
+    )
+
     # === Launch configuration === 
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
+    rviz2_config_path_launch_conf = LaunchConfiguration('rviz2_config_path')
 
     # =============
     # === RViz2 ===
     # =============
-
-    rviz2_node_args = PathJoinSubstitution([
-        twr_description_pkg_path, 
-        'rviz',
-        'nav2_config.rviz'
-    ])
 
     rviz2_node_params = [{
         'use_sim_time': use_sim_time_launch_conf
@@ -52,7 +57,7 @@ def generate_launch_description():
     rviz2_node = Node(
         package='rviz2',
         executable='rviz2',
-        arguments=['-d', rviz2_node_args], # -d -> --display-config
+        arguments=['-d', rviz2_config_path_launch_conf], # -d -> --display-config
         parameters=rviz2_node_params
     )
 
@@ -80,6 +85,8 @@ def generate_launch_description():
 
     ld.add_action(without_gz_launch_arg)
     ld.add_action(use_sim_time_launch_arg)
+    ld.add_action(rviz2_config_launch_arg)
+
     ld.add_action(rviz2_node)
     ld.add_action(tf_sb_odom_node)
     ld.add_action(tf_sb_map_node)
