@@ -7,15 +7,24 @@ bt_navigator:
     default_server_timeout: 20
     wait_for_service_timeout: 1000
     action_server_result_timeout: 900.0
-    navigators: ["navigate_to_pose", "navigate_through_poses"]
+    navigators: [
+      "navigate_to_pose", 
+      "navigate_through_poses"
+    ]
+
     navigate_to_pose:
       plugin: "nav2_bt_navigator::NavigateToPoseNavigator"
+      # 'default_nav_to_pose_bt_xml' parameter can be set using the launch argument nav2_nav_to_pose_bt_path
+      # or specified below
+      # default_nav_to_pose_bt_xml:
+    
     navigate_through_poses:
       plugin: "nav2_bt_navigator::NavigateThroughPosesNavigator"
-    # 'default_nav_through_poses_bt_xml' and 'default_nav_to_pose_bt_xml' are use defaults:
-    # nav2_bt_navigator/navigate_to_pose_w_replanning_and_recovery.xml
-    # nav2_bt_navigator/navigate_through_poses_w_replanning_and_recovery.xml
-    # They can be set here or via a RewrittenYaml remap from a parent launch file to Nav2.
+    # 'default_nav_through_poses_bt_xml' parameter is set by default behavior tree:
+    # (In nav2 project) nav2_bt_navigator/navigate_through_poses_w_replanning_and_recovery.xml
+    # or it can be specified below
+    # default_nav_through_poses_bt_xml:
+
 
     # plugin_lib_names is used to add custom BT plugins to the executor (vector of strings).
     # Built-in plugins are added automatically
@@ -24,6 +33,7 @@ bt_navigator:
     error_code_names:
       - compute_path_error_code
       - follow_path_error_code
+    
 
 behavior_server:
   ros__parameters:

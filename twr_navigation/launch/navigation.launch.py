@@ -21,6 +21,17 @@ def generate_launch_description():
         description='Use simulation time',
     )
 
+    nav2_nav_to_pose_bt_path_launch_arg = DeclareLaunchArgument(
+        name='nav2_nav_to_pose_bt_path',
+        default_value=PathJoinSubstitution([
+            twr_navigation_pkg_path, 
+            'nav2_bt',
+            'behavior_trees',
+            'navigate_to_pose.xml'
+        ]),
+        description='Path to behavior tree for navigate_to_pose',
+    )
+
     nav2_bt_params_path_launch_arg = DeclareLaunchArgument(
         name='nav2_bt_params_path',
         default_value=PathJoinSubstitution([
@@ -57,6 +68,7 @@ def generate_launch_description():
 
     # === Launch configuration === 
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
+    nav2_nav_to_pose_bt_path_launch_conf = LaunchConfiguration('nav2_nav_to_pose_bt_path')
     nav2_bt_params_path_launch_conf = LaunchConfiguration('nav2_bt_params_path')
     nav2_planner_server_params_path_launch_conf = LaunchConfiguration('nav2_planner_server_params_path')
     nav2_global_costmap_params_path_launch_conf = LaunchConfiguration('nav2_global_costmap_params_path')
@@ -71,7 +83,8 @@ def generate_launch_description():
     # === Behaviour Tree Server ===
     nav2_bt_params = [
         nav2_bt_params_path_launch_conf,
-        {'use_sim_time': use_sim_time_launch_conf,}
+        {'use_sim_time': use_sim_time_launch_conf,
+        'default_nav_to_pose_bt_xml': nav2_nav_to_pose_bt_path_launch_conf}
     ]
 
     nav2_behavior_server_node = Node(
@@ -111,6 +124,7 @@ def generate_launch_description():
 
 
     ld.add_action(use_sim_time_launch_arg)
+    ld.add_action(nav2_nav_to_pose_bt_path_launch_arg)
     ld.add_action(nav2_bt_params_path_launch_arg)
     ld.add_action(nav2_planner_server_params_path_launch_arg)
     ld.add_action(nav2_global_costmap_params_path_launch_arg)
