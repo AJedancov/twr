@@ -10,7 +10,6 @@ find_package(ament_cmake REQUIRED)
 install(DIRECTORY 
   launch 
   map
-  nav2_bt
   nav2_planners
   robot_localization
   slam_toolbox

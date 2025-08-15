@@ -39,6 +39,7 @@ install(TARGETS twr_g2g_controller
 
 install(DIRECTORY
   launch
+  nav2_bt
   nav2_controllers
   ros2_controllers
   DESTINATION share/${PROJECT_NAME}/
