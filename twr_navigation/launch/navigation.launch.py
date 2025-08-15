@@ -21,6 +21,12 @@ def generate_launch_description():
         description='Use simulation time',
     )
 
+    nav2_planner_server_prefix_launch_arg = DeclareLaunchArgument(
+        name='nav2_planner_server_prefix',
+        default_value='',
+        description='Prefix for Nav2 planner_server node. Declare this argument as a string in single or double quotes: \'prefix_content\' or \"prefix_content\"',
+    )
+    
     nav2_planner_server_params_path_launch_arg = DeclareLaunchArgument(
         name='nav2_planner_server_params_path',
         default_value=PathJoinSubstitution([
@@ -46,6 +52,7 @@ def generate_launch_description():
 
     # === Launch configuration === 
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
+    nav2_planner_server_prefix_launch_conf = LaunchConfiguration('nav2_planner_server_prefix')
     nav2_planner_server_params_path_launch_conf = LaunchConfiguration('nav2_planner_server_params_path')
     nav2_global_costmap_params_path_launch_conf = LaunchConfiguration('nav2_global_costmap_params_path')
 
@@ -69,12 +76,14 @@ def generate_launch_description():
         executable='planner_server',
         name='planner_server',
         output='screen',
+        prefix=nav2_planner_server_prefix_launch_conf,
         parameters=nav2_planner_server_params,
         remappings=common_remappings,
     )
 
 
     ld.add_action(use_sim_time_launch_arg)
+    ld.add_action(nav2_planner_server_prefix_launch_arg)
     ld.add_action(nav2_planner_server_params_path_launch_arg)
     ld.add_action(nav2_global_costmap_params_path_launch_arg)
 
