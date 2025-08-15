@@ -22,9 +22,9 @@ def generate_launch_description():
     # === Launch configuration === 
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
 
-    # ===========
-    # === EKF ===
-    # ===========
+    # ==========================
+    # === robot_localization ===
+    # ==========================
 
     ekf_node_congig_path = PathJoinSubstitution([
         twr_navigation_pkg_path,
@@ -42,6 +42,7 @@ def generate_launch_description():
         package='robot_localization',
         executable='ekf_node',
         parameters=ekf_node_params,
+        remappings=[('odometry/filtered', 'odom')]
     )
 
     ld.add_action(use_sim_time_launch_arg)
