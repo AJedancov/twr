@@ -28,17 +28,11 @@ def generate_launch_description():
         description='Launch RViz2',
     )
 
-    use_sim_time_launch_arg = DeclareLaunchArgument(
-        name='use_sim_time',
-        default_value='true',
-        description='Use simulation time',
-    )
-
 
     # ============================
     # === Launch configuration ===
     # ============================
-    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
+    use_rviz2_launch_conf = LaunchConfiguration('use_rviz2')
 
 
     # =============================
@@ -48,11 +42,8 @@ def generate_launch_description():
         PathJoinSubstitution([twr_bringup_pkg_path, 'launch', 'rsp.launch.py'])
     ])
 
-    rsp_ld_args = {'use_sim_time': use_sim_time_launch_conf}.items()
-
     rsp_ld = IncludeLaunchDescription(
-        launch_description_source=rsp_ld_src,
-        launch_arguments=rsp_ld_args,
+        launch_description_source=rsp_ld_src
     )
 
 
@@ -64,7 +55,7 @@ def generate_launch_description():
     ])
 
     control_ld = IncludeLaunchDescription(
-        launch_description_source=control_ld_src,
+        launch_description_source=control_ld_src
     )
 
 
@@ -75,11 +66,8 @@ def generate_launch_description():
         PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'slam.launch.py'])
     ])
 
-    slam_ld_args = {'use_sim_time': use_sim_time_launch_conf}.items()
-
     slam_ld = IncludeLaunchDescription(
-        launch_description_source=slam_ld_src,
-        launch_arguments=slam_ld_args,
+        launch_description_source=slam_ld_src
     )
 
 
@@ -90,11 +78,8 @@ def generate_launch_description():
         PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'fusion.launch.py'])
     ])
 
-    fusion_ld_args = {'use_sim_time': use_sim_time_launch_conf}.items()
-
     fusion_ld = IncludeLaunchDescription(
-        launch_description_source=fusion_ld_src,
-        launch_arguments=fusion_ld_args,
+        launch_description_source=fusion_ld_src
     )
 
 
@@ -105,11 +90,8 @@ def generate_launch_description():
         PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'navigation.launch.py'])
     ])
 
-    navigation_ld_args = {'use_sim_time': use_sim_time_launch_conf}.items()
-
     navigation_ld = IncludeLaunchDescription(
-        launch_description_source=navigation_ld_src,
-        launch_arguments=navigation_ld_args,
+        launch_description_source=navigation_ld_src
     )
 
 
@@ -120,14 +102,12 @@ def generate_launch_description():
         PathJoinSubstitution([twr_bringup_pkg_path, 'launch', 'rviz2.launch.py'])
     ])
 
-    rviz2_ld_args = {
-        'without_gz': 'False',
-        'use_sim_time': use_sim_time_launch_conf}.items()
+    rviz2_ld_args = {'without_gz': 'false'}.items()
 
     rviz2_ld = IncludeLaunchDescription(
         launch_description_source=rviz2_ld_src,
         launch_arguments=rviz2_ld_args,
-        condition=IfCondition(LaunchConfiguration('use_rviz2'))
+        condition=IfCondition(use_rviz2_launch_conf)
     )
 
 
@@ -139,7 +119,7 @@ def generate_launch_description():
     ])
 
     sim_ld = IncludeLaunchDescription(
-        launch_description_source=sim_ld_src,
+        launch_description_source=sim_ld_src
     )
 
 
@@ -173,7 +153,6 @@ def generate_launch_description():
     # ==========================
     launch_arguments=[
         use_rviz2_launch_arg,
-        use_sim_time_launch_arg
     ]
 
     external_launch_descriptions=[

@@ -93,11 +93,8 @@ def generate_launch_description():
         PathJoinSubstitution([rsp_pkg_path, 'launch', 'rsp.launch.py'])
     ])
 
-    rsp_ld_args = {'use_sim_time': use_sim_time_launch_conf}.items()
-
     rsp_ld = IncludeLaunchDescription(
         launch_description_source=rsp_ld_source,
-        launch_arguments=rsp_ld_args,
     )
 
 
