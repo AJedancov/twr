@@ -7,26 +7,32 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
 
-    ld = LaunchDescription()
-
-    # === Package Directories ===
+    # ===========================
+    # === Package directories ===
+    # ===========================
     twr_navigation_pkg_path = FindPackageShare('twr_navigation')
 
+
+    # ========================
     # === Launch arguments ===
+    # ========================
     use_sim_time_launch_arg = DeclareLaunchArgument(
         name='use_sim_time',
-        default_value='True',
+        default_value='true',
         description='Use simulation time',
     )
 
-    # === Launch configuration === 
+
+    # ============================
+    # === Launch configuration ===
+    # ============================
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
+
 
     # ==========================
     # === robot_localization ===
     # ==========================
-
-    ekf_node_congig_path = PathJoinSubstitution([
+    ekf_node_config_path = PathJoinSubstitution([
         twr_navigation_pkg_path,
         'robot_localization',
         'config', 
@@ -34,19 +40,29 @@ def generate_launch_description():
     ])
 
     ekf_node_params = [
-        ekf_node_congig_path,
+        ekf_node_config_path,
         {'use_sim_time': use_sim_time_launch_conf,}
     ]
+
+    ekf_node_remaps = [('odometry/filtered', 'odom')]
     
     ekf_node = Node(
         package='robot_localization',
         executable='ekf_node',
         parameters=ekf_node_params,
-        remappings=[('odometry/filtered', 'odom')]
+        remappings=ekf_node_remaps
     )
 
-    ld.add_action(use_sim_time_launch_arg)
 
-    ld.add_action(ekf_node)
+    # ==========================
+    # === Launch description === 
+    # ==========================
+    launch_arguments=[
+        use_sim_time_launch_arg
+    ]
 
-    return ld
+    nodes = [
+        ekf_node
+    ]
+
+    return LaunchDescription(launch_arguments + nodes)

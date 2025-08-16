@@ -1,5 +1,3 @@
-import os
-
 from launch import LaunchDescription
 from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
@@ -11,13 +9,16 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
 
-    ld = LaunchDescription()
-
-    # === Package Directories ===
+    # ===========================
+    # === Package directories ===
+    # ===========================
     ros_gz_pkg_path = FindPackageShare('ros_gz_sim')
     twr_sim_pkg_path = FindPackageShare('twr_sim')
 
+
+    # ========================
     # === Launch arguments ===
+    # ========================
     gz_sim_world_arg = DeclareLaunchArgument(
         name='gz_sim_world_path',
         default_value=PathJoinSubstitution([
@@ -29,8 +30,12 @@ def generate_launch_description():
         description='Path to Gazebo Sim world',
     )
 
+
+    # ============================
     # === Launch configuration ===
+    # ============================
     gz_sim_world = LaunchConfiguration('gz_sim_world_path')
+
 
     # ===================
     # === Gazebo Sim ====
@@ -53,8 +58,8 @@ def generate_launch_description():
         launch_arguments=gz_sim_ld_args
     )
 
-    # === Gazebo: bridge ===
 
+    # === Gazebo: bridge ===
     gz_bridge_node_config_path = PathJoinSubstitution([
         twr_sim_pkg_path,
         'gazebo_sim', 
@@ -62,7 +67,7 @@ def generate_launch_description():
         'gz_bridge.yaml'
     ])
 
-    gz_bridge_node_param = [{
+    gz_bridge_node_params = [{
         'config_file': gz_bridge_node_config_path
     }]
 
@@ -70,7 +75,7 @@ def generate_launch_description():
         package='ros_gz_bridge',
         executable='parameter_bridge',
         output='screen',
-        parameters=gz_bridge_node_param,
+        parameters=gz_bridge_node_params,
  
         #  Instead of a YAML file, we can describe connections as arguments and remappings for them 
         # 
@@ -93,9 +98,10 @@ def generate_launch_description():
         # ],
     )
 
+
     # === Gazebo: spawn entity ===
     # use /robot_description from robot_state_publisher node
-    gz_spawn_entity_node_param = [{
+    gz_spawn_entity_node_params = [{
         'name' : 'twr',
         'topic': 'robot_description',
         'z': 0.1
@@ -105,13 +111,24 @@ def generate_launch_description():
         package='ros_gz_sim',
         executable='create',
         output='screen',
-        parameters=gz_spawn_entity_node_param
+        parameters=gz_spawn_entity_node_params
     )
 
-    ld.add_action(gz_sim_world_arg)
 
-    ld.add_action(gz_sim_ld)
-    ld.add_action(gz_spawn_entity_node)
-    ld.add_action(gz_bridge_node)
-    
-    return ld
+    # ==========================
+    # === Launch description === 
+    # ==========================
+    launch_arguments=[
+        gz_sim_world_arg
+    ]
+
+    external_launch_descriptions=[
+        gz_sim_ld
+    ]
+
+    nodes = [
+        gz_spawn_entity_node,
+        gz_bridge_node,
+    ]
+
+    return LaunchDescription(launch_arguments + external_launch_descriptions + nodes)

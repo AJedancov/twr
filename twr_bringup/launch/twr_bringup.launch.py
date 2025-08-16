@@ -1,8 +1,6 @@
-import os
-
 from launch import LaunchDescription
 from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.conditions import IfCondition
 
@@ -12,29 +10,36 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
 
-    ld = LaunchDescription()
-
-    # === Package Directories ===
+    # ===========================
+    # === Package directories ===
+    # ===========================
     twr_bringup_pkg_path = FindPackageShare('twr_bringup')
     twr_control_pkg_path = FindPackageShare('twr_control')
     twr_navigation_pkg_path = FindPackageShare('twr_navigation')
     twr_sim_pkg_path = FindPackageShare('twr_sim')
 
+
+    # ========================
     # === Launch arguments ===
+    # ========================
     use_rviz2_launch_arg = DeclareLaunchArgument(
         name='use_rviz2',
-        default_value='True',
+        default_value='true',
         description='Launch RViz2',
     )
 
     use_sim_time_launch_arg = DeclareLaunchArgument(
         name='use_sim_time',
-        default_value='True',
+        default_value='true',
         description='Use simulation time',
     )
 
+
+    # ============================
     # === Launch configuration ===
+    # ============================
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
+
 
     # =============================
     # === Robot State Publisher ===
@@ -50,6 +55,7 @@ def generate_launch_description():
         launch_arguments=rsp_ld_args,
     )
 
+
     # ===============
     # === Control ===
     # ===============
@@ -60,6 +66,7 @@ def generate_launch_description():
     control_ld = IncludeLaunchDescription(
         launch_description_source=control_ld_src,
     )
+
 
     # ============
     # === SLAM ===
@@ -75,6 +82,7 @@ def generate_launch_description():
         launch_arguments=slam_ld_args,
     )
 
+
     # =====================
     # === Sensor Fusion ===
     # =====================
@@ -89,6 +97,7 @@ def generate_launch_description():
         launch_arguments=fusion_ld_args,
     )
 
+
     # ==================
     # === Navigation ===
     # ==================
@@ -102,6 +111,7 @@ def generate_launch_description():
         launch_description_source=navigation_ld_src,
         launch_arguments=navigation_ld_args,
     )
+
 
     # =============
     # === RViz2 ===
@@ -119,6 +129,7 @@ def generate_launch_description():
         launch_arguments=rviz2_ld_args,
         condition=IfCondition(LaunchConfiguration('use_rviz2'))
     )
+
 
     # ===================
     # === Simulation ====
@@ -157,16 +168,26 @@ def generate_launch_description():
     )
 
 
-    ld.add_action(use_rviz2_launch_arg)
-    ld.add_action(use_sim_time_launch_arg)
-    
-    ld.add_action(rsp_ld)
-    ld.add_action(sim_ld)
-    ld.add_action(control_ld)
-    ld.add_action(navigation_ld)
-    ld.add_action(rviz2_ld)
-    ld.add_action(slam_ld)
-    ld.add_action(fusion_ld)
-    ld.add_action(nav2_lifecycle_manager_node)
-    
-    return ld
+    # ==========================
+    # === Launch description === 
+    # ==========================
+    launch_arguments=[
+        use_rviz2_launch_arg,
+        use_sim_time_launch_arg
+    ]
+
+    external_launch_descriptions=[
+        rsp_ld,
+        sim_ld,
+        control_ld,
+        navigation_ld,
+        rviz2_ld,
+        slam_ld,
+        fusion_ld
+    ]
+
+    nodes = [
+        nav2_lifecycle_manager_node
+    ]
+
+    return LaunchDescription(launch_arguments + external_launch_descriptions + nodes)

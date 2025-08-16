@@ -1,5 +1,3 @@
-import os
-
 from launch import LaunchDescription
 from launch.substitutions import Command, PathJoinSubstitution, LaunchConfiguration
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
@@ -13,22 +11,25 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
 
-    ld = LaunchDescription()
-
-    # === Package Directories ===
+    # ===========================
+    # === Package directories ===
+    # ===========================
     rsp_pkg_path = FindPackageShare('twr_bringup')
     twr_description_pkg_path = FindPackageShare('twr_description')
 
+
+    # ========================
     # === Launch arguments ===
+    # ========================
     use_sim_time_launch_arg = DeclareLaunchArgument(
         name='use_sim_time',
-        default_value='True',
+        default_value='true',
         description='Use simulation time',
     )
 
     without_gz_launch_arg = DeclareLaunchArgument(
         name='without_gz',
-        default_value='True',
+        default_value='true',
         description='Gazebo is not using',
     )
 
@@ -42,14 +43,17 @@ def generate_launch_description():
         description='Path to RViz2 configuration file',
     )
 
-    # === Launch configuration === 
+
+    # ============================
+    # === Launch configuration ===
+    # ============================
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
     rviz2_config_path_launch_conf = LaunchConfiguration('rviz2_config_path')
+
 
     # =============
     # === RViz2 ===
     # =============
-
     rviz2_node_params = [{
         'use_sim_time': use_sim_time_launch_conf
     }]
@@ -63,9 +67,8 @@ def generate_launch_description():
 
 
     # ==============================
-    #  === TF Static Publisher ===
+    #  === TF Static Publisher =====
     # ==============================
-
     tf_sb_odom_node_args=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'odom', 'base_link']
 
     tf_sb_odom_node = Node(
@@ -83,19 +86,9 @@ def generate_launch_description():
     )
 
 
-    ld.add_action(without_gz_launch_arg)
-    ld.add_action(use_sim_time_launch_arg)
-    ld.add_action(rviz2_config_launch_arg)
-
-    ld.add_action(rviz2_node)
-    ld.add_action(tf_sb_odom_node)
-    ld.add_action(tf_sb_map_node)
-
-
     # =============================
     # === Robot State Publisher ===
     # =============================
-    
     rsp_ld_source = PythonLaunchDescriptionSource([
         PathJoinSubstitution([rsp_pkg_path, 'launch', 'rsp.launch.py'])
     ])
@@ -107,10 +100,10 @@ def generate_launch_description():
         launch_arguments=rsp_ld_args,
     )
 
+
     # ==============================
     #  === Joint State Publisher ===
     # ==============================
-
     # provide JointState messages for robot_state_publisher,
     # also necessary for correct representation of axes in rviz2
     jsp_node = Node(
@@ -123,6 +116,24 @@ def generate_launch_description():
             condition=IfCondition(LaunchConfiguration('without_gz')),
     )
 
-    ld.add_action(without_sim_group)
-    
-    return ld
+
+    # ==========================
+    # === Launch description === 
+    # ==========================
+    launch_arguments=[
+        without_gz_launch_arg,
+        use_sim_time_launch_arg,
+        rviz2_config_launch_arg
+    ]
+
+    action_groups=[
+        without_sim_group
+    ]
+
+    nodes = [
+        rviz2_node,
+        tf_sb_odom_node,
+        tf_sb_map_node
+    ]
+
+    return LaunchDescription(launch_arguments + action_groups + nodes)
