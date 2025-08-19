@@ -102,7 +102,7 @@ def generate_launch_description():
         PathJoinSubstitution([twr_bringup_pkg_path, 'launch', 'rviz2.launch.py'])
     ])
 
-    rviz2_ld_args = {'without_gz': 'false'}.items()
+    rviz2_ld_args = {'use_sim_env': 'true'}.items()
 
     rviz2_ld = IncludeLaunchDescription(
         launch_description_source=rviz2_ld_src,

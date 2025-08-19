@@ -1,7 +1,7 @@
 from launch import LaunchDescription
 from launch.substitutions import Command, PathJoinSubstitution, LaunchConfiguration
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
-from launch.conditions import IfCondition
+from launch.conditions import UnlessCondition
 
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
@@ -27,10 +27,10 @@ def generate_launch_description():
         description='Use simulation time',
     )
 
-    without_gz_launch_arg = DeclareLaunchArgument(
-        name='without_gz',
-        default_value='true',
-        description='Gazebo is not using',
+    use_sim_env_launch_arg = DeclareLaunchArgument(
+        name='use_sim_env',
+        default_value='false',
+        description='Use simulation environment',
     )
 
     rviz2_config_launch_arg = DeclareLaunchArgument(
@@ -48,6 +48,7 @@ def generate_launch_description():
     # === Launch configuration ===
     # ============================
     use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
+    use_sim_env_launch_conf = LaunchConfiguration('use_sim_env')
     rviz2_config_path_launch_conf = LaunchConfiguration('rviz2_config_path')
 
 
@@ -108,9 +109,12 @@ def generate_launch_description():
         executable='joint_state_publisher',
     )
 
-    without_sim_group = GroupAction(
-            actions=[rsp_ld, jsp_node],
-            condition=IfCondition(LaunchConfiguration('without_gz')),
+    use_sim_env_action_group = GroupAction(
+        actions=[
+            rsp_ld, 
+            jsp_node,
+        ],
+        condition=UnlessCondition(use_sim_env_launch_conf),
     )
 
 
@@ -118,13 +122,13 @@ def generate_launch_description():
     # === Launch description === 
     # ==========================
     launch_arguments=[
-        without_gz_launch_arg,
         use_sim_time_launch_arg,
+        use_sim_env_launch_arg,
         rviz2_config_launch_arg
     ]
 
     action_groups=[
-        without_sim_group
+        use_sim_env_action_group
     ]
 
     nodes = [
