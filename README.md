@@ -15,3 +15,6 @@ The project is based on a robot with a differential drive on the [ROS 2](https:/
 
 > [!TIP]  
 > **Getting Started** guide and **Documentation** are available [here](https://ajedancov.github.io/twr/).
+
+## License
+This project is licensed under the terms of the [MIT](./LICENSE.md) license.
