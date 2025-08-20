@@ -27,9 +27,11 @@
   gz_type_name: "gz.msgs.Pose_V"
   direction: GZ_TO_ROS
 
+# Use joint_state_broadcaster from ros2_control instead of direct declaration in bridge
+# Uncomment if you do not plan to use this plugin:
 # Joint states (GZ -> ROS2)
-- ros_topic_name: "/joint_states"
-  gz_topic_name: "/world/warehouse/model/twr/joint_state"
-  ros_type_name: "sensor_msgs/msg/JointState"
-  gz_type_name: "gz.msgs.Model"
-  direction: GZ_TO_ROS
+# - ros_topic_name: "/joint_states"
+#   gz_topic_name: "/world/warehouse/model/twr/joint_state"
+#   ros_type_name: "sensor_msgs/msg/JointState"
+#   gz_type_name: "gz.msgs.Model"
+#   direction: GZ_TO_ROS
