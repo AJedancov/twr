@@ -102,16 +102,18 @@ def generate_launch_description():
     # ====================
     # === ros2_control ===
     # ====================
-    twr_diff_drive_controller_node_params = PathJoinSubstitution([
+    controller_manager_node_params = PathJoinSubstitution([
         twr_control_pkg_path,
         'ros2_controllers',
-        'diff_drive_controller',
+        'controller_manager',
         'config', 
-        'twr_diff_drive_controller.yaml'
+        'controller_manager.yaml'
     ])
 
-    # === commented === 
-    # gz_ros2_control runs the controller_manager, no need for ros2_control_node
+    # === reason for commenting === 
+    # The project uses Gazebo Sim Plugin gz_ros2_control. 
+    # Internally it loads controller_manager, and therefore there is no need for ros2_control_node
+    # The plugin is declared in twr/twr_description/urdf/packages/gz.xacro, "Plugins" section.
 
     # control_node = Node(
     #     package="controller_manager",
@@ -124,8 +126,8 @@ def generate_launch_description():
     spawner_node_args = [
         'joint_state_broadcaster',
         'diff_drive_controller',
-            '--param-file',
-            twr_diff_drive_controller_node_params,
+        '--param-file',
+        controller_manager_node_params
     ]
 
     spawner_node = Node(

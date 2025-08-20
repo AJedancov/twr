@@ -44,11 +44,15 @@
   <!-- =============== -->
   
   <gazebo>
-    <!-- Ros2 control plugin -->
-    <!-- In addition to the ros2_control tags, a Gazebo plugin needs to be added to your URDF 
-    that actually parses the ros2_control tags and loads the appropriate hardware interfaces and controller manager -->
+    <!-- ros2_control plugin -->
+    <!-- 
+      In addition to the <ros2_control> tag (in twr/twr_description/urdf/packages/ros2_control.xacro), 
+      a Gazebo plugin needs to be added.
+      It parses the <ros2_control> tag and loads the appropriate hardware interfaces (hardware components) and
+      controller manager.
+    -->
     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-      <parameters> $(find twr_control)/ros2_controllers/diff_drive_controller/config/twr_diff_drive_controller.yaml </parameters>
+      <parameters> $(find twr_control)/ros2_controllers/controller_manager/config/controller_manager.yaml </parameters>
     </plugin>
 
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
@@ -64,8 +68,7 @@
       <dimensions>3</dimensions>
     </plugin>
 
-    <plugin
-      filename="gz-sim-imu-system" name="gz::sim::systems::Imu">
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu">
     </plugin>
     
   </gazebo>

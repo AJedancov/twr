@@ -3,8 +3,7 @@
 
   <ros2_control name="GazeboSimSystem" type="system"> 
     <hardware>
-      <!-- name of hardware interface -->
-      <!-- it will use Gazebo just like a normal hardware interface -->
+      <!-- This allows Gazebo to be used as a regular hardware interface (hardware component)-->
       <plugin>gz_ros2_control/GazeboSimSystem</plugin>
     </hardware>
 
