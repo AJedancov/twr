@@ -46,7 +46,9 @@ markdown_extensions:
 
 
 plugins:
-  - social
+  - social:
+      cards_layout_options:
+        background_color: "#ededf3"
 
 
 nav:
