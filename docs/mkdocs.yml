@@ -44,6 +44,10 @@ markdown_extensions:
       alternate_style: true
 
 
+plugins:
+  - social
+
+
 nav:
   - Home:
     - index.md
