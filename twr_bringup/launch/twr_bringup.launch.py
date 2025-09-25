@@ -52,7 +52,7 @@ def generate_launch_description():
     # === Control ===
     # ===============
     control_ld_src = PythonLaunchDescriptionSource([
-        PathJoinSubstitution([twr_control_pkg_path, 'launch', 'control.launch.py'])
+        PathJoinSubstitution([twr_control_pkg_path, 'launch', 'twr_control.launch.py'])
     ])
 
     control_ld = IncludeLaunchDescription(
@@ -64,7 +64,7 @@ def generate_launch_description():
     # === SLAM ===
     # ============
     slam_ld_src = PythonLaunchDescriptionSource([
-        PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'slam.launch.py'])
+        PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'twr_slam.launch.py'])
     ])
 
     slam_ld = IncludeLaunchDescription(
@@ -76,7 +76,7 @@ def generate_launch_description():
     # === Sensor Fusion ===
     # =====================
     fusion_ld_src = PythonLaunchDescriptionSource([
-        PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'fusion.launch.py'])
+        PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'twr_fusion.launch.py'])
     ])
 
     fusion_ld = IncludeLaunchDescription(
@@ -88,7 +88,7 @@ def generate_launch_description():
     # === Navigation ===
     # ==================
     navigation_ld_src = PythonLaunchDescriptionSource([
-        PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'navigation.launch.py'])
+        PathJoinSubstitution([twr_navigation_pkg_path, 'launch', 'twr_navigation.launch.py'])
     ])
 
     navigation_ld = IncludeLaunchDescription(
@@ -116,7 +116,7 @@ def generate_launch_description():
     # === Simulation ====
     # ===================
     sim_ld_src = PythonLaunchDescriptionSource([
-        PathJoinSubstitution([twr_sim_pkg_path, 'launch', 'sim.launch.py'])
+        PathJoinSubstitution([twr_sim_pkg_path, 'launch', 'twr_sim.launch.py'])
     ])
 
     sim_ld = IncludeLaunchDescription(
