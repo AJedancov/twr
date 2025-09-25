@@ -23,6 +23,7 @@ def generate_launch_description():
         name='use_sim_time',
         default_value='true',
         description='Use simulation time',
+        choices=["true", "false"]
     )
 
     nav2_behavior_server_node_prefix_launch_arg = DeclareLaunchArgument(

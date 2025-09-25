@@ -25,12 +25,14 @@ def generate_launch_description():
         name='use_sim_time',
         default_value='true',
         description='Use simulation time',
+        choices=["true", "false"]
     )
 
     use_sim_env_launch_arg = DeclareLaunchArgument(
         name='use_sim_env',
         default_value='false',
         description='Use simulation environment',
+        choices=["true", "false"]
     )
 
     rviz2_config_launch_arg = DeclareLaunchArgument(

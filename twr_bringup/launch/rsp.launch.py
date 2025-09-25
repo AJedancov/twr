@@ -22,6 +22,7 @@ def generate_launch_description():
         name='use_sim_time',
         default_value='true',
         description='Use simulation time',
+        choices=["true", "false"]
     )
 
 

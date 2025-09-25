@@ -26,6 +26,7 @@ def generate_launch_description():
         name='use_rviz2',
         default_value='true',
         description='Launch RViz2',
+        choices=["true", "false"]
     )
 
 
