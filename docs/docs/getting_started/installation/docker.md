@@ -1,5 +1,8 @@
 # Docker
 
+!!! warning
+    Currently, the GUI is displayed when the X Window System is in use. 
+
 
 ## Prerequisites
 Follow the [instructions](https://docs.docker.com/engine/install/) to install Docker from the official website.
@@ -25,22 +28,29 @@ To render the GUI from a Docker container, you need to add a local user (docker)
 sudo xhost +local:docker
 ```
 
-!!! note
-    Currently, the GUI is only displayed when using the X Window System. 
-
 
 ## Run Docker container
 
 And finally, you can run the container:
 
 ```shell
-docker run -it \
+docker run \
+--interactive \
+--tty \
 --rm \
 --net=host \
---volume /tmp/.X11-unix:/tmp/.X11-unix:rw \
+--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw \
 --env=DISPLAY \
---name twr_jazzy_container \
+--name=twr_jazzy_container \
 twr:jazzy
 ```
+
+??? note "Description of options" 
+    This command includes the following options:  
+    `--interactive` - keep terminal open.  
+    `--tty` - allocate a pseudo-TTY.  
+    `--rm` - automatically remove the container when it exits.  
+    `--net=host` - connect to the host network.  
+    `--volume` - link the volume mount. This is necessary for correct GUI rendering.  
 
 Once you have the project built, you can continue with the [usage](../usage.md) examples.
