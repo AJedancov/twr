@@ -7,26 +7,39 @@ ekf_filter_node:
 
     two_d_mode: true
 
-    odom0: /diff_drive_controller/odom  # Type: nav_msgs/msg/Odometry
-    odom0_config: [true,  true,  false, #  x,      y,    z, 
-                   false, false, true, # roll, pitch,  yaw, 
-                   true,  false, false, #  vx,    vy,    vz, 
-                   false, false, false,  # vroll, vpitch, vyaw, 
-                   false, false, false] #  ax,    ay,    az
+    # Configuration structure
+    # config: [x,     y,      z, 
+    #          roll,  pitch,  yaw, 
+    #          vx,    vy,     vz, 
+    #          vroll, vpitch, vyaw, 
+    #          ax,    ay,     az]
+
+    # Source: ros2_control -> diff_drive_controller
+    # Type: nav_msgs/msg/Odometry
+    odom0: /diff_drive_controller/odom  
+    odom0_config: [true,  true,  false,
+                   false, false, true,
+                   true,  false, false,
+                   false, false, false, 
+                   false, false, false] 
     
-    pose0: /pose  # Type: geometry_msgs/msg/PoseWithCovarianceStamped
+    # Source: slam_toolbox
+    # Type: geometry_msgs/msg/PoseWithCovarianceStamped
+    pose0: /pose  
     pose0_config: [true,  true,  false,
                    false, false, true,
                    false, false, false,
                    false, false, false,
                    false, false, false]
     
-    imu0: /imu  # Type: sensor_msgs/msg/Imu
-    imu0_config: [ false, false, false,
-                   false, false, true,
-                   true, false, false,
-                   false, false, true,
-                   false,  false, false]
+    # Source: Gazebo Sim
+    # Type: sensor_msgs/msg/Imu
+    imu0: /imu  
+    imu0_config: [false, false, false,
+                  false, false, true,
+                  true, false, false,
+                  false, false, true,
+                  false,  false, false]
 
     use_control: true
     # Order is      [vx,   vy,    vz,    vroll, vpitch, vyaw]
