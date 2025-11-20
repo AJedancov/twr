@@ -1,4 +1,4 @@
-site_name: | 
+site_name:  Two-Wheeled Robot
 site_url: https://ajedancov.github.io/twr/
 repo_url: https://github.com/AJedancov/twr
 
@@ -7,7 +7,7 @@ theme:
   name: material
   font:
     text: Inter
-    code: Inter Mono
+    code: Oxygen Mono
 
   features:
   - navigation.path
@@ -18,7 +18,6 @@ theme:
   - content.code.copy
   - content.code.annotate
 
-  - toc
   - toc.follow
 
   palette:
@@ -29,11 +28,19 @@ theme:
   
   icon:
     repo: fontawesome/brands/github
+    annotation: material/help-circle
+
+
+plugins:
+  - social:
+      cards_layout_options:
+        background_color: "#ededf3"
 
 
 markdown_extensions:
   - admonition
   - tables
+  - toc # Table of Contents
 
   - attr_list
   - md_in_html
@@ -45,10 +52,11 @@ markdown_extensions:
       alternate_style: true
 
 
-plugins:
-  - social:
-      cards_layout_options:
-        background_color: "#ededf3"
+extra_css:
+  - stylesheets/extra.css
+
+
+copyright: Copyright &copy; 2025 Andrei Jedancov
 
 
 nav:
@@ -72,7 +80,3 @@ nav:
       - documentation/sensors/index.md
       - LiDAR: documentation/sensors/lidar.md 
       - IMU: documentation/sensors/imu.md
-
-
-extra_css:
-  - stylesheets/extra.css
