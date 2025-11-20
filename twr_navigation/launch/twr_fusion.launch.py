@@ -33,24 +33,45 @@ def generate_launch_description():
     # ==========================
     # === robot_localization ===
     # ==========================
-    ekf_node_config_path = PathJoinSubstitution([
+    ekf_map_to_odom_node_config_path = PathJoinSubstitution([
         twr_navigation_pkg_path,
         'robot_localization',
         'config', 
-        'ekf.yaml'
+        'ekf_map_to_odom.yaml'
     ])
 
-    ekf_node_params = [
-        ekf_node_config_path,
+    ekf_odom_to_base_node_config_path = PathJoinSubstitution([
+        twr_navigation_pkg_path,
+        'robot_localization',
+        'config', 
+        'ekf_odom_to_base.yaml'
+    ])
+
+    ekf_map_to_odom_node_params = [
+        ekf_map_to_odom_node_config_path,
+        {'use_sim_time': use_sim_time_launch_conf,}
+    ]
+
+    ekf_odom_to_base_node_params = [
+        ekf_odom_to_base_node_config_path,
         {'use_sim_time': use_sim_time_launch_conf,}
     ]
 
     ekf_node_remaps = [('odometry/filtered', 'odom')]
-    
-    ekf_node = Node(
+
+    ekf_map_to_odom_node = Node(
         package='robot_localization',
         executable='ekf_node',
-        parameters=ekf_node_params,
+        name='ekf_map_to_odom',
+        parameters=ekf_map_to_odom_node_params,
+        remappings=ekf_node_remaps
+    )
+
+    ekf_odom_to_base_node = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_odom_to_base',
+        parameters=ekf_odom_to_base_node_params,
         remappings=ekf_node_remaps
     )
 
@@ -63,7 +84,8 @@ def generate_launch_description():
     ]
 
     nodes = [
-        ekf_node
+        ekf_map_to_odom_node,
+        ekf_odom_to_base_node
     ]
 
     return LaunchDescription(launch_arguments + nodes)
