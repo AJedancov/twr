@@ -33,7 +33,7 @@ def generate_launch_description():
     # ============================
     # === Launch configuration ===
     # ============================
-    use_rviz2_launch_conf = LaunchConfiguration('use_rviz2')
+    use_rviz2_launch_config = LaunchConfiguration('use_rviz2')
 
 
     # =============================
@@ -108,7 +108,7 @@ def generate_launch_description():
     rviz2_ld = IncludeLaunchDescription(
         launch_description_source=rviz2_ld_src,
         launch_arguments=rviz2_ld_args,
-        condition=IfCondition(use_rviz2_launch_conf)
+        condition=IfCondition(use_rviz2_launch_config)
     )
 
 

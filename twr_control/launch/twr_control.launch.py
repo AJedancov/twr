@@ -91,13 +91,13 @@ def generate_launch_description():
     # ============================
     # === Launch configuration ===
     # ============================
-    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
-    nav2_behavior_server_prefix_launch_conf = LaunchConfiguration('nav2_behavior_server_node_prefix')
-    nav2_bt_node_params_path_launch_conf = LaunchConfiguration('nav2_bt_node_params_path')
-    nav2_nav_to_pose_bt_path_launch_conf = LaunchConfiguration('nav2_nav_to_pose_bt_path')
-    nav2_controller_server_node_prefix_launch_conf = LaunchConfiguration('nav2_controller_server_node_prefix')
-    nav2_controller_server_node_params_path_launch_conf = LaunchConfiguration('nav2_controller_server_node_params_path')
-    nav2_local_costmap_node_params_path_launch_conf = LaunchConfiguration('nav2_local_costmap_node_params_path')
+    use_sim_time_launch_config = LaunchConfiguration('use_sim_time')
+    nav2_behavior_server_prefix_launch_config = LaunchConfiguration('nav2_behavior_server_node_prefix')
+    nav2_bt_node_params_path_launch_config = LaunchConfiguration('nav2_bt_node_params_path')
+    nav2_nav_to_pose_bt_path_launch_config = LaunchConfiguration('nav2_nav_to_pose_bt_path')
+    nav2_controller_server_node_prefix_launch_config = LaunchConfiguration('nav2_controller_server_node_prefix')
+    nav2_controller_server_node_params_path_launch_config = LaunchConfiguration('nav2_controller_server_node_params_path')
+    nav2_local_costmap_node_params_path_launch_config = LaunchConfiguration('nav2_local_costmap_node_params_path')
 
 
     # ====================
@@ -147,9 +147,9 @@ def generate_launch_description():
     
     # === Behaviour Tree Server ===
     nav2_bt_node_params = [
-        nav2_bt_node_params_path_launch_conf,
-        {'use_sim_time': use_sim_time_launch_conf,
-        'default_nav_to_pose_bt_xml': nav2_nav_to_pose_bt_path_launch_conf}
+        nav2_bt_node_params_path_launch_config,
+        {'use_sim_time': use_sim_time_launch_config,
+        'default_nav_to_pose_bt_xml': nav2_nav_to_pose_bt_path_launch_config}
     ]
 
     nav2_behavior_server_node = Node(
@@ -157,7 +157,7 @@ def generate_launch_description():
         executable='behavior_server',
         name='behavior_server',
         output='screen',
-        prefix=nav2_behavior_server_prefix_launch_conf,
+        prefix=nav2_behavior_server_prefix_launch_config,
         parameters=nav2_bt_node_params,
         remappings=common_remaps + cmd_vel_remaps,
     )
@@ -176,16 +176,16 @@ def generate_launch_description():
 
     # === Controller Server ===
     nav2_controller_server_node_params = [
-        nav2_controller_server_node_params_path_launch_conf,
-        nav2_local_costmap_node_params_path_launch_conf,
-        {'use_sim_time': use_sim_time_launch_conf}
+        nav2_controller_server_node_params_path_launch_config,
+        nav2_local_costmap_node_params_path_launch_config,
+        {'use_sim_time': use_sim_time_launch_config}
     ]
     
     nav2_controller_server_node = Node(
         package='nav2_controller',
         executable='controller_server',
         output='screen',
-        prefix=nav2_controller_server_node_prefix_launch_conf,
+        prefix=nav2_controller_server_node_prefix_launch_config,
         parameters=nav2_controller_server_node_params,
         remappings=common_remaps + cmd_vel_remaps,
     )

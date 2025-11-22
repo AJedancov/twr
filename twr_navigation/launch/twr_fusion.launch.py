@@ -27,7 +27,7 @@ def generate_launch_description():
     # ============================
     # === Launch configuration ===
     # ============================
-    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
+    use_sim_time_launch_config = LaunchConfiguration('use_sim_time')
 
 
     # ==========================
@@ -49,12 +49,12 @@ def generate_launch_description():
 
     ekf_map_to_odom_node_params = [
         ekf_map_to_odom_node_config_path,
-        {'use_sim_time': use_sim_time_launch_conf,}
+        {'use_sim_time': use_sim_time_launch_config,}
     ]
 
     ekf_odom_to_base_node_params = [
         ekf_odom_to_base_node_config_path,
-        {'use_sim_time': use_sim_time_launch_conf,}
+        {'use_sim_time': use_sim_time_launch_config,}
     ]
 
     ekf_node_remaps = [('odometry/filtered', 'odom')]

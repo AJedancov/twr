@@ -49,19 +49,19 @@ def generate_launch_description():
     # ============================
     # === Launch configuration ===
     # ============================
-    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
-    slam_toolbox_node_params_path_launch_conf = LaunchConfiguration('slam_toolbox_node_params_path')
-    slam_toolbox_path_to_map_launch_conf = LaunchConfiguration('slam_toolbox_path_to_map')
+    use_sim_time_launch_config = LaunchConfiguration('use_sim_time')
+    slam_toolbox_node_params_path_launch_config = LaunchConfiguration('slam_toolbox_node_params_path')
+    slam_toolbox_path_to_map_launch_config = LaunchConfiguration('slam_toolbox_path_to_map')
 
 
     # ====================
     # === slam_toolbox ===
     # ====================
     slam_toolbox_async_node_params = [
-        slam_toolbox_node_params_path_launch_conf,
+        slam_toolbox_node_params_path_launch_config,
         {
-            'use_sim_time': use_sim_time_launch_conf,
-            'map_file_name': slam_toolbox_path_to_map_launch_conf
+            'use_sim_time': use_sim_time_launch_config,
+            'map_file_name': slam_toolbox_path_to_map_launch_config
         }
     ]
 

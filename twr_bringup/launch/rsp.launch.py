@@ -29,7 +29,7 @@ def generate_launch_description():
     # ============================
     # === Launch configuration ===
     # ============================
-    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
+    use_sim_time_launch_config = LaunchConfiguration('use_sim_time')
 
 
     # =============================
@@ -40,7 +40,7 @@ def generate_launch_description():
     
     rsp_node_params = [{
         'robot_description': twr_urdf_config_file,
-        'use_sim_time': use_sim_time_launch_conf
+        'use_sim_time': use_sim_time_launch_config
     }]
     
     rsp_node = Node(

@@ -58,10 +58,10 @@ def generate_launch_description():
     # ============================
     # === Launch configuration ===
     # ============================
-    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
-    nav2_planner_server_node_prefix_launch_conf = LaunchConfiguration('nav2_planner_server_node_prefix')
-    nav2_planner_server_node_params_path_launch_conf = LaunchConfiguration('nav2_planner_server_node_params_path')
-    nav2_global_costmap_node_params_path_launch_conf = LaunchConfiguration('nav2_global_costmap_node_params_path')
+    use_sim_time_launch_config = LaunchConfiguration('use_sim_time')
+    nav2_planner_server_node_prefix_launch_config = LaunchConfiguration('nav2_planner_server_node_prefix')
+    nav2_planner_server_node_params_path_launch_config = LaunchConfiguration('nav2_planner_server_node_params_path')
+    nav2_global_costmap_node_params_path_launch_config = LaunchConfiguration('nav2_global_costmap_node_params_path')
 
 
     # ============
@@ -71,9 +71,9 @@ def generate_launch_description():
         
     # === Planner Server ===
     nav2_planner_server_node_params = [
-        nav2_planner_server_node_params_path_launch_conf,
-        nav2_global_costmap_node_params_path_launch_conf,
-        {'use_sim_time': use_sim_time_launch_conf,}
+        nav2_planner_server_node_params_path_launch_config,
+        nav2_global_costmap_node_params_path_launch_config,
+        {'use_sim_time': use_sim_time_launch_config,}
     ]
 
     nav2_planner_server_node = Node(
@@ -81,7 +81,7 @@ def generate_launch_description():
         executable='planner_server',
         name='planner_server',
         output='screen',
-        prefix=nav2_planner_server_node_prefix_launch_conf,
+        prefix=nav2_planner_server_node_prefix_launch_config,
         parameters=nav2_planner_server_node_params,
         remappings=common_remaps,
     )

@@ -49,22 +49,22 @@ def generate_launch_description():
     # ============================
     # === Launch configuration ===
     # ============================
-    use_sim_time_launch_conf = LaunchConfiguration('use_sim_time')
-    use_sim_env_launch_conf = LaunchConfiguration('use_sim_env')
-    rviz2_config_path_launch_conf = LaunchConfiguration('rviz2_config_path')
+    use_sim_time_launch_config = LaunchConfiguration('use_sim_time')
+    use_sim_env_launch_config = LaunchConfiguration('use_sim_env')
+    rviz2_config_path_launch_config = LaunchConfiguration('rviz2_config_path')
 
 
     # =============
     # === RViz2 ===
     # =============
     rviz2_node_params = [{
-        'use_sim_time': use_sim_time_launch_conf
+        'use_sim_time': use_sim_time_launch_config
     }]
 
     rviz2_node = Node(
         package='rviz2',
         executable='rviz2',
-        arguments=['-d', rviz2_config_path_launch_conf], # -d -> --display-config
+        arguments=['-d', rviz2_config_path_launch_config], # -d -> --display-config
         parameters=rviz2_node_params
     )
 
@@ -116,7 +116,7 @@ def generate_launch_description():
             rsp_ld, 
             jsp_node,
         ],
-        condition=UnlessCondition(use_sim_env_launch_conf),
+        condition=UnlessCondition(use_sim_env_launch_config),
     )
 
 
