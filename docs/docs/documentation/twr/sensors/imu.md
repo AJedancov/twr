@@ -5,5 +5,4 @@
 | **Update rate**       | 10                                                   |
 | **Topic name**        | `/imu`                                               |
 
-
-<!-- ### Camera -->
+The configuration file is located [here](https://github.com/AJedancov/twr/blob/master/twr_description/urdf/packages/gz.xacro).

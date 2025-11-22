@@ -23,8 +23,8 @@ theme:
   palette:
     primary: white
 
-  favicon: assets/twr_logo.png
-  logo: assets/twr_logo.png
+  favicon: _assets/twr_logo.png
+  logo: _assets/twr_logo.png
   
   icon:
     repo: fontawesome/brands/github
@@ -53,7 +53,7 @@ markdown_extensions:
 
 
 extra_css:
-  - stylesheets/extra.css
+  - _stylesheets/extra.css
 
 
 copyright: Copyright &copy; 2025 Andrei Jedancov
@@ -62,21 +62,34 @@ copyright: Copyright &copy; 2025 Andrei Jedancov
 nav:
   - Home:
     - index.md
+
   - Getting started:
     - Installation:
       - getting_started/installation/index.md
       - Locally: getting_started/installation/locally.md
       - Docker: getting_started/installation/docker.md
     - Usage: getting_started/usage.md
+
   - Documentation:
-    - Project structure:
-      - Scripts: documentation/project_structure/scripts.md
-      # - twr_bringup: documentation/project_structure/twr_bringup.md
-      # - twr_control: documentation/project_structure/twr_control.md
-      # - twr_description: documentation/project_structure/twr_description.md
-      # - twr_navigation: documentation/project_structure/twr_navigation.md
-      # - twr_sim: documentation/project_structure/twr_sim.md
-    - Sensors:
-      - documentation/sensors/index.md
-      - LiDAR: documentation/sensors/lidar.md 
-      - IMU: documentation/sensors/imu.md
+    - TWR:
+      - documentation/twr/index.md
+      - Sensors:
+        - LiDAR: documentation/twr/sensors/lidar.md 
+        - IMU: documentation/twr/sensors/imu.md
+        - Encoders: documentation/twr/sensors/encoders.md
+    - Simulation:
+      - documentation/simulation/index.md
+    - Software:
+      - documentation/software/index.md
+      - Project structure:
+        - scripts: documentation/software/project_structure/scripts.md
+        - twr_bringup: documentation/software/project_structure/twr_bringup.md
+        - twr_control: documentation/software/project_structure/twr_control.md
+        - twr_description: documentation/software/project_structure/twr_description.md
+        - twr_navigation: documentation/software/project_structure/twr_navigation.md
+        - twr_sim: documentation/software/project_structure/twr_sim.md
+      # - documentation/software/launch_file_structure.md
+      - documentation/software/launch_process.md
+
+  - Tutorials:
+    - tutorials/index.md
