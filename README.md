@@ -1,7 +1,7 @@
 # Two-Wheeled Robot (TWR)
 
 <div align="center">
-  <img src="./docs/docs/assets/twr_logo.png" style="width: 100px; height: auto;">
+  <img src="./docs/docs/_assets/twr_logo.png" style="width: 100px; height: auto;">
 </div>
 
 A flexible platform for testing and verifying control and navigation algorithms in a simulated environment.
