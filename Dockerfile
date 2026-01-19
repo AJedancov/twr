@@ -19,9 +19,18 @@ RUN apt-get update \
 
 FROM cashe AS build
 
+# Remove the default user "ubuntu" added in Ubuntu 24.04
+# to free up UID 1000 for a new non-root user.
+# It also helps avoid permission problems with bind mounts
+# and simplify a configuration for devcontainer.
+# More information about the binding:
+# https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user
+RUN userdel -rf ubuntu
+
+# Add a new developer user for this container
 ARG USERNAME=dev-user
 ARG GROUPNAME=dev-group
-ARG UID=1001
+ARG UID=1000
 ARG GID=$UID
 
 RUN groupadd \
