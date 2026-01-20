@@ -1,0 +1,39 @@
+{
+  "name": "TWR",
+
+  // It is possible to use either:
+  // a ready-made image
+  // "image": "twr:jazzy",
+
+  // or build it from Dockerfile
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "cacheFrom": [
+      // ...
+    ],
+    "options": [
+      // "--progress=plain",
+      // "--no-cache",
+    ]
+  },
+
+  "runArgs": [
+    "--name=twr"
+  ],
+
+  "mounts": [
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    "source=twr-bash-history,target=/home/dev-user/dotfiles/,type=volume"
+  ],
+
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}" // set up X11 forwarding, default value is :0
+  },
+
+  "workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind",
+  "workspaceFolder": "/home/dev-user/twr"
+}
+
+// === DOCUMENTATION ===
+// Dev Container metadata reference: https://containers.dev/implementors/json_reference/
+// Docker Manuals: https://docs.docker.com/manuals/
