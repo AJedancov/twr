@@ -51,8 +51,9 @@ RUN chown $UID:$GID $TWR_WS
 COPY --chown=$UID:$GID . $TWR_WS
 
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
-    colcon build \
-      --symlink-install
+    colcon build
+# Skip --symlink-install to avoid problems with setup.bash
+# while running through the Docker container
 
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /home/$USERNAME/.bashrc && \
     echo "source $TWR_WS/install/setup.bash" >> /home/$USERNAME/.bashrc
