@@ -58,5 +58,12 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /home/$USERNAME/.bashrc && \
     echo "source $TWR_WS/install/setup.bash" >> /home/$USERNAME/.bashrc
 
+ENV BASH_HISTORY_DIR=/home/$USERNAME/dotfiles
+RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=$BASH_HISTORY_DIR/.bash_history" \
+    && mkdir $BASH_HISTORY_DIR \
+    && touch $BASH_HISTORY_DIR/.bash_history \
+    && chown -R $USERNAME $BASH_HISTORY_DIR \
+    && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
+
 USER $USERNAME
 CMD ["bash"]
