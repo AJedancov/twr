@@ -21,15 +21,12 @@ jobs:
     steps:
       - *on_checkout
 
-
 workflows:
   build_and_publish_docs:
     jobs:
       - docs_build:
-          filters:
-            branches:
-              ignore: /.*/
+          filters: pipeline.event.name == "push"
       - docs_publish:
-          filters:
-            branches:
-              only: /^[a-z]+$/
+          filters: |
+            pipeline.event.name == "pull_request" 
+            and pipeline.event.github.pull_request.merged == true
