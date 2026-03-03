@@ -1,0 +1,35 @@
+version: 2.1
+
+references:
+  on_checkout: &on_checkout
+    checkout:
+      path: .
+
+executors:
+  docs_exec:
+    docker:
+      - image: ubuntu:focal
+    working_directory: /twr
+
+jobs:
+  docs_build:
+    executor: docs_exec
+    steps:
+      - *on_checkout
+  docs_publish:
+    executor: docs_exec
+    steps:
+      - *on_checkout
+
+
+workflows:
+  build_and_publish_docs:
+    jobs:
+      - docs_build:
+          filters:
+            branches:
+              ignore: /.*/
+      - docs_publish:
+          filters:
+            branches:
+              only: /^[a-z]+$/
