@@ -1,4 +1,5 @@
-name: ci 
+name: docs-ci 
+
 on:
   push:
     branches:
