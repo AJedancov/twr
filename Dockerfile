@@ -2,7 +2,7 @@ ARG ROS_DISTRO=jazzy
 ARG BASE_IMAGE=ros:$ROS_DISTRO
 
 
-FROM $BASE_IMAGE AS cashe
+FROM $BASE_IMAGE AS cache
 
 ARG MANIFESTS_DIR=/manifests/
 COPY --parents ./twr_**/package.xml $MANIFESTS_DIR
@@ -17,7 +17,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 
-FROM cashe AS build
+FROM cache AS build
 
 # Remove the default user "ubuntu" added in Ubuntu 24.04
 # to free up UID 1000 for a new non-root user.
