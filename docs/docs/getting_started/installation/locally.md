@@ -22,6 +22,19 @@ cd twr
 
 You can install the required dependencies in several ways, choose one of them:
 
+=== "rosdep"
+
+    ```shell
+    sudo apt-get update \
+    && rosdep init \
+    && rosdep update \
+        --rosdistro ${ROS_DISTRO} \
+    && rosdep install -y \
+        --from-paths . \
+        --rosdistro ${ROS_DISTRO} \
+        --ignore-src
+    ```
+
 === "apt-get"
 
     ```shell
@@ -36,20 +49,6 @@ You can install the required dependencies in several ways, choose one of them:
     ros-${ROS_DISTRO}-xacro \
     ros-${ROS_DISTRO}-joint-state-publisher
     ```
-
-=== "rosdep"
-
-    ```shell
-    sudo apt-get update \
-    && rosdep update \
-    --rosdistro ${ROS_DISTRO} \
-    && rosdep install -y \
-    --from-paths . \
-    --rosdistro ${ROS_DISTRO} \
-    --ignore-src
-    ```
-
-
 
 <!-- Install Gazebo for a specific ROS2 version. More detailed information can be found [here](https://gazebosim.org/docs/latest/ros_installation/).   -->
 
