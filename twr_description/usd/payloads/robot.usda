@@ -1,0 +1,157 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "URDF USD Converter v0.1.3"
+    }
+    defaultPrim = "twr"
+    doc = """Generated from Composed Stage of root layer /tmp/tmp20ude26y/twr.usdc
+
+
+Generated from Composed Stage of root layer /tmp/urdf_import_twr_5akcok41/usdex_twr/twr.usdc
+
+
+Generated from Composed Stage of root layer /tmp/urdf_import_twr_5akcok41/temp_twr/twr.usd
+"""
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+over "twr" (
+    prepend apiSchemas = ["IsaacRobotAPI"]
+)
+{
+    prepend rel isaac:physics:robotJoints = [
+        </twr/Physics/left_wheel_joint>,
+        </twr/Physics/right_wheel_joint>,
+        </twr/Physics/caster_front_left_wheel_joint>,
+        </twr/Physics/caster_front_right_wheel_joint>,
+        </twr/Physics/caster_back_left_wheel_joint>,
+        </twr/Physics/caster_back_right_wheel_joint>,
+        </twr/Physics/lidar_joint>,
+        </twr/Physics/imu_joint>,
+    ]
+    prepend rel isaac:physics:robotLinks = [
+        </twr/Geometry/base_link/chassis_link>,
+        </twr/Geometry/base_link/chassis_link/left_wheel_link>,
+        </twr/Geometry/base_link/chassis_link/right_wheel_link>,
+        </twr/Geometry/base_link/chassis_link/caster_front_left_wheel_link>,
+        </twr/Geometry/base_link/chassis_link/caster_front_right_wheel_link>,
+        </twr/Geometry/base_link/chassis_link/caster_back_left_wheel_link>,
+        </twr/Geometry/base_link/chassis_link/caster_back_right_wheel_link>,
+        </twr/Geometry/base_link/chassis_link/lidar_link>,
+        </twr/Geometry/base_link/chassis_link/imu_link>,
+    ]
+    token isaac:robotType = "Wheeled"
+
+    over "Geometry"
+    {
+        over "base_link"
+        {
+            over "chassis_link" (
+                prepend apiSchemas = ["IsaacLinkAPI"]
+            )
+            {
+                over "left_wheel_link" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                }
+
+                over "right_wheel_link" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                }
+
+                over "caster_front_left_wheel_link" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                }
+
+                over "caster_front_right_wheel_link" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                }
+
+                over "caster_back_left_wheel_link" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                }
+
+                over "caster_back_right_wheel_link" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                }
+
+                over "lidar_link" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                }
+
+                over "imu_link" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                }
+            }
+        }
+    }
+
+    over "Physics"
+    {
+        over "left_wheel_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "right_wheel_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "caster_front_left_wheel_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "caster_front_right_wheel_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "caster_back_left_wheel_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "caster_back_right_wheel_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "lidar_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "imu_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+    }
+}
+

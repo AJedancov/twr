@@ -1,0 +1,275 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "URDF USD Converter v0.1.3"
+    }
+    defaultPrim = "twr"
+    doc = """Generated from Composed Stage of root layer /tmp/tmp20ude26y/twr.usdc
+
+
+Generated from Composed Stage of root layer /tmp/urdf_import_twr_5akcok41/usdex_twr/twr.usdc
+
+
+Generated from Composed Stage of root layer /tmp/urdf_import_twr_5akcok41/temp_twr/twr.usd
+
+
+Generated from Composed Stage of root layer /home/ubuntu/twr/twr_description/usd_2/twr/payloads/base.usd
+"""
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+over "twr"
+{
+    over "Geometry"
+    {
+        over "base_link"
+        {
+            over "chassis_link" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsArticulationRootAPI", "NewtonArticulationRootAPI", "PhysicsMassAPI"]
+            )
+            {
+                bool newton:selfCollisionEnabled = 0
+                point3f physics:centerOfMass = (0, 0, 0.0875)
+                float3 physics:diagonalInertia = (0.027760416, 0.043385416, 0.06604166)
+                float physics:mass = 1
+                quatf physics:principalAxes = (0.5, 0.5, 0.5, 0.5)
+
+                over "left_wheel_link" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (0.00032666666, 0.00032666666, 0.00064)
+                    float physics:mass = 0.2
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "cylinder_1" (
+                        prepend apiSchemas = ["NewtonCollisionAPI"]
+                    )
+                    {
+                    }
+                }
+
+                over "right_wheel_link" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (0.00032666666, 0.00032666666, 0.00064)
+                    float physics:mass = 0.2
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "cylinder_1" (
+                        prepend apiSchemas = ["NewtonCollisionAPI"]
+                    )
+                    {
+                    }
+                }
+
+                over "caster_front_left_wheel_link" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (0.0000011875, 0.0000011875, 0.000002)
+                    float physics:mass = 0.01
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "cylinder_1" (
+                        prepend apiSchemas = ["NewtonCollisionAPI"]
+                    )
+                    {
+                    }
+                }
+
+                over "caster_front_right_wheel_link" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (0.0000011875, 0.0000011875, 0.000002)
+                    float physics:mass = 0.01
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "cylinder_1" (
+                        prepend apiSchemas = ["NewtonCollisionAPI"]
+                    )
+                    {
+                    }
+                }
+
+                over "caster_back_left_wheel_link" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (0.0000011875, 0.0000011875, 0.000002)
+                    float physics:mass = 0.01
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "cylinder_1" (
+                        prepend apiSchemas = ["NewtonCollisionAPI"]
+                    )
+                    {
+                    }
+                }
+
+                over "caster_back_right_wheel_link" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (0.0000011875, 0.0000011875, 0.000002)
+                    float physics:mass = 0.01
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "cylinder_1" (
+                        prepend apiSchemas = ["NewtonCollisionAPI"]
+                    )
+                    {
+                    }
+                }
+
+                over "lidar_link" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (0.000025833333, 0.000025833333, 0.000045)
+                    float physics:mass = 0.1
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "cylinder_1" (
+                        prepend apiSchemas = ["NewtonCollisionAPI"]
+                    )
+                    {
+                    }
+                }
+
+                over "imu_link" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (3.3333333e-7, 3.3333333e-7, 3.3333333e-7)
+                    float physics:mass = 0.02
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "box_1" (
+                        prepend apiSchemas = ["NewtonCollisionAPI"]
+                    )
+                    {
+                    }
+                }
+            }
+        }
+    }
+
+    over "Physics"
+    {
+        def PhysicsRevoluteJoint "left_wheel_joint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+        )
+        {
+            uniform token physics:axis = "Z"
+            custom rel physics:body0
+            prepend rel physics:body0 = </twr/Geometry/base_link/chassis_link>
+            custom rel physics:body1
+            prepend rel physics:body1 = </twr/Geometry/base_link/chassis_link/left_wheel_link>
+            point3f physics:localPos0 = (0, 0.265, 0.05)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.70710677, 0.70710677, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsRevoluteJoint "right_wheel_joint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
+        )
+        {
+            uniform token physics:axis = "Z"
+            custom rel physics:body0
+            prepend rel physics:body0 = </twr/Geometry/base_link/chassis_link>
+            custom rel physics:body1
+            prepend rel physics:body1 = </twr/Geometry/base_link/chassis_link/right_wheel_link>
+            point3f physics:localPos0 = (0, -0.265, 0.05)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (-0.70710677, 0.70710677, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsFixedJoint "caster_front_left_wheel_joint"
+        {
+            custom rel physics:body0
+            prepend rel physics:body0 = </twr/Geometry/base_link/chassis_link>
+            custom rel physics:body1
+            prepend rel physics:body1 = </twr/Geometry/base_link/chassis_link/caster_front_left_wheel_link>
+            point3f physics:localPos0 = (0.23333333, 0.18333334, -0.009)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.70710677, 0.70710677, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsFixedJoint "caster_front_right_wheel_joint"
+        {
+            custom rel physics:body0
+            prepend rel physics:body0 = </twr/Geometry/base_link/chassis_link>
+            custom rel physics:body1
+            prepend rel physics:body1 = </twr/Geometry/base_link/chassis_link/caster_front_right_wheel_link>
+            point3f physics:localPos0 = (0.23333333, -0.18333334, -0.009)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.70710677, 0.70710677, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsFixedJoint "caster_back_left_wheel_joint"
+        {
+            custom rel physics:body0
+            prepend rel physics:body0 = </twr/Geometry/base_link/chassis_link>
+            custom rel physics:body1
+            prepend rel physics:body1 = </twr/Geometry/base_link/chassis_link/caster_back_left_wheel_link>
+            point3f physics:localPos0 = (-0.23333333, 0.18333334, -0.009)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.70710677, 0.70710677, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsFixedJoint "caster_back_right_wheel_joint"
+        {
+            custom rel physics:body0
+            prepend rel physics:body0 = </twr/Geometry/base_link/chassis_link>
+            custom rel physics:body1
+            prepend rel physics:body1 = </twr/Geometry/base_link/chassis_link/caster_back_right_wheel_link>
+            point3f physics:localPos0 = (-0.23333333, -0.18333334, -0.009)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (0.70710677, 0.70710677, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsFixedJoint "lidar_joint"
+        {
+            custom rel physics:body0
+            prepend rel physics:body0 = </twr/Geometry/base_link/chassis_link>
+            custom rel physics:body1
+            prepend rel physics:body1 = </twr/Geometry/base_link/chassis_link/lidar_link>
+            point3f physics:localPos0 = (0, 0, 0.19)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsFixedJoint "imu_joint"
+        {
+            custom rel physics:body0
+            prepend rel physics:body0 = </twr/Geometry/base_link/chassis_link>
+            custom rel physics:body1
+            prepend rel physics:body1 = </twr/Geometry/base_link/chassis_link/imu_link>
+            point3f physics:localPos0 = (0, 0, 0.0875)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+    }
+}
+

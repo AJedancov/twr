@@ -1,0 +1,43 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "URDF USD Converter v0.1.3"
+    }
+    defaultPrim = "twr"
+    doc = """Generated from Composed Stage of root layer /tmp/tmp20ude26y/twr.usdc
+
+
+Generated from Composed Stage of root layer /tmp/urdf_import_twr_5akcok41/usdex_twr/twr.usdc
+
+
+Generated from Composed Stage of root layer /tmp/urdf_import_twr_5akcok41/temp_twr/twr.usd
+
+
+Generated from Composed Stage of root layer /home/ubuntu/twr/twr_description/usd_2/twr/payloads/base.usd
+"""
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    subLayers = [
+        @./physics.usda@
+    ]
+    upAxis = "Z"
+)
+
+over "twr"
+{
+    over "Physics"
+    {
+        over "left_wheel_joint" (
+            prepend apiSchemas = ["PhysxJointAPI"]
+        )
+        {
+        }
+
+        over "right_wheel_joint" (
+            prepend apiSchemas = ["PhysxJointAPI"]
+        )
+        {
+        }
+    }
+}
+
