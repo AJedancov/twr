@@ -5,7 +5,8 @@ on:
     branches:
       - jazzy
     paths:
-      - 'docs/**'
+      - docs/**
+      - .github/workflows/docs-ci.yml
 
 permissions:
   contents: write
@@ -30,6 +31,5 @@ jobs:
           path: .cache 
           restore-keys: |
             mkdocs-material-
-      - run: pip install mkdocs-material 
-      - run: pip install "mkdocs-material[imaging]"
+      - run: pip3 install -r ../twr/docs/requirements.txt
       - run: mkdocs gh-deploy --config-file ../twr/docs/mkdocs.yml --force
