@@ -33,6 +33,8 @@ theme:
 
 
 plugins:
+  - search
+  - glightbox
   - social:
       cards_layout_options:
         background_color: "#ededf3"
