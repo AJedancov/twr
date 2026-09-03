@@ -1,6 +1,9 @@
+.vscode
+
 build
 install
 log
-.vscode
-venv
+
 .cache
+venv
+site
