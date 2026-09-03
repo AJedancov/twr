@@ -1,0 +1,42 @@
+/* Custom styles for buttons in the documentation */
+
+.md-typeset .md-button {
+  border-radius: .4rem;
+  padding: .8rem 2rem;
+  margin-top: .3rem;
+  background-color: white;
+  border-color: black;
+  color: black;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: black;
+    background-color: white;
+    color: black; 
+    box-shadow: 0 2px 2px #00000034;
+    transform: translateY(-1px);
+    transition: position 0.2s ease;
+  }
+}
+
+/* Adapt the grid to work with buttons */
+.md-typeset .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(min(100%,16rem),1fr));
+  grid-gap: .5rem;
+  margin: 1em 0;
+  align-content: start;
+  align-items: stretch;
+
+  & > p {
+    display: contents;  /* Makes the <p> wrapper invisible to grid layout */
+    margin: 0;
+  }
+
+  .md-button {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+  }
+}

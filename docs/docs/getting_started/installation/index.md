@@ -1,11 +1,10 @@
 # Installation
 
-You can build and launch the project either **locally** or within a **Docker** container.
+You can build and launch the project either **locally** or using **Docker** container.
 
+<div class="grid" markdown>
 
-<div class="grid cards" markdown>
-  - <p style="text-align: center;">[Locally](locally.md)</p>
-  - <p style="text-align: center;">[Docker](docker.md)</p>  
+[Local Installation](locally.md){ .md-button .md-button--primary }
+[Docker Installation](docker.md){ .md-button .md-button--primary }
+
 </div>
-
-
