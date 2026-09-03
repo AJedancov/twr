@@ -5,6 +5,7 @@ repo_url: https://github.com/AJedancov/twr
 
 theme:
   name: material
+  custom_dir: overrides
   font:
     text: Inter
     code: Oxygen Mono
@@ -51,10 +52,9 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
 
-
 extra_css:
-  - _stylesheets/extra.css
-
+  # Path relative to custom_dir (overrides/):
+  - assets/stylesheets/extra.css
 
 copyright: Copyright &copy; 2025 Andrei Jedancov
 
