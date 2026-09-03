@@ -48,7 +48,7 @@ chmod 700 scripts/host/rebuild_and_launch.bash &&
 ./scripts/host/rebuild_and_launch.bash # (1)!
 ```
 
-1. For more information, see [scripts](../documentation/project_structure/scripts.md) description.  
+1. For more information, see [scripts](../documentation/software/project_structure/scripts.md) description.  
 
 <!-- TODO: For more information about bringup launch files, see here -->
 
