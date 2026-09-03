@@ -173,6 +173,9 @@ over "twr"
             prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
         )
         {
+            float drive:angular:physics:damping = 10000000
+            float drive:angular:physics:stiffness = 0
+            uniform token drive:angular:physics:type = "force"
             uniform token physics:axis = "Z"
             custom rel physics:body0
             prepend rel physics:body0 = </twr/Geometry/base_link/chassis_link>
@@ -188,6 +191,9 @@ over "twr"
             prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular"]
         )
         {
+            float drive:angular:physics:damping = 10000000
+            float drive:angular:physics:stiffness = 0
+            uniform token drive:angular:physics:type = "force"
             uniform token physics:axis = "Z"
             custom rel physics:body0
             prepend rel physics:body0 = </twr/Geometry/base_link/chassis_link>
