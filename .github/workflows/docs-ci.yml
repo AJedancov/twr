@@ -5,7 +5,7 @@ on:
     branches:
       - jazzy
     paths:
-      - docs/**
+      - twr_docs/**
       - .github/workflows/docs-ci.yml
 
 permissions:
@@ -31,5 +31,5 @@ jobs:
           path: .cache 
           restore-keys: |
             mkdocs-material-
-      - run: pip3 install -r ../twr/docs/requirements.txt
-      - run: mkdocs gh-deploy --config-file ../twr/docs/mkdocs.yml --force
+      - run: pip3 install -r ../twr/twr_docs/requirements.txt
+      - run: mkdocs gh-deploy --config-file ../twr/twr_docs/mkdocs.yml --force

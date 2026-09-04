@@ -1,7 +1,7 @@
 # Two-Wheeled Robot (TWR)
 
 <div align="center">
-  <img src="./docs/docs/_assets/twr_logo.png" style="width: 100px; height: auto;">
+  <img src="./twr_docs/docs/assets/twr_logo.png" style="width: 100px; height: auto;">
 </div>
 
 A flexible platform for testing and verifying control and navigation algorithms in a simulated environment.
@@ -9,8 +9,8 @@ A flexible platform for testing and verifying control and navigation algorithms 
 The project is based on a robot with a differential drive on the [ROS 2](https://www.ros.org/) framework.
 
 <div align="center">
-  <img src="./docs/docs/_assets/screenshots/twr_gazebo_warehouse.png" style="height: 300px; width: auto;">
-  <img src="./docs/docs/_assets/screenshots/twr_rviz2_nav.png" style="height: 300px; width: auto;">
+  <img src="./twr_docs/docs/getting_started/assets/twr_gazebo_warehouse.png" style="height: 300px; width: auto;">
+  <img src="twr_docs/docs/getting_started/assets/twr_rviz2_nav.png" style="height: 300px; width: auto;">
 </div>
 
 > [!IMPORTANT] 
