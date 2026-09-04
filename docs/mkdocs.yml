@@ -61,4 +61,16 @@ extra_css:
 
 copyright: Copyright &copy; 2025 Andrei Jedancov
 
+# Terminate the build on warnings
+strict: true
+
+validation:
+  links:
+    absolute_links: relative_to_docs
+    anchors: warn
+    unrecognized_links: warn
+  nav:
+    omitted_files: warn
+    absolute_links: warn
+
 INHERIT: nav.yml
