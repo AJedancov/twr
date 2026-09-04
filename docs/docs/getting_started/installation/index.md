@@ -4,7 +4,7 @@ You can build and launch the project either **locally** or using **Docker** cont
 
 <div class="grid" markdown>
 
-[Local Installation](locally.md){ .md-button .md-button--primary }
-[Docker Installation](docker.md){ .md-button .md-button--primary }
+[Local Installation](local_installation.md){ .md-button .md-button--primary }
+[Docker Installation](docker_installation.md){ .md-button .md-button--primary }
 
 </div>

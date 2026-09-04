@@ -1,9 +1,8 @@
-
-# Locally
+# Local Installation
 
 ## Prerequisites
 
-| **Software**     | **Version**  |
+| **project_architecture**     | **Version**  |
 |------------------|--------------|
 | **Linux Distro** | Ubuntu 24.04 |
 | **ROS 2 Distro** | Jazzy        |

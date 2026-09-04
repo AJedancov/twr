@@ -10,7 +10,7 @@ A ready-made solution for testing your navigation and control algorithms.
 
 The project integrates existing packages built on [ROS 2](https://www.ros.org/) and demonstrates how they can be combined and used.
 
-[Get Started](./getting_started/installation/index.md){ .md-button .md-button--primary }
+[Getting Started](getting_started/installation/index.md){ .md-button .md-button--primary }
 
 
 

@@ -29,9 +29,9 @@ ros2 launch twr_bringup rviz2.launch.py
 
 As a result, the RViz2 will be launched with a robot model without simulation:
 
-<p align="center">
-  <img src="../../_assets/screenshots/twr_rviz2.png" width="600"/>  
-</p>
+<figure markdown="span">
+  ![](assets/twr_rviz2.png){ width="600" }
+</figure>
 
 
 
@@ -48,17 +48,17 @@ chmod 700 scripts/host/rebuild_and_launch.bash &&
 ./scripts/host/rebuild_and_launch.bash # (1)!
 ```
 
-1. For more information, see [scripts](../documentation/software/project_structure/scripts.md) description.  
+1. For more information, see [scripts](../project_architecture/project_structure/scripts.md) description.  
 
 <!-- TODO: For more information about bringup launch files, see here -->
 
 <!-- Set the `use_sim_time` parameter to use Gazebo time (by default `True`).  
 Set the `use_rviz2` to use RViz2 during simulation time (by default `True`). -->
 
-<div align="center">
-  <img src="../../_assets/screenshots/twr_rviz2_nav.png" width="500"/>  
-  <img src="../../_assets/screenshots/twr_gazebo_warehouse.png" width="500"/>
-</div>
+<figure markdown="span">
+  ![](assets/twr_rviz2_nav.png){ width="500" }  
+  ![](assets/twr_gazebo_warehouse.png){ width="500" }
+</figure>
 
 
 ## Control
@@ -77,12 +77,13 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args \
 
 This function is implemented based on the [Nav2](https://github.com/ros-navigation/navigation2) framework.  
 Use the `2D Goal Pose` function in RViz2 to set the desired position: 
-<div align="center">
-  <img src="../../_assets/screenshots/rviz2_goal_pose.png" width="400"/>  
-</div>
+
+<figure markdown="span">
+  ![](assets/rviz2_goal_pose.png){ width="400" }
+</figure>
 
 Now you can choose any position and orientation of the robot on the presented map:
 
-<div align="center">
-  <img src="../../_assets/screenshots/twr_rviz2_set_goal.png" width="500"/>  
-</div>
+<figure markdown="span">
+  ![](assets/twr_rviz2_set_goal.png){ width="500" }
+</figure>

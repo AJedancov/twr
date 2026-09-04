@@ -1,4 +1,4 @@
-# Docker
+# Docker Installation
 
 !!! warning
     Currently, the GUI is displayed when the X Window System is in use. 
