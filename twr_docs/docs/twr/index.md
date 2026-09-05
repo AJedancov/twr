@@ -6,12 +6,15 @@
   
 ## Sensors
 
-| **Sensor** | **Quantity** | **Description** |
-|--|--|--|
-| **LiDAR**     | 1 |Light Detection and Ranging|
-| **IMU**       | 1 |Inertial Measurement Unit|
-| **Encoder**   | 2 |Wheel encoders for each side|
+<div class="center-table" markdown>
 
+| **Sensor**    | **Quantity** | **Description**             |
+|---------------|--------------|-----------------------------|
+| **LiDAR**     | 1            | Light Detection and Ranging |
+| **IMU**       | 1            | Inertial Measurement Unit   |
+| **Encoder**   | 2            | Wheel encoders              |
+
+</div>
 
 Get more detailed information about each sensor type:
 

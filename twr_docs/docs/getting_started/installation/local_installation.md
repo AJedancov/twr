@@ -2,12 +2,15 @@
 
 ## Prerequisites
 
-| **project_architecture**     | **Version**  |
-|------------------|--------------|
-| **Linux Distro** | Ubuntu 24.04 |
-| **ROS 2 Distro** | Jazzy        |
-| **Gazebo Sim**   | Harmonic     |
+<div class="center-table" markdown>
 
+| **project_architecture**     | **Version**  |
+|------------------------------|--------------|
+| **Linux Distro**             | Ubuntu 24.04 |
+| **ROS 2 Distro**             | Jazzy        |
+| **Gazebo Sim**               | Harmonic     |
+
+</div>
 
 ## Clone repository
 Select the directory where the project will be locatedand and clone the project from GitHub:
