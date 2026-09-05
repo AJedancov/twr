@@ -17,7 +17,7 @@ The project is based on a robot with a differential drive on the [ROS 2](https:/
 > **Getting Started** guide and **Documentation** are available here:
 > <div align="left">
 >  <a href="https://ajedancov.github.io/twr/">
->    <img src="https://ajedancov.github.io/twr/assets/images/social/index.png" style="height: 250px; width: auto;">
+>    <img src="twr_docs/docs/assets/social_card.png" style="height: 250px; width: auto;">
 >  </a>
 > </div>
 

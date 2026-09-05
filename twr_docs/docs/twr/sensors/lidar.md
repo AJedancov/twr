@@ -5,7 +5,7 @@
 | **Parameter**         | **Value**  |
 |-----------------------|------------|
 | **Number of samples** | 360        |
-| **Range [m]**         | 0.05 - 5   |
+| **Range \[m\]**         | 0.05 - 5   |
 | **Update rate**       | 10         |
 | **Topic name**        | `/scan`    |
 

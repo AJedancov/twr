@@ -1,12 +1,12 @@
 /* Custom styles for buttons in the documentation */
 
 .md-typeset .md-button {
-  border-radius: .4rem;
   padding: .8rem 2rem;
   margin-top: .3rem;
   background-color: white;
-  border-color: black;
   color: black;
+  border: solid 2px black;
+  border-radius: .4rem;
   box-sizing: border-box;
 
   &:hover {

@@ -23,19 +23,20 @@ pip3 install -r requirements.txt
 
 Use the following command to build the documentation:
 ```shell
-mkdocs build
+zensical build
 ```
 
 The build result can be found in the `site` directory, and the entry point in `site/index.html` file.
-[Other options][mkdocs-build-url] for the build command.
+[Other options][zensical-build-url] for the build command.
 
-MkDocs provides a live preview server that can be started with:
+Zensical provides a live preview server that can be started with:
+
 ```shell
-mkdocs serve
+zensical serve
 ```
 
-It allows to preview new changes during documentation update. The server will automatically rebuild the entire documentation after each file saving and display result at http://127.0.0.1:8000/. See [more options][mkdocs-serve-url] for the command.
+It allows to preview new changes during documentation update. The server will automatically rebuild the entire documentation after each file saving and display result at http://127.0.0.1:8000/. See [more options][zensical-serve-url] for the command.
 
 
-[mkdocs-build-url]: https://www.mkdocs.org/user-guide/cli/#mkdocs-build
-[mkdocs-serve-url]: https://www.mkdocs.org/user-guide/cli/#mkdocs-serve
+[zensical-build-url]: https://zensical.org/docs/usage/build/#build
+[zensical-serve-url]: https://zensical.org/docs/usage/preview/#preview

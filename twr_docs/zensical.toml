@@ -1,0 +1,104 @@
+[project]
+site_name = "Two-Wheeled Robot"
+site_url = "https://ajedancov.github.io/twr/"
+repo_url = "https://github.com/AJedancov/twr"
+site_author = "Andrei Jedancov"
+copyright = "Copyright &copy; 2026 Andrei Jedancov"
+
+strict = true  # Terminate the build on warnings
+
+# Path relative to custom_dir (overrides/):
+extra_css = [
+  "assets/stylesheets/extra.css",
+  "assets/stylesheets/buttons.css"
+]
+
+nav = [
+  { "Home" = "index.md" },
+  { "Getting started" = [
+    { "Installation" = [
+      "getting_started/installation/index.md",
+      { "Local Installation" = "getting_started/installation/local_installation.md" },
+      { "Docker Installation" = "getting_started/installation/docker_installation.md" }
+    ] },
+    { "Usage" = "getting_started/usage.md" }
+  ] },
+  { "TWR" = [
+    "twr/index.md" ,
+    { "Sensors" = [
+      { "LiDAR" = "twr/sensors/lidar.md" },
+      { "IMU" = "twr/sensors/imu.md" },
+      { "Encoders" = "twr/sensors/encoders.md" }
+    ] },
+  ] },
+  { "Simulation" = [
+    { "Gazebo" = [
+      "simulation/gazebo/index.md"
+    ] },
+  ] },
+  { "Project Architecture" = [
+    { "Modules" = [
+      { "scripts" = "project_architecture/project_structure/scripts.md" },
+      { "twr_bringup" = "project_architecture/project_structure/twr_bringup.md" },
+      { "twr_control" = "project_architecture/project_structure/twr_control.md" },
+      { "twr_description" = "project_architecture/project_structure/twr_description.md" },
+      { "twr_navigation" = "project_architecture/project_structure/twr_navigation.md" },
+      { "twr_sim" = "project_architecture/project_structure/twr_sim.md" }
+    ] },
+    { "Launch Process" = "project_architecture/launch_process.md" }
+  ] },
+  { "Tutorials" = [
+    "tutorials/index.md"
+  ] }
+]
+
+[project.theme]
+logo = "assets/twr_logo.png"
+favicon = "assets/twr_logo.png"
+custom_dir = "overrides"
+features = [
+  "navigation.path",
+  "navigation.tabs",
+  "navigation.indexes",
+  "navigation.top",
+
+  "content.code.copy",
+  "content.code.annotate",
+
+  "toc.follow"
+]
+
+[project.theme.font]
+text = "Inter"
+code = "Oxygen Mono"
+
+[project.theme.palette]
+primary = "white"
+scheme = "default"
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"
+annotation = "material/help-circle"
+
+[project.markdown_extensions]
+admonition = {}
+tables = {}
+attr_list = {}
+toc = {}
+md_in_html = {}
+
+[project.markdown_extensions.pymdownx]
+details = {}
+superfences = {}
+blocks.caption = {}
+tabbed.alternate_style = true
+
+[project.validation]
+invalid_links = true
+invalid_link_anchors = true
+unresolved_references = true
+unresolved_footnotes = true
+unused_definitions = true
+unused_footnotes = true
+shadowed_definitions = true
+shadowed_footnotes = true
