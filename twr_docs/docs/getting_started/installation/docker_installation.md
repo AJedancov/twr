@@ -20,7 +20,7 @@ First you need to create a Docker image.
 ```shell
 docker build -t twr:jazzy .
 ```
-This command will create an image according to the [Dockerfile](https://github.com/AJedancov/twr/blob/master/Dockerfile) located at the root of the project. 
+This command will create an image according to the [Dockerfile](https://github.com/AJedancov/twr/blob/jazzy/Dockerfile) located at the root of the project. 
 
 
 To render the GUI from a Docker container, you need to add a local user (docker) to the host X server:

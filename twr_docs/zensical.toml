@@ -26,6 +26,7 @@ nav = [
   { "TWR" = [
     "twr/index.md" ,
     { "Sensors" = [
+      "twr/sensors/index.md",
       { "LiDAR" = "twr/sensors/lidar.md" },
       { "IMU" = "twr/sensors/imu.md" },
       { "Encoders" = "twr/sensors/encoders.md" }

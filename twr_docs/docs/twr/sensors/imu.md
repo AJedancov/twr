@@ -9,4 +9,4 @@
 
 </div>
 
-The configuration file is located [here](https://github.com/AJedancov/twr/blob/master/twr_description/urdf/packages/gz.xacro).
+**Full Configuration on GitHub:** [`twr_description/urdf/packages/gz.xacro`](https://github.com/AJedancov/twr/blob/jazzy/twr_description/urdf/packages/gz.xacro#L32)

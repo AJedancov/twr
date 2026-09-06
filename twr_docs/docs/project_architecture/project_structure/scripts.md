@@ -1,15 +1,15 @@
 
 # Scripts description
 
-## [rebuild_and_launch.bash](https://github.com/AJedancov/twr/blob/master/scripts/host/rebuild_and_launch.bash)
+## [rebuild_and_launch.bash](https://github.com/AJedancov/twr/blob/jazzy/scripts/host/rebuild_and_launch.bash)
   
-  Provides the ability to rebuild the project and launch [twr_bringup](https://github.com/AJedancov/twr/blob/master/twr_bringup/launch/twr_bringup.launch.py) with one command.
+  Provides the ability to rebuild the project and launch [twr_bringup](https://github.com/AJedancov/twr/blob/jazzy/twr_bringup/launch/twr_bringup.launch.py) with one command.
   
   ```shell
   ./scripts/host/rebuild_and_launch.bash
   ```
 
-## [run_docker_container.bash](https://github.com/AJedancov/twr/blob/master/scripts/host/run_docker_container.bash)
+## [run_docker_container.bash](https://github.com/AJedancov/twr/blob/jazzy/scripts/host/run_docker_container.bash)
 
   Provides automatic image creation and launch container with all necessary parameters for the GUI.
   ```shell
@@ -35,7 +35,7 @@
   ```
 
 
-## [twr_entrypoint.bash](https://github.com/AJedancov/twr/blob/master/scripts/docker/twr_entrypoint.bash)
+## [twr_entrypoint.bash](https://github.com/AJedancov/twr/blob/jazzy/scripts/docker/twr_entrypoint.bash)
 
-  Entry point script for Docker container. Specified in [Dockerfile](https://github.com/AJedancov/twr/blob/master/Dockerfile).   
+  Entry point script for Docker container. Specified in [Dockerfile](https://github.com/AJedancov/twr/blob/jazzy/Dockerfile).   
   Required for automatic configuration of ROS2 packages and should not be executed manually.
