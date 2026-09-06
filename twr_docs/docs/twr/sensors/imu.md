@@ -2,10 +2,10 @@
 
 <div class="center-table" markdown>
 
-| **Parameter**         | **Value**   |
-|-----------------------|-------------|
-| **Update rate**       | 10          |
-| **Topic name**        | `/imu`      |
+| **Parameter**  | **Value**   |
+|----------------|-------------|
+| Update rate    | 10          |
+| Topic name     | `/imu`      |
 
 </div>
 
