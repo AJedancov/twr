@@ -10,7 +10,14 @@ strict = true  # Terminate the build on warnings
 # Path relative to custom_dir (overrides/):
 extra_css = [
   "assets/stylesheets/extra.css",
-  "assets/stylesheets/buttons.css"
+  "assets/stylesheets/buttons.css",
+  "https://unpkg.com/katex@0/dist/katex.min.css",
+]
+
+extra_javascript = [
+  "assets/javascripts/katex.js",
+  "https://unpkg.com/katex@0/dist/katex.min.js",
+  "https://unpkg.com/katex@0/dist/contrib/auto-render.min.js",
 ]
 
 nav = [
@@ -38,6 +45,11 @@ nav = [
     ] },
   ] },
   { "Project Architecture" = [
+    { "Packages" = [
+      { "ros2_control" = [
+        { "diff_drive_controller" = "project_architecture/packages/ros2_control/ros2_controllers/diff_drive_controller.md" }
+      ] }
+    ] },
     { "Modules" = [
       { "scripts" = "project_architecture/project_structure/scripts.md" },
       { "twr_bringup" = "project_architecture/project_structure/twr_bringup.md" },
@@ -93,6 +105,9 @@ details = {}
 superfences = {}
 blocks.caption = {}
 tabbed.alternate_style = true
+arithmatex.generic = true
+emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
+emoji.emoji_index = "zensical.extensions.emoji.twemoji"
 
 [project.validation]
 invalid_links = true
