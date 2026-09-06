@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <!-- <ros2_control> tag is used by Controller Manager -->
+
   <ros2_control name="GazeboSimSystem" type="system"> 
+    <!-- Treats Gazebo as a regular hardware interface (hardware component) -->
     <hardware>
-      <!-- This allows Gazebo to be used as a regular hardware interface (hardware component)-->
       <plugin>gz_ros2_control/GazeboSimSystem</plugin>
     </hardware>
 

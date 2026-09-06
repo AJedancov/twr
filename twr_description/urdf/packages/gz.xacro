@@ -44,22 +44,12 @@
   <!-- =============== -->
   
   <gazebo>
-    <!-- ros2_control plugin -->
-    <!-- 
-      In addition to the <ros2_control> tag (in twr/twr_description/urdf/packages/ros2_control.xacro), 
-      a Gazebo plugin needs to be added.
-      It parses the <ros2_control> tag and loads the appropriate hardware interfaces (hardware components) and
-      controller manager.
+    <!--
+      To integrate ros2_control in the Gazebo simulator, we need to add a Gazebo Sim system plugin.
+      The plugin will instantiate the Controller Manager with given parameters.
     -->
     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
       <parameters> $(find twr_control)/ros2_controllers/controller_manager/config/controller_manager.yaml </parameters>
-    </plugin>
-
-    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
-    </plugin>
-
-    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
-      <render_engine>ogre2</render_engine>
     </plugin>
 
     <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
@@ -68,9 +58,20 @@
       <dimensions>3</dimensions>
     </plugin>
 
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
     <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu">
     </plugin>
-    
+
+    <!-- Using joint_state_broadcaster from ros2_control instead. -->
+    <!-- To integrate joint states from Gazebo, uncoment also bridge configuration in twr_sim/gazebo_sim/config/gz_bridge.yaml -->
+    <!-- 
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+    </plugin>
+    -->
+
   </gazebo>
 
 </robot>

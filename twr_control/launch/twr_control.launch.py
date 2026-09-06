@@ -109,15 +109,15 @@ def generate_launch_description():
         'controller_manager.yaml'
     ])
 
-    # === reason for commenting === 
-    # The project uses Gazebo Sim Plugin gz_ros2_control. 
-    # Internally it loads controller_manager, and therefore there is no need for ros2_control_node
-    # The plugin is declared in twr/twr_description/urdf/packages/gz.xacro, "Plugins" section.
+    # === Note for Controller Manager launch === 
+    # The Controller Manager is instantiated via Gazebo Sim system plugin (gz_ros2_control-system). 
+    # Therefore, there is no need to launch it directly.
+    # The plugin is declared in twr_description/urdf/packages/gz.xacro.
 
     # control_node = Node(
     #     package="controller_manager",
     #     executable="ros2_control_node",
-    #     parameters=[twr_diff_drive_controller_node_params],
+    #     parameters=[controller_manager_node_params],
     #     output="both"
     # )
     # =================

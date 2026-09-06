@@ -27,8 +27,8 @@
   gz_type_name: "gz.msgs.Pose_V"
   direction: GZ_TO_ROS
 
-# Use joint_state_broadcaster from ros2_control instead of direct declaration in bridge
-# Uncomment if you do not plan to use this plugin:
+# Using joint_state_broadcaster from ros2_control instead.
+# To integrate joint states from Gazebo, also uncomment Gazebo system plugin in twr_description/urdf/packages/gz.xacro
 # Joint states (GZ -> ROS2)
 # - ros_topic_name: "/joint_states"
 #   gz_topic_name: "/world/warehouse/model/twr/joint_state"
