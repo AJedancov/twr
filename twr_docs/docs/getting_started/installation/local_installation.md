@@ -4,60 +4,48 @@
 
 <div class="center-table" markdown>
 
-| **project_architecture**     | **Version**  |
-|------------------------------|--------------|
-| **Linux Distro**             | Ubuntu 24.04 |
-| **ROS 2 Distro**             | Jazzy        |
-| **Gazebo Sim**               | Harmonic     |
+| **Software**       | **Version**  |
+|--------------------|--------------|
+| Linux Distro       | Ubuntu 24.04 |
+| ROS 2 Distro       | Jazzy        |
+| Gazebo Sim         | Harmonic     |
 
 </div>
 
-## Clone repository
-Select the directory where the project will be locatedand and clone the project from GitHub:
+!!! Note 
+
+    Refer to the official [Gazebo documentation](https://gazebosim.org/docs/latest/ros_installation/) to install a version compatible with the specific ROS 2  distribution.
+
+## 1. Clone repository
+
+Clone the project from GitHub:
+
 ```shell
-git clone https://github.com/AJedancov/twr.git && 
+git clone https://github.com/AJedancov/twr.git
 cd twr
 ```
 
+## 2. Install dependencies
 
-## Install dependencies
+Install all required dependencies using rosdep as shown below:
 
-You can install the required dependencies in several ways, choose one of them:
+```shell
+sudo apt-get update
+rosdep init
+rosdep update \
+    --rosdistro ${ROS_DISTRO}
+rosdep install -y \
+    --from-paths . \
+    --rosdistro ${ROS_DISTRO} \
+    --ignore-src
+```
 
-=== "rosdep"
+## 3. Build project
 
-    ```shell
-    sudo apt-get update \
-    && rosdep init \
-    && rosdep update \
-        --rosdistro ${ROS_DISTRO} \
-    && rosdep install -y \
-        --from-paths . \
-        --rosdistro ${ROS_DISTRO} \
-        --ignore-src
-    ```
+Build the project using the following command:
 
-=== "apt-get"
-
-    ```shell
-    sudo apt-get update && apt-get install -y \
-    ros-${ROS_DISTRO}-navigation2 \
-    ros-${ROS_DISTRO}-slam-toolbox \
-    ros-${ROS_DISTRO}-ros2-control \
-    ros-${ROS_DISTRO}-ros2-controllers \
-    ros-${ROS_DISTRO}-robot-localization \
-    ros-${ROS_DISTRO}-ros-gz \
-    ros-${ROS_DISTRO}-gz-ros2-control \
-    ros-${ROS_DISTRO}-xacro \
-    ros-${ROS_DISTRO}-joint-state-publisher
-    ```
-
-<!-- Install Gazebo for a specific ROS2 version. More detailed information can be found [here](https://gazebosim.org/docs/latest/ros_installation/).   -->
-
-## Build project
-
-And finally, build the project:
 ```shell
 colcon build
 ```
-Once you have the project built, you can continue with the [usage](../usage.md) examples.
+
+Once it is built, continue with [usage examples](../usage.md).
