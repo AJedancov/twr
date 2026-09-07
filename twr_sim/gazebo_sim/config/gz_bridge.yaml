@@ -20,12 +20,14 @@
   gz_type_name: "gz.msgs.IMU"
   direction: GZ_TO_ROS
 
+# Ground Truth Odometry data from Gazebo
+# To use this information, uncomment also the corresponding Gazebo system plugin in twr_description/urdf/packages/gz.xacro
 # Model Data (GZ -> ROS2)
-- ros_topic_name: "/gz/pose_array"
-  gz_topic_name: "/model/twr/pose"
-  ros_type_name: "geometry_msgs/msg/PoseArray"
-  gz_type_name: "gz.msgs.Pose_V"
-  direction: GZ_TO_ROS
+# - ros_topic_name: "/gz/pose_array"
+#   gz_topic_name: "/model/twr/pose"
+#   ros_type_name: "geometry_msgs/msg/PoseArray"
+#   gz_type_name: "gz.msgs.Pose_V"
+#   direction: GZ_TO_ROS
 
 # Using joint_state_broadcaster from ros2_control instead.
 # To integrate joint states from Gazebo, also uncomment Gazebo system plugin in twr_description/urdf/packages/gz.xacro

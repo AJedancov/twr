@@ -52,11 +52,6 @@
       <parameters> $(find twr_control)/ros2_controllers/controller_manager/config/controller_manager.yaml </parameters>
     </plugin>
 
-    <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
-      <odom_frame>map</odom_frame>
-      <robot_base_frame>base_link</robot_base_frame>
-      <dimensions>3</dimensions>
-    </plugin>
 
     <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
       <render_engine>ogre2</render_engine>
@@ -64,6 +59,16 @@
 
     <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu">
     </plugin>
+
+    <!-- Publish Ground Truth Odometry from Gazebo -->
+    <!-- To use this information, uncomment also bridge configuration in twr_sim/gazebo_sim/config/gz_bridge.yaml -->
+    <!-- 
+    <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>map</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <dimensions>3</dimensions>
+    </plugin> 
+    -->
 
     <!-- Using joint_state_broadcaster from ros2_control instead. -->
     <!-- To integrate joint states from Gazebo, uncoment also bridge configuration in twr_sim/gazebo_sim/config/gz_bridge.yaml -->
