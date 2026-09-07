@@ -21,7 +21,7 @@ The `diff_drive_controller` is a bidirectional kinematic converter that bridges 
 
 ## Odometry Feedback
 
-1. Reads actual wheel velocities from state interfaces (simulation).
+1. Reads actual wheel positions from state interfaces (simulation) and calculates wheel velocities.
 2. Calculates robot velocity using forward kinematics:
 
     $v_x = \frac{w_{l} + w_{r}}{2}$
