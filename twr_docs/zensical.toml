@@ -46,6 +46,11 @@ nav = [
   ] },
   { "Project Architecture" = [
     { "Packages" = [
+      { "gz-sim" = [ 
+        { "Plugins" = [
+          { "gz_ros2_control-system" = "project_architecture/packages/gazebo_sim/plugins/gz_ros2_control_system.md" }
+        ] }
+      ] },
       { "ros2_control" = [
         { "diff_drive_controller" = "project_architecture/packages/ros2_control/ros2_controllers/diff_drive_controller.md" }
       ] }
