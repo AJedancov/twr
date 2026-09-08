@@ -11,6 +11,7 @@ find_package(ament_cmake REQUIRED)
 install(DIRECTORY
   launch 
   gazebo_sim
+  mujoco
   DESTINATION share/${PROJECT_NAME}/
 )
 

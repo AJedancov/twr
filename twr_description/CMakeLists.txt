@@ -12,7 +12,12 @@ find_package(ament_cmake REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 
-install(DIRECTORY mesh rviz urdf
-  DESTINATION share/${PROJECT_NAME}/)
+install(DIRECTORY
+  mesh
+  rviz
+  urdf
+  mjcf
+  DESTINATION share/${PROJECT_NAME}/
+)
 
 ament_package()

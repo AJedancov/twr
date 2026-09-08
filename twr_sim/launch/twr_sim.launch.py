@@ -21,7 +21,7 @@ def generate_launch_description():
         name='sim',
         default_value='gazebo_sim',
         description='Simulation to launch',
-        choices=['gazebo_sim']
+        choices=['gazebo_sim', 'mujoco']
     )
 
 
