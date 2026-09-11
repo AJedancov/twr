@@ -1,12 +1,20 @@
 <?xml version="1.0"?>
 <robot name="twr" xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <xacro:arg name="sim" default="gazebo_sim"/>
+  <xacro:property name="sim" value="$(arg sim)"/>
+
   <xacro:include filename="$(find twr_description)/urdf/macros/inertia.macro.xacro"/>
   <xacro:include filename="$(find twr_description)/urdf/macros/wheel.macro.xacro"/>
   <xacro:include filename="$(find twr_description)/urdf/macros/lidar.macro.xacro"/>
 
-  <xacro:include filename="$(find twr_description)/urdf/packages/gz.xacro"/>
-  <xacro:include filename="$(find twr_description)/urdf/packages/ros2_control.xacro"/>
+  <xacro:if value="${sim == 'gazebo_sim'}">
+    <xacro:include filename="$(find twr_description)/urdf/packages/gz.xacro"/>
+    <xacro:include filename="$(find twr_description)/urdf/packages/ros2_control_gz.xacro"/>
+  </xacro:if>
+  <xacro:if value="${sim == 'mujoco'}">
+    <xacro:include filename="$(find twr_description)/urdf/packages/ros2_control_mjc.xacro"/>
+  </xacro:if>
 
   <xacro:include filename="$(find twr_description)/urdf/properties/colors.xacro"/>
   <xacro:include filename="$(find twr_description)/urdf/properties/geometry.xacro"/>
