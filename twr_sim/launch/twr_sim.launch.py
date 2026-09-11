@@ -1,6 +1,7 @@
 from launch import LaunchDescription
-from launch.substitutions import PathJoinSubstitution
+from launch.substitutions import PathJoinSubstitution, PythonExpression
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, OpaqueFunction
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 from launch_ros.substitutions import FindPackageShare
@@ -42,8 +43,11 @@ def generate_launch_description():
             ])
         )
 
+        # MuJoCo simulation will be launched via mujoco_ros2_control plugin.
+        # Therefore, Therefore, only Gazebo launches at this stage.
         sim_ld = IncludeLaunchDescription(
-            launch_description_source=sim_ld_src
+            launch_description_source=sim_ld_src,
+            condition=IfCondition(PythonExpression([f"'{sim_type}' == 'gazebo_sim'"]))
         )
         
         return [sim_ld]

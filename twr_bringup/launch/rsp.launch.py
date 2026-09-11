@@ -1,6 +1,6 @@
 from launch import LaunchDescription
 from launch.substitutions import Command, PathJoinSubstitution, LaunchConfiguration
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, OpaqueFunction
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -23,6 +23,13 @@ def generate_launch_description():
         choices=["true", "false"]
     )
 
+    sim_launch_arg = DeclareLaunchArgument(
+        name='sim',
+        default_value='gazebo_sim',
+        description='Simulation to launch',
+        choices=['gazebo_sim', 'mujoco']
+    )
+
 
     # ============================
     # === Launch configuration ===
@@ -33,30 +40,39 @@ def generate_launch_description():
     # =============================
     # === Robot State Publisher ===
     # =============================
-    twr_xacro_config_file = PathJoinSubstitution([twr_description_pkg_path, 'urdf', 'twr.urdf.xacro'])
-    twr_urdf_config_file = Command(['xacro ', twr_xacro_config_file])
-    
-    rsp_node_params = [{
-        'robot_description': twr_urdf_config_file,
-        'use_sim_time': use_sim_time_launch_config
-    }]
-    
-    rsp_node = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        parameters=rsp_node_params
-    )
+    def launch_rsp_node(context, *args, **kwargs):
+        sim_type = context.launch_configurations['sim']
+
+        twr_xacro_config_file = PathJoinSubstitution([twr_description_pkg_path, 'urdf', 'twr.urdf.xacro'])
+        twr_urdf_config_file = Command([
+            'xacro ',
+            twr_xacro_config_file, 
+            f' sim:={sim_type}'
+        ])
+
+        rsp_node_params = [{
+            'robot_description': twr_urdf_config_file,
+            'use_sim_time': use_sim_time_launch_config
+        }]
+        
+        rsp_node = Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            parameters=rsp_node_params
+        )
+        return [rsp_node]
 
 
     # ==========================
     # === Launch description === 
     # ==========================
     launch_arguments=[
-        use_sim_time_launch_arg
+        use_sim_time_launch_arg,
+        sim_launch_arg,
     ]
 
     nodes = [
-        rsp_node
+        OpaqueFunction(function=launch_rsp_node)
     ]
 
     return LaunchDescription(launch_arguments + nodes)

@@ -1,10 +1,11 @@
 from launch import LaunchDescription
-from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
-from launch.actions import DeclareLaunchArgument
+from launch.substitutions import PathJoinSubstitution, LaunchConfiguration, PythonExpression
+from launch.actions import DeclareLaunchArgument, OpaqueFunction
+from launch.conditions import IfCondition
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-
+from launch_ros.parameter_descriptions import ParameterFile
 
 def generate_launch_description():
 
@@ -22,6 +23,13 @@ def generate_launch_description():
         default_value='true',
         description='Use simulation time',
         choices=["true", "false"]
+    )
+
+    sim_launch_arg = DeclareLaunchArgument(
+        name='sim',
+        default_value='gazebo_sim',
+        description='Simulation to launch',
+        choices=['gazebo_sim', 'mujoco']
     )
 
     nav2_behavior_server_node_prefix_launch_arg = DeclareLaunchArgument(
@@ -122,6 +130,30 @@ def generate_launch_description():
     # )
     # =================
 
+    def launch_mjc_control_node(context, *args, **kwargs):
+        mujoco_controller_manager_node_params = PathJoinSubstitution([
+            twr_control_pkg_path,
+            'ros2_controllers',
+            'controller_manager',
+            'config', 
+            'mujoco_ros2_control_plugins.yaml'
+        ])
+
+        sim_type = context.launch_configurations['sim']
+
+        # Will launch MuJoCo GUI too
+        mjc_control_node = Node(
+            package="mujoco_ros2_control",
+            executable="ros2_control_node",
+            output="both",
+            parameters=[
+                ParameterFile(controller_manager_node_params), 
+                ParameterFile(mujoco_controller_manager_node_params)
+            ],
+            condition=IfCondition(PythonExpression([f"'{sim_type}' == 'mujoco'"]))
+        )
+        return [mjc_control_node]
+
     spawner_node_args = [
         'joint_state_broadcaster',
         'diff_drive_controller',
@@ -194,6 +226,7 @@ def generate_launch_description():
     # ==========================
     launch_arguments=[
         use_sim_time_launch_arg,
+        sim_launch_arg,
         nav2_behavior_server_node_prefix_launch_arg,
         nav2_bt_node_params_path_launch_arg,
         nav2_nav_to_pose_bt_path_launch_arg,
@@ -207,6 +240,7 @@ def generate_launch_description():
         nav2_behavior_server_node,
         nav2_bt_navigator_node,
         nav2_controller_server_node,
+        OpaqueFunction(function=launch_mjc_control_node),
     ]
 
     return LaunchDescription(launch_arguments + nodes)
