@@ -3,32 +3,72 @@
 <mujoco model="twr">
   <compiler angle="radian"/>
 
+  <extension>
+    <plugin plugin="mujoco.plugin.lidar">
+      <instance name="lidar">
+        <config key="resolution" value="360 1"/>
+        <config key="azimuth_range" value="-3.14159 3.14159"/>
+        <config key="elevation_range" value="0.0"/>
+        <config key="min_range" value="0.1"/>
+        <config key="max_range" value="5"/>
+        <config key="update_rate" value="10.0"/>
+        <config key="async" value="0"/>
+      </instance>
+    </plugin>
+  </extension>
+
   <worldbody>
+    <body name="chassis" pos="0 0 0.03">
+      <joint type="free"/>
+      <geom type="box" size="0.35 0.275 0.0875" pos="0 0 0.0875" rgba="0.8 0.8 0.8 1"/>
+      <inertial pos="0 0 0.0875" euler="0 0 0" mass="1" diaginertia="3.3333333333333335e-07 3.3333333333333335e-07 3.3333333333333335e-07"/>
 
-    <geom name="base" size="0.35 0.275 0.0875" pos="0 0 0.1" type="box"/>
+      <!-- Drive wheels -->
+      <body name="left_wheel_link" pos="0 0.265 0.05" quat="0.707107 -0.707107 0 0">
+        <joint name="left_wheel_joint" type="hinge" pos="0 0 0" axis="0 0 1" damping="0.1" frictionloss="0.1"/>
+        <inertial pos="0 0 0" quat="0 0 0 1" mass="0.2" diaginertia="0.0003266666666666667 0.0003266666666666667 0.00064"/>
+        <geom type="cylinder" size="0.08 0.01" rgba="1 0.3 0.1 1"/>
+      </body>
+      <body name="right_wheel_link" pos="0 -0.265 0.05" quat="0.707107 -0.707107 0 0">
+        <joint name="right_wheel_joint" type="hinge" pos="0 0 0" axis="0 0 1" damping="0.1" frictionloss="0.1"/>
+        <inertial pos="0 0 0" quat="0 0 0 1" mass="0.2" diaginertia="0.0003266666666666667 0.0003266666666666667 0.00064"/>
+        <geom type="cylinder" size="0.08 0.01" rgba="1 0.3 0.1 1"/>
+      </body>
 
-    <geom name="caster_front_left_wheel" type="cylinder" size="0.02 0.0075" 
-      pos="0.233333 0.183333 0.021" quat="0.707107 0.707107 0 0"  rgba="1 0.3 0.1 1"/>
-    <geom name="caster_front_right_wheel" type="cylinder" size="0.02 0.0075" 
-      pos="0.233333 -0.183333 0.021" quat="0.707107 0.707107 0 0"  rgba="1 0.3 0.1 1"/>
-    <geom name="caster_back_left_wheel" type="cylinder" size="0.02 0.0075" 
-      pos="-0.233333 0.183333 0.021" quat="0.707107 0.707107 0 0"  rgba="1 0.3 0.1 1"/>
-    <geom name="caster_back_right_wheel" type="cylinder" size="0.02 0.0075" 
-      pos="-0.233333 -0.183333 0.021" quat="0.707107 0.707107 0 0"  rgba="1 0.3 0.1 1"/>
+      <!-- Caster wheels -->
+      <geom name="caster_front_left_wheel" type="cylinder" size="0.02 0.0075" 
+        pos="0.233333 0.183333 -0.009" quat="0.707107 0.707107 0 0" rgba="1 0.3 0.1 1"/>
+      <geom name="caster_front_right_wheel" type="cylinder" size="0.02 0.0075" 
+        pos="0.233333 -0.183333 -0.009" quat="0.707107 0.707107 0 0" rgba="1 0.3 0.1 1"/>
+      <geom name="caster_back_left_wheel" type="cylinder" size="0.02 0.0075" 
+        pos="-0.233333 0.183333 -0.009" quat="0.707107 0.707107 0 0" rgba="1 0.3 0.1 1"/>
+      <geom name="caster_back_right_wheel" type="cylinder" size="0.02 0.0075" 
+        pos="-0.233333 -0.183333 -0.009" quat="0.707107 0.707107 0 0" rgba="1 0.3 0.1 1"/>
 
-    <body name="left_wheel_link" pos="0 0.265 0.08" quat="0.707107 -0.707107 0 0">
-      <joint name="left_wheel_joint" type="hinge" pos="0 0 0" axis="0 0 1"/>
-      <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.2" diaginertia="0.00064 0.000326667 0.000326667"/>
-      <geom type="cylinder" size="0.08 0.01" rgba="1 0.3 0.1 1"/>
-    </body>
-    <body name="right_wheel_link" pos="0 -0.265 0.08" quat="0.707107 -0.707107 0 0">
-      <joint name="right_wheel_joint" type="hinge" pos="0 0 0" axis="0 0 1"/>
-      <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.2" diaginertia="0.00064 0.000326667 0.000326667"/>
-      <geom type="cylinder" size="0.08 0.01" rgba="1 0.3 0.1 1"/>
-    </body>
+      <!-- IMU -->
+      <geom name="imu" size="0.005 0.005 0.005" pos="0 0 0.0875" type="box" rgba="0 0 0 1"/>
 
-    <geom size="0.03 0.01" pos="0 0 0.22" type="cylinder" rgba="0 0 0 1"/>
-    <geom size="0.005 0.005 0.005" pos="0 0 0.1175" type="box" rgba="0 0 0 1"/>
+      <!-- LiDAR -->
+      <body name="lidar" pos="0 0 0.19">
+        <inertial mass="1.0" pos="0 0 0" diaginertia="2.5833333333333332e-05 2.5833333333333332e-05 4.4999999999999996e-05"></inertial>
+        <geom type="cylinder" size="0.03 0.01" mass="0.1"/>
+        <!-- 
+          Set position of 'site' the same as the top of the lidar geom.
+          Otherwise, the lidar beams will collide with the lidar body itself and not displayed correctly.
+        -->
+        <site name="lidar_link" pos="0 0 0.01"/>
+      </body>
 
+    </body>    
   </worldbody>
+
+  <actuator>
+    <velocity name="left_wheel_motor" joint="left_wheel_joint" ctrlrange="-1 1"/>
+    <velocity name="right_wheel_motor" joint="right_wheel_joint" ctrlrange="-1 1"/>
+  </actuator>
+
+  <sensor>
+    <plugin name="lidar_plugin" instance="lidar" objtype="site" objname="lidar_link"/>
+  </sensor>
+
 </mujoco>

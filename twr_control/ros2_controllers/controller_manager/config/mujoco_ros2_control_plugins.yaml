@@ -1,0 +1,8 @@
+/**:
+  ros__parameters:
+    mujoco_plugins:
+      lidar_plugin:
+        type: "mujoco_ros2_control_plugins/Mujoco3dLidarPlugin"
+        lidar:
+          frame_name: "lidar_link" # Must correspond to the 'site' name in the lidar XML file.
+          topic: "/scan"
