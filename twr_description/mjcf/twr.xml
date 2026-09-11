@@ -17,10 +17,14 @@
     </plugin>
   </extension>
 
+  <asset>
+    <mesh name="twr_base" file="../mesh/twr_base.obj" scale="0.001 0.001 0.001"/>
+  </asset>
+
   <worldbody>
     <body name="chassis" pos="0 0 0.03">
       <joint type="free"/>
-      <geom type="box" size="0.35 0.275 0.0875" pos="0 0 0.0875" rgba="0.8 0.8 0.8 1"/>
+      <geom type="mesh" mesh="twr_base"/>
       <inertial pos="0 0 0.0875" euler="0 0 0" mass="1" diaginertia="3.3333333333333335e-07 3.3333333333333335e-07 3.3333333333333335e-07"/>
 
       <!-- Drive wheels -->

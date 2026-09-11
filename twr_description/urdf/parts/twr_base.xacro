@@ -14,14 +14,14 @@
   <link name="chassis_link">
     <visual>
       <geometry>
-        <mesh filename="file://$(find twr_description)/mesh/twr_base.dae"/>
+        <mesh filename="file://$(find twr_description)/mesh/twr_base.obj" scale="0.001 0.001 0.001"/>
       </geometry>
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </visual>
 
     <collision>
       <geometry>
-        <mesh filename="file://$(find twr_description)/mesh/twr_base.dae"/>
+        <mesh filename="file://$(find twr_description)/mesh/twr_base.obj" scale="0.001 0.001 0.001"/>
       </geometry>
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </collision>
