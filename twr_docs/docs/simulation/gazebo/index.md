@@ -1,9 +1,11 @@
+# Gazebo
 
-# Simulation
 
-Available simulation environments:
+## Simulation Environments
 
-## Warehouse
+Available simulation environments for Gazebo.
+
+### Warehouse
 
 <p align="center">
   <img src="assets/gz_world_warehouse.png" width="800"/>  

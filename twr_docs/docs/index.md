@@ -30,7 +30,8 @@ The project integrates existing packages built on [ROS 2](https://www.ros.org/) 
 <div class="grid cards" markdown>
   - [ros2_control](https://github.com/ros-controls/ros2_control)  
   - [ros2_controllers](https://github.com/ros-controls/ros2_controllers)  
-  - [gz_ros2_control](https://github.com/ros-controls/gz_ros2_control) 
+  - [gz_ros2_control](https://github.com/ros-controls/gz_ros2_control)
+  - [mujoco_ros2_control](https://github.com/ros-controls/mujoco_ros2_control)
   - [joint_state_publisher](https://github.com/ros/joint_state_publisher)
   - [robot_state_publisher](https://github.com/ros/robot_state_publisher) 
 </div>
@@ -38,7 +39,8 @@ The project integrates existing packages built on [ROS 2](https://www.ros.org/) 
 ### Simulation
 
 <div class="grid cards" markdown>
-  - [gz-sim](https://github.com/gazebosim/gz-sim)  
+  - [gz-sim](https://github.com/gazebosim/gz-sim)
+  - [mujoco](https://github.com/deepmind/mujoco)
 </div>
 
 

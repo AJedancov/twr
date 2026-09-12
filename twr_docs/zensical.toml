@@ -43,6 +43,9 @@ nav = [
     { "Gazebo" = [
       "simulation/gazebo/index.md"
     ] },
+    { "MuJoCo" = [
+      "simulation/mujoco/index.md"
+    ] },
   ] },
   { "Project Architecture" = [
     { "Packages" = [
@@ -51,9 +54,16 @@ nav = [
           { "gz_ros2_control-system" = "project_architecture/packages/gazebo_sim/plugins/gz_ros2_control_system.md" }
         ] }
       ] },
+      { "mujoco" = [
+        { "mujoco_ros2_control-system" = "project_architecture/packages/mujoco/index.md" }
+      ] },
       { "ros2_control" = [
-        { "diff_drive_controller" = "project_architecture/packages/ros2_control/ros2_controllers/diff_drive_controller.md" }
-      ] }
+        { "gz_ros2_control" = "project_architecture/packages/ros2_control/gz_ros2_control.md" },
+        { "mujoco_ros2_control" = "project_architecture/packages/ros2_control/mujoco_ros2_control.md" },
+        { "ros2_controllers" = [
+          { "diff_drive_controller" = "project_architecture/packages/ros2_control/ros2_controllers/diff_drive_controller.md" }
+        ] }
+      ] },
     ] },
     { "Modules" = [
       { "scripts" = "project_architecture/project_structure/scripts.md" },
