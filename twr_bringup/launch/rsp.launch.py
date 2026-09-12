@@ -43,10 +43,10 @@ def generate_launch_description():
     def launch_rsp_node(context, *args, **kwargs):
         sim_type = context.launch_configurations['sim']
 
-        twr_xacro_config_file = PathJoinSubstitution([twr_description_pkg_path, 'urdf', 'twr.urdf.xacro'])
+        twr_urdf_description = PathJoinSubstitution([twr_description_pkg_path, 'urdf', 'twr.urdf.xacro'])
         twr_urdf_config_file = Command([
             'xacro ',
-            twr_xacro_config_file, 
+            twr_urdf_description, 
             f' sim:={sim_type}'
         ])
 
