@@ -17,6 +17,7 @@ def generate_launch_description():
     twr_control_pkg_path = FindPackageShare('twr_control')
     twr_navigation_pkg_path = FindPackageShare('twr_navigation')
     twr_sim_pkg_path = FindPackageShare('twr_sim')
+    twr_viz_pkg_path = FindPackageShare('twr_viz')
 
 
     # ========================
@@ -100,7 +101,7 @@ def generate_launch_description():
     # === RViz2 ===
     # =============
     rviz2_ld_src = PythonLaunchDescriptionSource([
-        PathJoinSubstitution([twr_bringup_pkg_path, 'launch', 'rviz2.launch.py'])
+        PathJoinSubstitution([twr_viz_pkg_path, 'launch', 'rviz2.launch.py'])
     ])
 
     rviz2_ld_args = {'use_sim_env': 'true'}.items()
